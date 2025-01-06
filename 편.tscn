@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1b4j3cqic1i4"]
+
+[ext_resource type="Script" path="res://편.gd" id="1_5j0h1"]
+
+[sub_resource type="Theme" id="Theme_msews"]
+default_font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ialxp"]
+font_size = 24
+
+[node name="편" type="PanelContainer"]
+offset_right = 16.0
+offset_bottom = 8.0
+script = ExtResource("1_5j0h1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_msews")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "?등"
+label_settings = SubResource("LabelSettings_ialxp")

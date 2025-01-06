@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gd4윷놀이3d"
-run/main_scene="res://윷놀이3d.tscn"
+run/main_scene="res://윷놀이.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Global3d="*res://global/global3d.gd"
 NamedColorList="*res://global/named_color_list.gd"
+Settings="*res://global/settings.gd"
+PolygonNode="*res://global/polygon_node.gd"
 
 [display]
 

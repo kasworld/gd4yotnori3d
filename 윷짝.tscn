@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpsrl3ehaiokq"]
+
+[ext_resource type="Script" path="res://윷짝.gd" id="1_j08vt"]
+
+[node name="윷짝" type="PanelContainer"]
+script = ExtResource("1_j08vt")
+
+[node name="윷통" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 5
