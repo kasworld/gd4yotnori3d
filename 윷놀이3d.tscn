@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqc027qp08bih"]
+
+[ext_resource type="Script" path="res://윷놀이3d.gd" id="1_7vhbj"]
+
+[node name="윷놀이3D" type="Node3D"]
+script = ExtResource("1_7vhbj")
