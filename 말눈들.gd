@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 class_name 말눈들
 
 const 눈사이각도 = 360.0/20.0

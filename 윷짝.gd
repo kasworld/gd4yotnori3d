@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name 윷짝
 
-var 윷_scene = preload("res://윷.tscn")
+var 윷_scene = preload("res://윷가락.tscn")
 
 const 결과문자변환 = {
 	-3:"뒷걸",
@@ -14,7 +14,7 @@ const 결과문자변환 = {
 	5:"모",
 }
 
-var 윷들 :Array[윷]
+var 윷들 :Array[윷가락]
 var 결과label :Label
 var 결과수치 :int
 var 던진횟수 :int = 0

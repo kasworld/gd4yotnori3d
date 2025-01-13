@@ -15,8 +15,8 @@ func init() -> void:
 
 	var 판반지름 = min(vp_size.x,vp_size.y)
 	var depth = 판반지름/40
-	$말판.init(판반지름, depth)
-	$말판.position = Vector3(0,0,0)
+	#$말판.init(판반지름, depth)
+	#$말판.position = Vector3(0,0,0)
 
 	$DirectionalLight3D.position = Vector3(판반지름,판반지름,-판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
@@ -60,7 +60,7 @@ func 말이동길보이기(t:편) ->void:
 		for i in 편들:
 			i.길.visible = false
 		t.길.visible = true
-		t.길.position = Vector2.ZERO
+		t.길.position = Vector3.ZERO
 
 func 말이동길모두보기() ->void:
 	var deg_start = 30.0

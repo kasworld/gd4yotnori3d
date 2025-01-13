@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 class_name 말이동길
 
 var 화살표_scene = preload("res://arrow3d/arrow3d.tscn")
