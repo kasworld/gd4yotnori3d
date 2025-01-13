@@ -1,4 +1,4 @@
-extends Control
+extends Node3D
 class_name 말
 
 var 속한편 :편
@@ -18,7 +18,7 @@ func _to_string() -> String:
 func init(t :편, r :float, n:int, hide_num :bool = false) -> 말:
 	속한편 = t
 	말번호 = n
-	custom_minimum_size = Vector2(r*2,r*2)
+	#custom_minimum_size = Vector2(r*2,r*2)
 	r = r*1.0 * t.인자.크기보정
 	도형만들기(r/10, r, t.인자.모양, t.인자.색)
 	#PolygonNode.alter_polygon_fill($"내부", Vector2(r,r),r,t.인자.색,t.인자.모양,360)

@@ -12,8 +12,8 @@ var 바깥길 :Array[int]
 var 첫지름길 :Array[int]
 var 둘째지름길 :Array[int]
 var 세째지름길 :Array[int]
-var 놓을길시작 : Vector2
-var 나는길끝 : Vector2
+var 놓을길시작 : Vector3
+var 나는길끝 : Vector3
 
 func _to_string() -> String:
 	return "%s\n%s\n%s\n%s\n" %[바깥길,첫지름길,둘째지름길,세째지름길]
@@ -87,11 +87,11 @@ func init(w: float, co :Color, es :Array[눈], 시작눈 :int, mirror :bool = fa
 	var 중점 = 눈들[22].position
 
 	var 시작점 = 눈들[바깥길[0]].position
-	놓을길시작 = ((중점-시작점)*0.3).rotated(-PI/6) + 시작점
+	놓을길시작 = ((중점-시작점)*0.3).rotated(Vector3.UP, -PI/6) + 시작점
 	화살표추가(놓을길시작,시작점)
 
 	var 끝점 = 눈들[바깥길[-1]].position
-	나는길끝 = ((중점-끝점)*0.3).rotated(-PI/6) + 끝점
+	나는길끝 = ((중점-끝점)*0.3).rotated(Vector3.UP, -PI/6) + 끝점
 	화살표추가(끝점,나는길끝)
 
 # 도착 말눈번호를 돌려준다.
@@ -129,10 +129,12 @@ func 말이동과정찾기(현재말눈번호:int, 이동거리:int)->Array[int]
 func 종점눈번호()->int:
 	return 바깥길[-1]
 
-func 화살표추가(p1 :Vector2, p2 :Vector2):
+func 화살표추가(p1 :Vector3, p2 :Vector3):
 	var 화살표 = 화살표_scene.instantiate()
 	var t1 = (p1-p2)*0.8+p2
 	var t2 = (p2-p1)*0.8+p1
-	화살표.init_2_point_center(t1, t2, 화살표색, 화살표두께, 화살표두께*5)
+	화살표.init((t1-t2).length(), 화살표색, 화살표두께, 화살표두께*5)
+	화살표.rotate_y( t2.angle_to(t2) )
+	#화살표.init_2_point_center(t1, t2, 화살표색, 화살표두께, 화살표두께*5)
 	$"화살표통".add_child(화살표)
 	화살표.position = (t1+t2)/2
