@@ -1,4 +1,4 @@
-extends Control
+extends Node3D
 class_name 눈
 
 var 번호 :int
@@ -8,8 +8,20 @@ func _to_string() -> String:
 
 func init(r :float, co: Color, n:int) -> void:
 	self.번호 = n
-	PolygonNode.alter_polygon_fill($"원", Vector2(0,0),r,co, 360,360)
+	눈구만들기(r, co)
+	#PolygonNode.alter_polygon_fill($"원", Vector2(0,0),r,co, 360,360)
 	$"눈번호".text = "%d" % 번호
+
+func 눈구만들기(r :float, co :Color) -> void:
+	var mesh = SphereMesh.new()
+	mesh.radius = r
+	#mesh.radial_segments = 100
+	#mesh.rings = 100
+	mesh.material = Global3d.get_color_mat(co)
+	$"구".mesh = mesh
+
+func set_color(co :Color) -> void:
+	$"원".mesh.material = Global3d.get_color_mat(co)
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	var 있던말들 :Array[말]
@@ -40,6 +52,3 @@ func 말보기()->Array[말]:
 
 func 눈번호보기(b :bool):
 	$"눈번호".visible = b
-
-func set_color(co :Color) -> void:
-	$"원".color = co

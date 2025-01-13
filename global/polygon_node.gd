@@ -1,5 +1,8 @@
 extends Node
 
+func make_pos_by_rad_r_3d(rad:float, r :float, y :float =0)->Vector3:
+	return Vector3(sin(rad)*r, y, cos(rad)*r)
+
 func make_pos_by_rad_r(rad:float, r :float)->Vector2:
 	return Vector2(sin(rad)*r, cos(rad)*r)
 

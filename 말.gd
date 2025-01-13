@@ -20,11 +20,22 @@ func init(t :편, r :float, n:int, hide_num :bool = false) -> 말:
 	말번호 = n
 	custom_minimum_size = Vector2(r*2,r*2)
 	r = r*1.0 * t.인자.크기보정
-	PolygonNode.alter_polygon_fill($"내부", Vector2(r,r),r,t.인자.색,t.인자.모양,360)
-	PolygonNode.alter_polygon($"테두리", Vector2(r,r),r*1.1,Color.BLACK,max(1,r/10),t.인자.모양,360)
+	도형만들기(r/10, r, t.인자.모양, t.인자.색)
+	#PolygonNode.alter_polygon_fill($"내부", Vector2(r,r),r,t.인자.색,t.인자.모양,360)
+	#PolygonNode.alter_polygon($"테두리", Vector2(r,r),r*1.1,Color.BLACK,max(1,r/10),t.인자.모양,360)
 	if not hide_num:
 		$"번호".text = "%d" % 말번호
 	return self
+
+
+func 도형만들기(h :float, r :float, 모양 :int, co :Color) -> void:
+	var mesh = CylinderMesh.new()
+	mesh.height = h
+	mesh.bottom_radius = r
+	mesh.top_radius = r
+	mesh.radial_segments = 모양
+	mesh.material = Global3d.get_color_mat(co)
+	$"도형".mesh = mesh
 
 func 편얻기()->편:
 	return 속한편
