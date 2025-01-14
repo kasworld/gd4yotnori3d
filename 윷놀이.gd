@@ -8,19 +8,20 @@ var 편_scene = preload("res://편.tscn")
 var 말_scene = preload("res://말.tscn")
 
 var 편들 :Array[편]
-var vp_size
+var vp_size :Vector2
+var 판반지름 :float
+
 func init() -> void:
 	vp_size = get_viewport().get_visible_rect().size
 	RenderingServer.set_default_clear_color( Global3d.colors.default_clear)
 
-	var 판반지름 = min(vp_size.x,vp_size.y)/2
+	판반지름 = min(vp_size.x,vp_size.y)/2
 	var depth = 판반지름/40
 
-	$Camera3D.position = Vector3(1,판반지름,1)
-	$Camera3D.look_at(Vector3.ZERO)
-	$DirectionalLight3D.position = Vector3(판반지름,판반지름,-판반지름)
+	reset_camera_pos()
+	$DirectionalLight3D.position = Vector3(판반지름/2,판반지름/2,판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
-	$OmniLight3D.position = Vector3(판반지름,판반지름,-판반지름)
+	$OmniLight3D.position = Vector3(판반지름/2,-판반지름/2,판반지름)
 	#$"말판2".init(판반지름, depth)
 
 	var r = min(vp_size.x,vp_size.y)/2
@@ -190,5 +191,26 @@ func _on_놀이재시작_pressed() -> void:
 func _ready() -> void:
 	init()
 
+func reset_camera_pos()->void:
+	$Camera3D.position = Vector3(1,1,판반지름)
+	$Camera3D.look_at(Vector3.ZERO)
+
+var camera_move = false
 func _process(_delta: float) -> void:
-	pass
+	var t = Time.get_unix_time_from_system() /-3.0
+	if camera_move:
+		$Camera3D.position = Vector3(sin(t)*판반지름/2, cos(t)*판반지름/2, 판반지름  )
+		$Camera3D.look_at(Vector3.ZERO)
+
+# esc to exit
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_ESCAPE:
+			get_tree().quit()
+		elif event.keycode == KEY_ENTER:
+			_on_카메라변경_pressed()
+
+func _on_카메라변경_pressed() -> void:
+	camera_move = !camera_move
+	if camera_move == false:
+		reset_camera_pos()

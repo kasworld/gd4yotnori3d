@@ -14,6 +14,7 @@ func init(r :float, co: Color, n:int) -> void:
 func 눈구만들기(r :float, co :Color) -> void:
 	var mesh = SphereMesh.new()
 	mesh.radius = r
+	mesh.height = r*2
 	#mesh.radial_segments = 100
 	#mesh.rings = 100
 	mesh.material = Global3d.get_color_mat(co)
