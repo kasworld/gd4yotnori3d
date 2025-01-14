@@ -13,17 +13,15 @@ func init() -> void:
 	vp_size = get_viewport().get_visible_rect().size
 	RenderingServer.set_default_clear_color( Global3d.colors.default_clear)
 
-	var 판반지름 = min(vp_size.x,vp_size.y)
+	var 판반지름 = min(vp_size.x,vp_size.y)/2
 	var depth = 판반지름/40
-	#$말판.init(판반지름, depth)
-	#$말판.position = Vector3(0,0,0)
 
 	$Camera3D.position = Vector3(1,판반지름,1)
 	$Camera3D.look_at(Vector3.ZERO)
 	$DirectionalLight3D.position = Vector3(판반지름,판반지름,-판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
 	$OmniLight3D.position = Vector3(판반지름,판반지름,-판반지름)
-	$"말판2".init(판반지름, depth)
+	#$"말판2".init(판반지름, depth)
 
 	var r = min(vp_size.x,vp_size.y)/2
 	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)
@@ -72,8 +70,8 @@ func 말이동길모두보기() ->void:
 	var i = 0
 	for t in 편들:
 		t.길.visible = true
-		var ra = deg_to_rad( deg_start + i*deg_inc)
-		t.길.position = PolygonNode.make_pos_by_rad_r_3d(ra,r)
+		var rd = deg_to_rad( deg_start + i*deg_inc)
+		t.길.position = Vector3(sin(rd)*r, 0, cos(rd)*r) # PolygonNode.make_pos_by_rad_r_3d(ra,r)
 		i+=1
 
 func 눈번호들을좌표로(눈번호들 :Array[int])->Array[Vector3]:

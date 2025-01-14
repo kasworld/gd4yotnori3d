@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dssphq21kra0l"]
+[gd_scene load_steps=18 format=3 uid="uid://dssphq21kra0l"]
 
 [ext_resource type="Script" path="res://윷놀이.gd" id="1_4ga8h"]
 [ext_resource type="PackedScene" uid="uid://bpsrl3ehaiokq" path="res://윷짝.tscn" id="2_lq234"]
@@ -6,71 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://b1a0q4gxh5net" path="res://말.tscn" id="4_sy70a"]
 [ext_resource type="PackedScene" uid="uid://dvp0uwp7i8jln" path="res://말판.tscn" id="5_pprtp"]
 
-[sub_resource type="Animation" id="Animation_xp0rs"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_141jw"]
-resource_name = "rotate"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.0666666, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.28319]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.966667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.01, 0.01), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5p2q7"]
-_data = {
-"RESET": SubResource("Animation_xp0rs"),
-"rotate": SubResource("Animation_141jw")
-}
-
 [sub_resource type="Animation" id="Animation_fu0i4"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("이동용말:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_4pe0f"]
 resource_name = "말이동"
-tracks/0/type = "value"
+tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("이동용말:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.966667, 1.96667, 3.03333, 4.06667, 5.06667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
-}
+tracks/0/path = NodePath("이동용말")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gpajh"]
 _data = {
@@ -121,15 +68,7 @@ shadow_enabled = true
 omni_range = 5000.0
 omni_attenuation = 0.1
 
-[node name="시작AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../말판")
-libraries = {
-"": SubResource("AnimationLibrary_5p2q7")
-}
-autoplay = "rotate"
-
 [node name="말판" type="Node3D" parent="."]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="말눈들" parent="말판" instance=ExtResource("3_of73k")]
 
