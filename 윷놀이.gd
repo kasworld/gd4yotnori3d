@@ -18,9 +18,12 @@ func init() -> void:
 	#$말판.init(판반지름, depth)
 	#$말판.position = Vector3(0,0,0)
 
+	$Camera3D.position = Vector3(1,판반지름,1)
+	$Camera3D.look_at(Vector3.ZERO)
 	$DirectionalLight3D.position = Vector3(판반지름,판반지름,-판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
 	$OmniLight3D.position = Vector3(판반지름,판반지름,-판반지름)
+	$"말판2".init(판반지름, depth)
 
 	var r = min(vp_size.x,vp_size.y)/2
 	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)
