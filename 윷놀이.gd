@@ -22,7 +22,7 @@ func init() -> void:
 	$DirectionalLight3D.position = Vector3(판반지름/2,판반지름/2,판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
 	$OmniLight3D.position = Vector3(판반지름/2,-판반지름/2,판반지름)
-	#$"말판2".init(판반지름, depth)
+	$"말판2".init(판반지름, depth)
 
 	var r = min(vp_size.x,vp_size.y)/2
 	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)
@@ -192,15 +192,16 @@ func _ready() -> void:
 	init()
 
 func reset_camera_pos()->void:
-	$Camera3D.position = Vector3(1,1,판반지름)
+	$Camera3D.position = Vector3(1,1,판반지름*1)
 	$Camera3D.look_at(Vector3.ZERO)
 
 var camera_move = false
 func _process(_delta: float) -> void:
 	var t = Time.get_unix_time_from_system() /-3.0
 	if camera_move:
-		$Camera3D.position = Vector3(sin(t)*판반지름/2, cos(t)*판반지름/2, 판반지름  )
-		$Camera3D.look_at(Vector3.ZERO)
+		$Camera3D.position = Vector3(sin(t)*판반지름, cos(t)*판반지름, 판반지름  )
+		$Camera3D.look_at(Vector3(sin(t)*판반지름/2, cos(t)*판반지름/2, 0) )
+		#$Camera3D.look_at(Vector3.ZERO)
 
 # esc to exit
 func _unhandled_input(event: InputEvent) -> void:

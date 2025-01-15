@@ -134,11 +134,12 @@ func 화살표추가(p1 :Vector3, p2 :Vector3):
 	var t1 = (p1-p2)*0.8+p2
 	var t2 = (p2-p1)*0.8+p1
 	화살표.init((t1-t2).length(), 화살표색, 화살표두께, 화살표두께*5)
-	$"화살표통".add_child(화살표)
-	#화살표.rotation = (p2-p1).normalized()
-	화살표.rotate_z( Vector3.UP.angle_to(p2-p1) )
+
+	#화살표.transform.basis = transform.basis.rotated(Vector3.FORWARD, Vector3.UP.angle_to(p2-p1) )
+
+	화살표.rotate_object_local(Vector3.FORWARD, Vector3.UP.angle_to(p2-p1) )
 	화살표.position = (p1+p2)/2
 	#화살표.look_at_from_position( (t1+t2)/2,t2 )
 	#화살표.rotate_z( PI/2 )
 
-	print(p1,p2 )
+	$"화살표통".add_child(화살표)
