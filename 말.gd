@@ -36,6 +36,7 @@ func 도형만들기(h :float, r :float, 모양 :int, co :Color) -> void:
 	mesh.radial_segments = 모양
 	mesh.material = Global3d.get_color_mat(co)
 	$"도형".mesh = mesh
+	$"도형".rotate_x(PI/2)
 
 func 편얻기()->편:
 	return 속한편
