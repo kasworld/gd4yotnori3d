@@ -87,11 +87,11 @@ func init(w: float, co :Color, es :Array[눈], 시작눈 :int, mirror :bool = fa
 	var 중점 = 눈들[22].position
 
 	var 시작점 = 눈들[바깥길[0]].position
-	놓을길시작 = ((중점-시작점)*0.3).rotated(Vector3.UP, -PI/6) + 시작점
+	놓을길시작 = ((중점-시작점)*0.3).rotated(Vector3.FORWARD, -PI/6) + 시작점
 	화살표추가(놓을길시작,시작점)
 
 	var 끝점 = 눈들[바깥길[-1]].position
-	나는길끝 = ((중점-끝점)*0.3).rotated(Vector3.UP, -PI/6) + 끝점
+	나는길끝 = ((중점-끝점)*0.3).rotated(Vector3.FORWARD, -PI/6) + 끝점
 	화살표추가(끝점,나는길끝)
 
 # 도착 말눈번호를 돌려준다.
