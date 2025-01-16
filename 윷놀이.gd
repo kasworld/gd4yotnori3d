@@ -22,7 +22,8 @@ func init() -> void:
 	$DirectionalLight3D.position = Vector3(판반지름/2,판반지름/2,판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
 	$OmniLight3D.position = Vector3(판반지름/2,-판반지름/2,판반지름)
-	$"말판".init(판반지름, depth)
+	$"말판/다각기둥".init(판반지름*1.05, depth, Color.DIM_GRAY, 20)
+	$"말판/다각기둥".position.z = -depth
 
 	var r = min(vp_size.x,vp_size.y)/2
 	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)

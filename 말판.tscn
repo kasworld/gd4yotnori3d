@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvp0uwp7i8jln"]
-
-[ext_resource type="Script" path="res://말판.gd" id="1_56xxe"]
-[ext_resource type="PackedScene" uid="uid://caufs5hrb6jlt" path="res://다각기둥.tscn" id="2_061ms"]
-
-[node name="말판" type="Node3D"]
-script = ExtResource("1_56xxe")
-
-[node name="원판" parent="." instance=ExtResource("2_061ms")]

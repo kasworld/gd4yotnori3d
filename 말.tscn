@@ -6,7 +6,7 @@
 [node name="말" type="Node3D"]
 script = ExtResource("1_edvhi")
 
+[node name="다각기둥" parent="." instance=ExtResource("2_wlm0w")]
+
 [node name="번호" type="Label3D" parent="."]
 pixel_size = 1.0
-
-[node name="다각기둥" parent="." instance=ExtResource("2_wlm0w")]
