@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dssphq21kra0l"]
+[gd_scene load_steps=21 format=3 uid="uid://dssphq21kra0l"]
 
 [ext_resource type="Script" path="res://윷놀이.gd" id="1_4ga8h"]
 [ext_resource type="PackedScene" uid="uid://bpsrl3ehaiokq" path="res://윷짝.tscn" id="2_lq234"]
@@ -47,6 +47,39 @@ tracks/0/keys = PackedFloat32Array()
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p5hde"]
 _data = {
 "말이동": SubResource("Animation_a0a0t")
+}
+
+[sub_resource type="Animation" id="Animation_vtkmd"]
+resource_name = "시작"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("말판")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, -1)
+tracks/1/type = "scale_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("말판")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_mkuig"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("말판")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ha7vo"]
+_data = {
+"RESET": SubResource("Animation_mkuig"),
+"시작": SubResource("Animation_vtkmd")
 }
 
 [node name="윷놀이" type="Node3D"]
@@ -154,6 +187,7 @@ theme = SubResource("Theme_y2end")
 text = "윷던지기"
 
 [node name="말판" type="Node3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="말눈들" parent="말판" instance=ExtResource("3_of73k")]
 
@@ -171,6 +205,12 @@ visible = false
 [node name="달말통" parent="말판" instance=ExtResource("6_w3qwi")]
 
 [node name="난말통" parent="말판" instance=ExtResource("6_w3qwi")]
+
+[node name="시작AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ha7vo")
+}
+autoplay = "시작"
 
 [connection signal="toggled" from="왼쪽패널/자동진행" to="." method="_on_자동진행_toggled"]
 [connection signal="toggled" from="왼쪽패널/길보기" to="." method="_on_길보기_toggled"]
