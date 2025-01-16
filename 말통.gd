@@ -14,6 +14,9 @@ func 설명달기(설명 :String, 위치 :Vector3 = Vector3.ZERO) -> void:
 	$"설명".text = 설명
 	$"설명".position = 위치
 
+func 설명보기(b :bool) -> void:
+	$"설명".visible = b
+
 func 말들넣기(넣을말들 :Array[말]) -> void:
 	for m in 넣을말들:
 		말넣기(m)

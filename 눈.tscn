@@ -6,10 +6,4 @@
 [node name="눈" type="Node3D"]
 script = ExtResource("1_ayhlg")
 
-[node name="번호" type="Label3D" parent="."]
-pixel_size = 1.0
-billboard = 1
-shaded = true
-no_depth_test = true
-
 [node name="말통" parent="." instance=ExtResource("2_wi061")]
