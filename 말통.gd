@@ -16,7 +16,7 @@ func 말들넣기(넣을말들 :Array[말]) -> void:
 
 func 말넣기(넣을말 :말) -> void:
 	$"말들".add_child(넣을말)
-	넣을말.position = Vector3(randfn(0,반지름/4),randfn(0,반지름/4), randfn(높이, 높이/2) )
+	넣을말.position = rand_circle(반지름*0.9, 높이)
 
 func 말모두빼기() -> Array[말]:
 	var rtn :Array[말]
@@ -33,3 +33,8 @@ func 말보기() -> Array[말]:
 	for m in $"말들".get_children():
 		rtn.append(m)
 	return rtn
+
+func rand_circle(r :float, h :float) -> Vector3:
+	var l = randf_range(0,r)
+	var rad = randf_range(0,2*PI)
+	return Vector3(sin(rad)*l, cos(rad)*l, randf_range(h/2,h))
