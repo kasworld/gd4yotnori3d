@@ -186,4 +186,9 @@ playback_auto_capture = false
 [node name="이동용말" parent="말판" instance=ExtResource("4_sy70a")]
 visible = false
 
-[node name="다각기둥" parent="말판" instance=ExtResource("5_mxqr6")]
+[node name="원판" parent="말판" instance=ExtResource("5_mxqr6")]
+
+[node name="난말통" parent="말판" instance=ExtResource("5_mxqr6")]
+skeleton = NodePath("../달말통")
+
+[node name="달말통" parent="말판" instance=ExtResource("5_mxqr6")]

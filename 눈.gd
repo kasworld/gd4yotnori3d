@@ -6,11 +6,12 @@ var 번호 :int
 func _to_string() -> String:
 	return "눈%d" % 번호
 
-func init(r :float, co: Color, n:int) -> void:
+func init(반지름 :float, 높이 :float, 색깔: Color, n:int) -> void:
 	self.번호 = n
-	$"원판".init(r,r/3 ,co)
+	$"원판".init(반지름,높이,색깔)
+	#$"원판".position.z = -r/2
 	$"눈번호".text = "%d" % 번호
-	$"눈번호".position = Vector3(r,-r,0)
+	$"눈번호".position = Vector3(반지름,-반지름,0)
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	var 있던말들 :Array[말]

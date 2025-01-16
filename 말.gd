@@ -19,7 +19,7 @@ func init(t :편, r :float, n:int, hide_num :bool = false) -> 말:
 	속한편 = t
 	말번호 = n
 	r = r*1.0 * t.인자.크기보정
-	$"다각기둥".init(r, r/10, t.인자.색, t.인자.모양)
+	$"다각기둥".init(r, r/3, t.인자.색, t.인자.모양)
 	if not hide_num:
 		$"번호".text = "%d" % 말번호
 	return self
