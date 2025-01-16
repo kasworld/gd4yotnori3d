@@ -177,5 +177,7 @@ visible = false
 
 [node name="난말통" parent="말판" instance=ExtResource("6_w3qwi")]
 
+[connection signal="toggled" from="왼쪽패널/자동진행" to="." method="_on_자동진행_toggled"]
 [connection signal="toggled" from="왼쪽패널/길보기" to="." method="_on_길보기_toggled"]
 [connection signal="toggled" from="왼쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]
+[connection signal="pressed" from="오른쪽패널/윷던지기" to="." method="_on_윷던지기_pressed"]
