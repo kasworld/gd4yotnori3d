@@ -181,3 +181,4 @@ visible = false
 [connection signal="toggled" from="왼쪽패널/길보기" to="." method="_on_길보기_toggled"]
 [connection signal="toggled" from="왼쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]
 [connection signal="pressed" from="오른쪽패널/윷던지기" to="." method="_on_윷던지기_pressed"]
+[connection signal="animation_finished" from="말판/말이동AnimationPlayer" to="." method="_on_말이동animation_player_animation_finished"]
