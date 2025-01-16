@@ -6,6 +6,25 @@
 [ext_resource type="PackedScene" uid="uid://b1a0q4gxh5net" path="res://말.tscn" id="4_sy70a"]
 [ext_resource type="PackedScene" uid="uid://dvp0uwp7i8jln" path="res://말판.tscn" id="5_pprtp"]
 
+[sub_resource type="Animation" id="Animation_fu0i4"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_4pe0f"]
+resource_name = "말이동"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../말판2/이동용말")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gpajh"]
+_data = {
+"RESET": SubResource("Animation_fu0i4"),
+"말이동": SubResource("Animation_4pe0f")
+}
+
 [sub_resource type="Theme" id="Theme_6e71o"]
 default_font_size = 50
 
@@ -33,25 +52,6 @@ font_size = 24
 [sub_resource type="Theme" id="Theme_y2end"]
 default_font_size = 50
 
-[sub_resource type="Animation" id="Animation_fu0i4"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_4pe0f"]
-resource_name = "말이동"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../말판2/이동용말")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array()
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gpajh"]
-_data = {
-"RESET": SubResource("Animation_fu0i4"),
-"말이동": SubResource("Animation_4pe0f")
-}
-
 [node name="윷놀이" type="Node3D"]
 script = ExtResource("1_4ga8h")
 
@@ -67,6 +67,20 @@ light_energy = 5.0
 shadow_enabled = true
 omni_range = 5000.0
 omni_attenuation = 0.1
+
+[node name="말판" parent="." instance=ExtResource("5_pprtp")]
+
+[node name="말눈들" parent="말판" instance=ExtResource("3_of73k")]
+
+[node name="말이동AnimationPlayer" type="AnimationPlayer" parent="말판"]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_gpajh")
+}
+playback_auto_capture = false
+
+[node name="이동용말" parent="말판" instance=ExtResource("4_sy70a")]
+visible = false
 
 [node name="왼쪽패널" type="VBoxContainer" parent="."]
 offset_right = 40.0
@@ -171,17 +185,3 @@ layout_mode = 2
 layout_mode = 2
 theme = SubResource("Theme_y2end")
 text = "윷던지기"
-
-[node name="말판" parent="." instance=ExtResource("5_pprtp")]
-
-[node name="말눈들" parent="말판" instance=ExtResource("3_of73k")]
-
-[node name="말이동AnimationPlayer" type="AnimationPlayer" parent="말판"]
-root_node = NodePath("")
-libraries = {
-"": SubResource("AnimationLibrary_gpajh")
-}
-playback_auto_capture = false
-
-[node name="이동용말" parent="말판" instance=ExtResource("4_sy70a")]
-visible = false
