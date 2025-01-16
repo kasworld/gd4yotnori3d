@@ -8,37 +8,38 @@ func _to_string() -> String:
 
 func init(반지름 :float, 높이 :float, 색깔: Color, n:int) -> void:
 	self.번호 = n
-	$"원판".init(반지름,높이,색깔)
-	#$"원판".position.z = -r/2
+	$"말통".init(반지름,높이,색깔)
 	$"번호".text = "%d" % 번호
 	$"번호".position = Vector3(반지름,-반지름,0)
 
 func 말놓기(놓을말들 :Array)->Array[말]:
-	var 있던말들 :Array[말]
 	if 놓을말들.size() == 0 :
 		print("문제:놓을말들이 비어있습니다.", 번호)
-		return 있던말들
-	if $"말들".get_child_count() != 0 and $"말들".get_children()[0].편얻기() != 놓을말들[0].편얻기():
-		있던말들 = 말빼기()
+		return []
+
+	var 선두말 :말
+	var 잡은말들 : Array[말]
+	var 있던말들 = 말보기()
+	if 있던말들.size() != 0:
+		if 있던말들[0].편얻기() != 놓을말들[0].편얻기():
+			# 말을 잡는다.
+			잡은말들 = 말빼기()
+			선두말 = 놓을말들[0]
+		else :
+			선두말 = 있던말들[0]
+	else :
+		선두말 = 놓을말들[0]
 
 	for m in 놓을말들:
-		$"말들".add_child(m)
-		if $"말들".get_child_count() != 0:
-			m.지나온눈번호들 = $"말들".get_children()[0].지나온눈번호들
-	return 있던말들
+		$"말통".말넣기(m)
+		m.지나온눈번호들 = 선두말.지나온눈번호들
+	return 잡은말들
 
 func 말빼기()->Array[말]:
-	var rtn :Array[말]
-	for m in $"말들".get_children():
-		rtn.append(m)
-		$"말들".remove_child(m)
-	return rtn
+	return $"말통".말모두빼기()
 
 func 말보기()->Array[말]:
-	var rtn :Array[말]
-	for m in $"말들".get_children():
-		rtn.append(m)
-	return rtn
+	return $"말통".말보기()
 
 func 눈번호보기(b :bool):
 	$"번호".visible = b
