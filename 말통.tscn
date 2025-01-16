@@ -7,3 +7,5 @@
 script = ExtResource("1_aswxv")
 
 [node name="모양" parent="." instance=ExtResource("2_x4ufe")]
+
+[node name="말들" type="Node3D" parent="."]

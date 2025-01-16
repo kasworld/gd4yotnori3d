@@ -53,10 +53,7 @@ func init() -> void:
 			func():
 				self.말이동길보이기(t)
 				)
-		for n in t.말들:
-			#n.position = $"말판/달말통".position + Vector3(randfn(0,판반지름/4),randfn(0,판반지름/4),depth*2)
-			$"말판/달말통".add_child(n)
-			n.position = Vector3(randfn(0,판반지름/10),randfn(0,판반지름/10), randfn(depth,depth/2) )
+		$"말판/달말통".말들넣기(t.말들)
 
 	$"왼쪽패널/자동진행".button_pressed = Settings.자동진행
 	$"왼쪽패널/길보기".button_pressed = Settings.모든길보기
