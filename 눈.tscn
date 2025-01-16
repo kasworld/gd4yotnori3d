@@ -13,4 +13,4 @@ billboard = 1
 shaded = true
 no_depth_test = true
 
-[node name="구" type="MeshInstance3D" parent="."]
+[node name="모양" type="MeshInstance3D" parent="."]

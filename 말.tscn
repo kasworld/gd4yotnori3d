@@ -5,7 +5,7 @@
 [node name="말" type="Node3D"]
 script = ExtResource("1_edvhi")
 
-[node name="도형" type="MeshInstance3D" parent="."]
+[node name="모양" type="MeshInstance3D" parent="."]
 
 [node name="번호" type="Label3D" parent="."]
 pixel_size = 1.0

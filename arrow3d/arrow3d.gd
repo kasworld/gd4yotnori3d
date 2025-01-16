@@ -2,7 +2,7 @@ extends Node3D
 class_name Arrow3D
 
 const bodyRate = 0.5
-const headRate = 1.0-bodyRate
+const headRate = 1.0 - bodyRate
 
 func init(l :float, co :Color, bodyw :float, headw :float) -> Arrow3D:
 	var mat = Global3d.get_color_mat(co)
