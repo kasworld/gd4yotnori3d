@@ -10,8 +10,8 @@ func init(반지름 :float, 높이 :float, 색깔: Color, n:int) -> void:
 	self.번호 = n
 	$"원판".init(반지름,높이,색깔)
 	#$"원판".position.z = -r/2
-	$"눈번호".text = "%d" % 번호
-	$"눈번호".position = Vector3(반지름,-반지름,0)
+	$"번호".text = "%d" % 번호
+	$"번호".position = Vector3(반지름,-반지름,0)
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	var 있던말들 :Array[말]
@@ -41,4 +41,4 @@ func 말보기()->Array[말]:
 	return rtn
 
 func 눈번호보기(b :bool):
-	$"눈번호".visible = b
+	$"번호".visible = b

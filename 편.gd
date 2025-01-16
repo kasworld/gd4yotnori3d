@@ -42,7 +42,7 @@ func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작
 	길단추.text = 인자.이름
 	길단추.modulate = 인자.색
 	for i in range(0,말수):
-		var m = 말_scene.instantiate().init(self, r, i+1)
+		var m = 말_scene.instantiate().init(self, r,r/3, i+1)
 		말들.append(m)
 
 func 놓을말로만들기(ms :Array[말]):

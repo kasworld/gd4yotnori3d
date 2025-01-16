@@ -15,13 +15,14 @@ func string_debug() -> String:
 func _to_string() -> String:
 	return "%s말%d" % [속한편,말번호]
 
-func init(t :편, r :float, n:int, hide_num :bool = false) -> 말:
+func init(t :편, 반지름 :float,높이 :float, n:int, hide_num :bool = false) -> 말:
 	속한편 = t
 	말번호 = n
-	r = r*1.0 * t.인자.크기보정
-	$"다각기둥".init(r, r/3, t.인자.색, t.인자.모양)
-	if not hide_num:
-		$"번호".text = "%d" % 말번호
+	반지름 = 반지름*1.0 * t.인자.크기보정
+	$"다각기둥".init(반지름, 높이, t.인자.색, t.인자.모양)
+	$"번호".position = Vector3(반지름/2,-반지름/2,0)
+	$"번호".text = "%d" % 말번호
+	$"번호".visible = not hide_num
 	return self
 
 func 편얻기()->편:

@@ -8,7 +8,7 @@ script = ExtResource("1_ayhlg")
 
 [node name="말들" type="Node3D" parent="."]
 
-[node name="눈번호" type="Label3D" parent="."]
+[node name="번호" type="Label3D" parent="."]
 pixel_size = 1.0
 billboard = 1
 shaded = true
