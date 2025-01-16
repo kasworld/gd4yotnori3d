@@ -14,3 +14,6 @@ func init(r :float,h :float, co :Color) -> void:
 	mesh.material = mat
 	$".".mesh = mesh
 	$".".rotate_x(PI/2)
+
+func set_color(co :Color) -> void:
+	$".".mesh.material.albedo_color = co

@@ -8,25 +8,9 @@ func _to_string() -> String:
 
 func init(r :float, co: Color, n:int) -> void:
 	self.번호 = n
-	눈모양만들기(r, co)
+	$"원판".init(r,r/3 ,co)
 	$"눈번호".text = "%d" % 번호
 	$"눈번호".position = Vector3(r,-r,0)
-
-func 눈모양만들기(r :float, co :Color) -> void:
-	var mesh = CylinderMesh.new()
-	mesh.bottom_radius = r
-	mesh.top_radius = r
-	mesh.height = r/3
-	#mesh.radial_segments = 100
-	#mesh.rings = 100
-	mesh.material = Global3d.get_color_mat(co)
-	$"모양".mesh = mesh
-	$"모양".rotate_x(PI/2)
-	#$"모양".position = Vector3(0,0,0)
-
-
-func set_color(co :Color) -> void:
-	$"모양".mesh.material = Global3d.get_color_mat(co)
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	var 있던말들 :Array[말]
