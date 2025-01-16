@@ -29,8 +29,10 @@ func init() -> void:
 
 	$"말판/달말통".init(판반지름/4, depth, Color.CYAN)
 	$"말판/달말통".position = Vector3(-판반지름/3,판반지름/3, -depth+1)
+	$"말판/달말통".설명달기("달말통",Vector3(0,판반지름/3.5,0))
 	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK)
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth+1)
+	$"말판/난말통".설명달기("난말통",Vector3(0,판반지름/3.5,0))
 
 	var r = min(vp_size.x,vp_size.y)/2
 	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)

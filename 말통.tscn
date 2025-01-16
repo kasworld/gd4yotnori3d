@@ -9,3 +9,9 @@ script = ExtResource("1_aswxv")
 [node name="모양" parent="." instance=ExtResource("2_x4ufe")]
 
 [node name="말들" type="Node3D" parent="."]
+
+[node name="설명" type="Label3D" parent="."]
+pixel_size = 1.0
+billboard = 1
+shaded = true
+no_depth_test = true

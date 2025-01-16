@@ -10,6 +10,10 @@ func init(반지름a :float, 높이a :float, 색깔 :Color, 각수 :int = 64) ->
 	높이 = 높이a
 	$"모양".init(반지름, 높이, 색깔, 각수)
 
+func 설명달기(설명 :String, 위치 :Vector3 = Vector3.ZERO) -> void:
+	$"설명".text = 설명
+	$"설명".position = 위치
+
 func 말들넣기(넣을말들 :Array[말]) -> void:
 	for m in 넣을말들:
 		말넣기(m)
