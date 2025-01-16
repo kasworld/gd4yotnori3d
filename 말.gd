@@ -20,7 +20,7 @@ func init(t :편, 반지름 :float,높이 :float, n:int, hide_num :bool = false)
 	말번호 = n
 	반지름 = 반지름*1.0 * t.인자.크기보정
 	$"다각기둥".init(반지름, 높이, t.인자.색, t.인자.모양)
-	$"번호".position = Vector3(반지름/2,-반지름/2,0)
+	#$"번호".position = Vector3(반지름/2,-반지름/2,0)
 	$"번호".text = "%d" % 말번호
 	$"번호".visible = not hide_num
 	return self
