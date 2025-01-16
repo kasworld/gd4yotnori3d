@@ -137,6 +137,6 @@ func 화살표추가(p1 :Vector3, p2 :Vector3):
 	var temp = p2-p1
 	var v2 = Vector2(temp.x, temp.y)
 	var a2 = v2.angle()
-	화살표.rotate_z( a2 +PI/2 )
+	화살표.rotate_z( a2 -PI/2 )
 	화살표.position = (p1+p2)/2
 	$"화살표통".add_child(화살표)

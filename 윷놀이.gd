@@ -22,15 +22,15 @@ func init() -> void:
 	$DirectionalLight3D.position = Vector3(판반지름/2,판반지름/2,판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
 	$OmniLight3D.position = Vector3(판반지름/2,-판반지름/2,판반지름)
-	$"말판/다각기둥".init(판반지름*1.05, depth, Color.DIM_GRAY, 20)
+	$"말판/다각기둥".init(판반지름, depth, Color.DIM_GRAY, 20)
 	$"말판/다각기둥".position.z = -depth
+	$"말판/말눈들".init(판반지름*0.95, Color.GRAY)
 
 	var r = min(vp_size.x,vp_size.y)/2
 	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)
 	$오른쪽패널.size = Vector2(vp_size.x/2 -r, vp_size.y)
 	$오른쪽패널.position = Vector2(vp_size.x/2 + r, 0)
 
-	$"말판/말눈들".init(r, Color.GRAY)
 	윷짝1.init()
 
 	Settings.편인자들.shuffle()
@@ -40,7 +40,7 @@ func init() -> void:
 		편통.add_child(t)
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
-		t.init(ti,Settings.편당말수, r, $"말판/말눈들", 시작눈, mirror)
+		t.init(ti,Settings.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
 		편들.append(t)
 		$"말판".add_child(t.길)
 		t.길단추.pressed.connect(
