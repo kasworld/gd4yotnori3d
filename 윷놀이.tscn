@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dssphq21kra0l"]
+[gd_scene load_steps=19 format=3 uid="uid://dssphq21kra0l"]
 
 [ext_resource type="Script" path="res://윷놀이.gd" id="1_4ga8h"]
 [ext_resource type="PackedScene" uid="uid://bpsrl3ehaiokq" path="res://윷짝.tscn" id="2_lq234"]
 [ext_resource type="PackedScene" uid="uid://chvddubar1fad" path="res://말눈들.tscn" id="3_of73k"]
 [ext_resource type="PackedScene" uid="uid://b1a0q4gxh5net" path="res://말.tscn" id="4_sy70a"]
 [ext_resource type="PackedScene" uid="uid://caufs5hrb6jlt" path="res://다각기둥.tscn" id="5_mxqr6"]
+[ext_resource type="PackedScene" uid="uid://h31tcp58dngw" path="res://말통.tscn" id="6_w3qwi"]
 
 [sub_resource type="Theme" id="Theme_6e71o"]
 default_font_size = 50
@@ -172,12 +173,6 @@ visible = false
 
 [node name="원판" parent="말판" instance=ExtResource("5_mxqr6")]
 
-[node name="난말통" type="Node3D" parent="말판"]
+[node name="달말통" parent="말판" instance=ExtResource("6_w3qwi")]
 
-[node name="모양" parent="말판/난말통" instance=ExtResource("5_mxqr6")]
-skeleton = NodePath("../../달말통/모양")
-
-[node name="달말통" type="Node3D" parent="말판"]
-
-[node name="모양" parent="말판/달말통" instance=ExtResource("5_mxqr6")]
-skeleton = NodePath("../..")
+[node name="난말통" parent="말판" instance=ExtResource("6_w3qwi")]

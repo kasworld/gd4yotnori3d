@@ -28,9 +28,9 @@ func init() -> void:
 	$"말판/말눈들".init(판반지름*0.95, depth, Color.GRAY)
 	$"말판/말눈들".position.z = -depth+1
 
-	$"말판/달말통/모양".init(판반지름/4, depth, Color.CYAN)
+	$"말판/달말통".init(판반지름/4, depth, Color.CYAN)
 	$"말판/달말통".position = Vector3(-판반지름/3,판반지름/3, -depth+1)
-	$"말판/난말통/모양".init(판반지름/4, depth, Color.HOT_PINK)
+	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK)
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth+1)
 
 	var r = min(vp_size.x,vp_size.y)/2
