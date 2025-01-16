@@ -18,23 +18,22 @@ func _to_string() -> String:
 func init(t :편, r :float, n:int, hide_num :bool = false) -> 말:
 	속한편 = t
 	말번호 = n
-	#custom_minimum_size = Vector2(r*2,r*2)
 	r = r*1.0 * t.인자.크기보정
-	모양만들기(r/10, r, t.인자.모양, t.인자.색)
-	#PolygonNode.alter_polygon_fill($"내부", Vector2(r,r),r,t.인자.색,t.인자.모양,360)
-	#PolygonNode.alter_polygon($"테두리", Vector2(r,r),r*1.1,Color.BLACK,max(1,r/10),t.인자.모양,360)
+	모양만들기(r, r/10, t.인자.색, t.인자.모양)
 	if not hide_num:
 		$"번호".text = "%d" % 말번호
 	return self
 
 
-func 모양만들기(h :float, r :float, 모양 :int, co :Color) -> void:
+func 모양만들기(r :float, h :float, co :Color, 모양 :int) -> void:
 	var mesh = CylinderMesh.new()
 	mesh.height = h
 	mesh.bottom_radius = r
 	mesh.top_radius = r
 	mesh.radial_segments = 모양
-	mesh.material = Global3d.get_color_mat(co)
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = co
+	mesh.material = mat
 	$"모양".mesh = mesh
 	$"모양".rotate_x(PI/2)
 
