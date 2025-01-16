@@ -171,7 +171,7 @@ func 이동애니메니션하기(t :편, 이동좌표들 :Array[Vector3]):
 	for i in 이동좌표들.size():
 		말이동.track_insert_key(0, $"왼쪽패널/HBoxContainer/HSlider".value * i, 이동좌표들[i])
 	var r = min(vp_size.x,vp_size.y)/2 *0.9 / 30
-	$"말판/이동용말".init(t, r, 0, true )
+	$"말판/이동용말".init(t, r, r/4, 0, true )
 	$"말판/이동용말".visible = true
 	$"말판/말이동AnimationPlayer".play("말이동")
 

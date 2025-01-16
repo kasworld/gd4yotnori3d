@@ -13,7 +13,7 @@ func init(반지름 :float, 높이 :float, 색깔 :Color, 각수 :int = 64) -> v
 	mat.albedo_color = 색깔
 	msh.material = mat
 	$".".mesh = msh
-	$".".rotate_x(PI/2)
+	$".".rotation.x = PI/2
 
 func set_color(co :Color) -> void:
 	$".".mesh.material.albedo_color = co

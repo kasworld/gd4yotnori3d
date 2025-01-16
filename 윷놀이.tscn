@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dssphq21kra0l"]
+[gd_scene load_steps=18 format=3 uid="uid://dssphq21kra0l"]
 
 [ext_resource type="Script" path="res://윷놀이.gd" id="1_4ga8h"]
 [ext_resource type="PackedScene" uid="uid://bpsrl3ehaiokq" path="res://윷짝.tscn" id="2_lq234"]
@@ -34,23 +34,19 @@ font_size = 24
 [sub_resource type="Theme" id="Theme_y2end"]
 default_font_size = 50
 
-[sub_resource type="Animation" id="Animation_fu0i4"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_4pe0f"]
+[sub_resource type="Animation" id="Animation_a0a0t"]
 resource_name = "말이동"
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../말판2/이동용말")
+tracks/0/path = NodePath("이동용말")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array()
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gpajh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5hde"]
 _data = {
-"RESET": SubResource("Animation_fu0i4"),
-"말이동": SubResource("Animation_4pe0f")
+"말이동": SubResource("Animation_a0a0t")
 }
 
 [node name="윷놀이" type="Node3D"]
@@ -162,9 +158,8 @@ text = "윷던지기"
 [node name="말눈들" parent="말판" instance=ExtResource("3_of73k")]
 
 [node name="말이동AnimationPlayer" type="AnimationPlayer" parent="말판"]
-root_node = NodePath("")
 libraries = {
-"": SubResource("AnimationLibrary_gpajh")
+"": SubResource("AnimationLibrary_p5hde")
 }
 playback_auto_capture = false
 
