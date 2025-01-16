@@ -176,3 +176,6 @@ visible = false
 [node name="달말통" parent="말판" instance=ExtResource("6_w3qwi")]
 
 [node name="난말통" parent="말판" instance=ExtResource("6_w3qwi")]
+
+[connection signal="toggled" from="왼쪽패널/길보기" to="." method="_on_길보기_toggled"]
+[connection signal="toggled" from="왼쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]

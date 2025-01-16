@@ -83,7 +83,7 @@ func 말이동길모두보기() ->void:
 	for t in 편들:
 		t.길.visible = true
 		var rd = deg_to_rad( deg_start + i*deg_inc)
-		t.길.position = Vector3(sin(rd)*r, 0, cos(rd)*r) # PolygonNode.make_pos_by_rad_r_3d(ra,r)
+		t.길.position = Vector3(sin(rd)*r, cos(rd)*r, 0)
 		i+=1
 
 func 눈번호들을좌표로(눈번호들 :Array[int])->Array[Vector3]:
