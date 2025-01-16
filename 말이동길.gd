@@ -133,7 +133,7 @@ func 화살표추가(p1 :Vector3, p2 :Vector3):
 	var 화살표 = 화살표_scene.instantiate()
 	var t1 = (p1-p2)*0.8+p2
 	var t2 = (p2-p1)*0.8+p1
-	화살표.init((t1-t2).length(), 화살표색, 화살표두께, 화살표두께*5)
+	화살표.init((t1-t2).length(), 화살표색, 화살표두께, 화살표두께*4)
 	var temp = p2-p1
 	var v2 = Vector2(temp.x, temp.y)
 	var a2 = v2.angle()
