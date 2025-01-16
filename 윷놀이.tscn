@@ -132,26 +132,10 @@ layout_mode = 2
 [node name="제목" type="HBoxContainer" parent="오른쪽패널/편들상태"]
 layout_mode = 2
 
-[node name="달말들" type="Label" parent="오른쪽패널/편들상태/제목"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "달말들"
-label_settings = SubResource("LabelSettings_gvy41")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="길보기단추" type="Label" parent="오른쪽패널/편들상태/제목"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "길보기"
-label_settings = SubResource("LabelSettings_gvy41")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="난말들" type="Label" parent="오른쪽패널/편들상태/제목"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "난말들"
 label_settings = SubResource("LabelSettings_gvy41")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -188,7 +172,12 @@ visible = false
 
 [node name="원판" parent="말판" instance=ExtResource("5_mxqr6")]
 
-[node name="난말통" parent="말판" instance=ExtResource("5_mxqr6")]
-skeleton = NodePath("../달말통")
+[node name="난말통" type="Node3D" parent="말판"]
 
-[node name="달말통" parent="말판" instance=ExtResource("5_mxqr6")]
+[node name="모양" parent="말판/난말통" instance=ExtResource("5_mxqr6")]
+skeleton = NodePath("../../달말통/모양")
+
+[node name="달말통" type="Node3D" parent="말판"]
+
+[node name="모양" parent="말판/달말통" instance=ExtResource("5_mxqr6")]
+skeleton = NodePath("../..")

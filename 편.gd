@@ -12,8 +12,6 @@ class 인자틀:
 		모양 = c
 		크기보정 = d
 
-@onready var 놓을말통 = $HBoxContainer/HBoxContainer
-@onready var 난말통 = $HBoxContainer/HBoxContainer2
 @onready var 길단추 = $HBoxContainer/Button
 
 var 말_scene = preload("res://말.tscn")
@@ -41,33 +39,29 @@ func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작
 	길.init( max(1,크기/200), 인자.색, es.눈들, 시작눈, mirror)
 	var r = 크기/30
 	custom_minimum_size = Vector2(r*2*10,r*2)
-	놓을말통.custom_minimum_size = Vector2(r*2*4,r*2)
-	난말통.custom_minimum_size = Vector2(r*2*4,r*2)
 	길단추.text = 인자.이름
 	길단추.modulate = 인자.색
 	for i in range(0,말수):
 		var m = 말_scene.instantiate().init(self, r, i+1)
-		놓을말통.add_child(m)
 		말들.append(m)
 
-func 놓을말로되돌리기(ms :Array[말]):
+func 놓을말로만들기(ms :Array[말]):
 	for m in ms:
 		m.지나온눈번호들 = []
-		m.편얻기().놓을말통.add_child(m)
 
-func 놓을말에서빼기(m :말):
-	놓을말통.remove_child(m)
-
-func 난말로넣기(ms :Array[말]):
+func 난말로만들기(ms :Array[말]):
 	for m in ms:
-		m.편얻기().난말통.add_child(m)
 		m.났다 = true
 
 func 난말수얻기() -> int:
-	return 난말통.get_child_count()
+	var rtn :int = 0
+	for n in 말들:
+		if n.난말인가():
+			rtn +=1
+	return rtn
 
 func 모든말이났나() -> bool:
-	return 난말통.get_child_count() == 말들.size()
+	return 난말수얻기() == 말들.size()
 
 # 이동 주체로 사용 불가
 func 업힌말인가(m :말)->bool:
@@ -114,13 +108,13 @@ func 말쓰기(이동거리 :int, m :말)->이동결과틀:
 
 func 새로말달기(m :말, 이동거리 :int)->이동결과틀:
 	var 결과 = 이동결과틀.new()
-	놓을말에서빼기(m)
+	#놓을말에서빼기(m)
 	결과.말이동과정눈번호 = 길.말이동과정찾기(-1,이동거리)
 	for i in 결과.말이동과정눈번호:
 		m.지나온눈번호들.append(i)
 	var 도착눈 = 눈들.눈얻기(결과.말이동과정눈번호[-1])
 	결과.잡힌말들 = 도착눈.말놓기([m])
-	놓을말로되돌리기(결과.잡힌말들)
+	놓을말로만들기(결과.잡힌말들)
 	결과.새로단말 = m
 	결과.성공 = true
 	return 결과
@@ -133,7 +127,7 @@ func 판위의말이동하기(m :말, 이동거리 :int)->이동결과틀:
 			for i in m.지나온눈번호들:
 				결과.말이동과정눈번호.append(i)
 			결과.말이동과정눈번호.reverse()
-			놓을말로되돌리기(이동할말들)
+			놓을말로만들기(이동할말들)
 			결과.놓을말로돌아간말들 = 이동할말들
 			결과.성공 = true
 			return 결과
@@ -141,7 +135,7 @@ func 판위의말이동하기(m :말, 이동거리 :int)->이동결과틀:
 			결과.말이동과정눈번호.append(m.지나온눈번호들.pop_back())
 		결과.말이동과정눈번호.append(m.마지막눈번호())
 		결과.잡힌말들 = 눈들.눈얻기(m.마지막눈번호()).말놓기(이동할말들)
-		놓을말로되돌리기(결과.잡힌말들)
+		놓을말로만들기(결과.잡힌말들)
 		결과.성공 = true
 		return 결과
 
@@ -152,12 +146,12 @@ func 판위의말이동하기(m :말, 이동거리 :int)->이동결과틀:
 		m.지나온눈번호들.append(i)
 	결과.말이동과정눈번호.push_front(기존위치눈번호)
 	if 결과.말이동과정눈번호[-1] == 길.종점눈번호(): # 말이 났다.
-		난말로넣기(이동할말들)
+		난말로만들기(이동할말들)
 		결과.난말들 = 이동할말들
 		결과.성공 = true
 		return 결과
 	var 도착눈 = 눈들.눈얻기(결과.말이동과정눈번호[-1])
 	결과.잡힌말들 = 도착눈.말놓기(이동할말들)
-	놓을말로되돌리기(결과.잡힌말들)
+	놓을말로만들기(결과.잡힌말들)
 	결과.성공 = true
 	return 결과
