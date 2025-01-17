@@ -219,7 +219,7 @@ var camera_move = false
 func _process(_delta: float) -> void:
 	var t = Time.get_unix_time_from_system() /-3.0
 	if camera_move:
-		$Camera3D.position = Vector3(sin(t)*판반지름, cos(t)*판반지름, 판반지름  )
+		$Camera3D.position = Vector3(sin(t)*판반지름, cos(t)*판반지름, 판반지름*0.6  )
 		$Camera3D.look_at(Vector3(sin(t)*판반지름/2, cos(t)*판반지름/2, 0) )
 		#$Camera3D.look_at(Vector3.ZERO)
 
