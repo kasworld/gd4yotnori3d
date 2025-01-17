@@ -8,7 +8,7 @@ func _to_string() -> String:
 
 func init(반지름 :float, 높이 :float, 색깔: Color, n:int) ->  눈:
 	self.번호 = n
-	$"말통".init(반지름,높이,색깔,64,1.1,"%d" % 번호, Vector3(반지름,-반지름,0))
+	$"말통".init(반지름,높이,색깔,64,1.1).설명달기("%d" % 번호, Vector3(반지름,-반지름,0),색깔)
 	눈번호보기(false)
 	return self
 
