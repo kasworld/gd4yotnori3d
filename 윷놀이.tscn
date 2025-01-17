@@ -1,38 +1,16 @@
-[gd_scene load_steps=21 format=3 uid="uid://dssphq21kra0l"]
+[gd_scene load_steps=15 format=3 uid="uid://dssphq21kra0l"]
 
 [ext_resource type="Script" path="res://윷놀이.gd" id="1_4ga8h"]
+[ext_resource type="Theme" uid="uid://dlbbbw7g3rlr4" path="res://왼쪽패널.tres" id="2_c0hqa"]
 [ext_resource type="PackedScene" uid="uid://bpsrl3ehaiokq" path="res://윷짝.tscn" id="2_lq234"]
+[ext_resource type="Theme" uid="uid://by255psfytiui" path="res://오른쪽패널.tres" id="3_is060"]
 [ext_resource type="PackedScene" uid="uid://chvddubar1fad" path="res://말눈들.tscn" id="3_of73k"]
 [ext_resource type="PackedScene" uid="uid://b1a0q4gxh5net" path="res://말.tscn" id="4_sy70a"]
 [ext_resource type="PackedScene" uid="uid://caufs5hrb6jlt" path="res://다각기둥.tscn" id="5_mxqr6"]
 [ext_resource type="PackedScene" uid="uid://h31tcp58dngw" path="res://말통.tscn" id="6_w3qwi"]
 
-[sub_resource type="Theme" id="Theme_6e71o"]
-default_font_size = 50
-
-[sub_resource type="Theme" id="Theme_xyhcb"]
-default_font_size = 50
-
-[sub_resource type="Theme" id="Theme_jwqqu"]
-default_font_size = 50
-
-[sub_resource type="Theme" id="Theme_1556g"]
-default_font_size = 50
-
-[sub_resource type="Theme" id="Theme_upo72"]
-default_font_size = 50
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8horw"]
 bg_color = Color(0.272655, 0.272655, 0.272655, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_gvy41"]
-font_size = 24
-
-[sub_resource type="LabelSettings" id="LabelSettings_f60j2"]
-font_size = 24
-
-[sub_resource type="Theme" id="Theme_y2end"]
-default_font_size = 50
 
 [sub_resource type="Animation" id="Animation_a0a0t"]
 resource_name = "말이동"
@@ -103,44 +81,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_c0hqa")
 
-[node name="자동진행" type="CheckButton" parent="왼쪽패널"]
+[node name="Label" type="Label" parent="왼쪽패널"]
 layout_mode = 2
-theme = SubResource("Theme_6e71o")
-text = "자동진행하기"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="왼쪽패널"]
-layout_mode = 2
-theme = SubResource("Theme_xyhcb")
-
-[node name="Label" type="Label" parent="왼쪽패널/HBoxContainer"]
-layout_mode = 2
-text = "말속도 "
-
-[node name="HSlider" type="HSlider" parent="왼쪽패널/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-min_value = 0.1
-max_value = 1.0
-step = 0.1
-value = 0.6
-ticks_on_borders = true
-
-[node name="길보기" type="CheckButton" parent="왼쪽패널"]
-layout_mode = 2
-theme = SubResource("Theme_jwqqu")
-text = "모든길보기"
-
-[node name="눈번호보기" type="CheckButton" parent="왼쪽패널"]
-layout_mode = 2
-theme = SubResource("Theme_1556g")
-text = "눈번호보기"
-
-[node name="놀이재시작" type="Button" parent="왼쪽패널"]
-layout_mode = 2
-theme = SubResource("Theme_upo72")
-text = "놀이재시작"
+text = "진행사항"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="왼쪽패널"]
 modulate = Color(1, 1, 1, 0.709804)
@@ -155,6 +100,18 @@ layout_mode = 2
 [node name="오른쪽패널" type="VBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("3_is060")
+
+[node name="윷짝" parent="오른쪽패널" instance=ExtResource("2_lq234")]
+layout_mode = 2
+
+[node name="윷던지기" type="Button" parent="오른쪽패널"]
+layout_mode = 2
+text = "윷던지기"
+
+[node name="Control" type="Control" parent="오른쪽패널"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="편들상태" type="VBoxContainer" parent="오른쪽패널"]
 layout_mode = 2
@@ -166,25 +123,48 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "길보기"
-label_settings = SubResource("LabelSettings_gvy41")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="등수" type="Label" parent="오른쪽패널/편들상태/제목"]
 layout_mode = 2
 text = "등수"
-label_settings = SubResource("LabelSettings_f60j2")
 
 [node name="내용" type="VBoxContainer" parent="오른쪽패널/편들상태"]
 layout_mode = 2
 
-[node name="윷짝" parent="오른쪽패널" instance=ExtResource("2_lq234")]
+[node name="자동진행" type="CheckButton" parent="오른쪽패널"]
+layout_mode = 2
+text = "자동진행하기"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="오른쪽패널"]
 layout_mode = 2
 
-[node name="윷던지기" type="Button" parent="오른쪽패널"]
+[node name="Label" type="Label" parent="오른쪽패널/HBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_y2end")
-text = "윷던지기"
+text = "말속도 "
+
+[node name="HSlider" type="HSlider" parent="오른쪽패널/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.6
+ticks_on_borders = true
+
+[node name="길보기" type="CheckButton" parent="오른쪽패널"]
+layout_mode = 2
+text = "모든길보기"
+
+[node name="눈번호보기" type="CheckButton" parent="오른쪽패널"]
+layout_mode = 2
+text = "눈번호보기"
+
+[node name="놀이재시작" type="Button" parent="오른쪽패널"]
+layout_mode = 2
+text = "놀이재시작"
 
 [node name="말판" type="Node3D" parent="."]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -212,9 +192,9 @@ libraries = {
 }
 autoplay = "시작"
 
-[connection signal="toggled" from="왼쪽패널/자동진행" to="." method="_on_자동진행_toggled"]
-[connection signal="toggled" from="왼쪽패널/길보기" to="." method="_on_길보기_toggled"]
-[connection signal="toggled" from="왼쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]
-[connection signal="pressed" from="왼쪽패널/놀이재시작" to="." method="_on_놀이재시작_pressed"]
 [connection signal="pressed" from="오른쪽패널/윷던지기" to="." method="_on_윷던지기_pressed"]
+[connection signal="toggled" from="오른쪽패널/자동진행" to="." method="_on_자동진행_toggled"]
+[connection signal="toggled" from="오른쪽패널/길보기" to="." method="_on_길보기_toggled"]
+[connection signal="toggled" from="오른쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]
+[connection signal="pressed" from="오른쪽패널/놀이재시작" to="." method="_on_놀이재시작_pressed"]
 [connection signal="animation_finished" from="말판/말이동AnimationPlayer" to="." method="_on_말이동animation_player_animation_finished"]

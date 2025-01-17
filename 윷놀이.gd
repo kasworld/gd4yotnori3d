@@ -55,10 +55,10 @@ func init() -> void:
 				)
 		$"말판/달말통".말들넣기(t.말들)
 
-	$"왼쪽패널/자동진행".button_pressed = Settings.자동진행
-	$"왼쪽패널/길보기".button_pressed = Settings.모든길보기
-	$"왼쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
-	$"왼쪽패널/HBoxContainer/HSlider".value = Settings.말빠르기
+	$"오른쪽패널/자동진행".button_pressed = Settings.자동진행
+	$"오른쪽패널/길보기".button_pressed = Settings.모든길보기
+	$"오른쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
+	$"오른쪽패널/HBoxContainer/HSlider".value = Settings.말빠르기
 	차례준비하기(0)
 	if Settings.자동진행:
 		윷던지기()
@@ -163,11 +163,11 @@ func 말이동하기() -> void:
 func 이동애니메니션하기(t :편, 이동좌표들 :Array[Vector3]):
 	$"말판/말이동AnimationPlayer".stop()
 	var 말이동 = $"말판/말이동AnimationPlayer".get_animation("말이동")
-	말이동.length = $"왼쪽패널/HBoxContainer/HSlider".value * 이동좌표들.size()
+	말이동.length = $"오른쪽패널/HBoxContainer/HSlider".value * 이동좌표들.size()
 	for i in 말이동.track_get_key_count(0) :
 		말이동.track_remove_key(0,0)
 	for i in 이동좌표들.size():
-		말이동.track_insert_key(0, $"왼쪽패널/HBoxContainer/HSlider".value * i, 이동좌표들[i])
+		말이동.track_insert_key(0, $"오른쪽패널/HBoxContainer/HSlider".value * i, 이동좌표들[i])
 	var r = min(vp_size.x,vp_size.y)/2 *0.9 / 30
 	$"말판/이동용말".init(t, r, r/4, 0, true )
 	$"말판/이동용말".visible = true
@@ -205,7 +205,7 @@ func _on_눈번호보기_toggled(toggled_on: bool) -> void:
 
 func _on_놀이재시작_pressed() -> void:
 	$"말판/말이동AnimationPlayer".stop()
-	Settings.말빠르기 = $"왼쪽패널/HBoxContainer/HSlider".value
+	Settings.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
 	get_tree().reload_current_scene()
 
 func _ready() -> void:

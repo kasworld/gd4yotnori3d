@@ -26,12 +26,10 @@ func init()->윷짝:
 	var lb :Label
 	for i in ["결과","뒷도","뒷개","뒷걸","도"]:
 		lb = Label.new()
-		lb.label_settings = preload("res://label_settings.tres")
 		lb.text = i
 		$"윷통".add_child(lb)
 
 	결과label = Label.new()
-	결과label.label_settings = preload("res://윷결과labelsettings.tres")
 	결과label.text = "모"
 	$"윷통".add_child(결과label)
 
