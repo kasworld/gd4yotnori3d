@@ -5,7 +5,7 @@ const 눈사이각도 = 360.0/20.0
 var 눈_scene = preload("res://눈.tscn")
 var 눈들 :Array[눈]
 
-func init(반지름: float, 높이 :float, 색깔 :Color) -> void:
+func init(반지름: float, 높이 :float, 색깔 :Color) -> 말눈들:
 	var 눈반지름 = max(10,반지름/30)
 
 	# 눈 추가하기
@@ -19,6 +19,8 @@ func init(반지름: float, 높이 :float, 색깔 :Color) -> void:
 
 	for i in [-0.66,-0.33,0.33,0.66]:
 		눈추가(눈반지름, 높이, Vector3(0,반지름*i, 0),색깔)
+
+	return self
 
 func 눈추가(눈반지름: float, 높이:float, pos:Vector3, 색깔:Color):
 	var 눈1 = 눈_scene.instantiate()

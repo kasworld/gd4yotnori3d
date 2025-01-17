@@ -18,7 +18,7 @@ var 나는길끝 : Vector3
 func _to_string() -> String:
 	return "%s\n%s\n%s\n%s\n" %[바깥길,첫지름길,둘째지름길,세째지름길]
 
-func init(w: float, co :Color, es :Array[눈], 시작눈 :int, mirror :bool = false) -> void:
+func init(w: float, co :Color, es :Array[눈], 시작눈 :int, mirror :bool = false) -> 말이동길:
 	화살표색 = co
 	화살표두께 = w
 	눈들 = es
@@ -93,6 +93,8 @@ func init(w: float, co :Color, es :Array[눈], 시작눈 :int, mirror :bool = fa
 	var 끝점 = 눈들[바깥길[-1]].position
 	나는길끝 = ((중점-끝점)*0.3).rotated(Vector3.FORWARD, -PI/6) + 끝점
 	화살표추가(끝점,나는길끝)
+
+	return self
 
 # 도착 말눈번호를 돌려준다.
 # 말을 새로 다는 경우 현재말눈번호를 -1

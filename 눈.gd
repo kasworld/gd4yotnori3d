@@ -6,11 +6,11 @@ var 번호 :int
 func _to_string() -> String:
 	return "눈%d" % 번호
 
-func init(반지름 :float, 높이 :float, 색깔: Color, n:int) -> void:
+func init(반지름 :float, 높이 :float, 색깔: Color, n:int) ->  눈:
 	self.번호 = n
 	$"말통".init(반지름,높이,색깔,64,1.1,"%d" % 번호, Vector3(반지름,-반지름,0))
 	눈번호보기(false)
-
+	return self
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	if 놓을말들.size() == 0 :

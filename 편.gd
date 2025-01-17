@@ -32,7 +32,7 @@ func 등수쓰기(n :int):
 func 등수얻기() -> int:
 	return 등수
 
-func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작눈 :int, mirror :bool = false) -> void:
+func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작눈 :int, mirror :bool = false) -> 편:
 	인자 = 편정보
 	눈들 = es
 	길 = 말이동길_scene.instantiate()
@@ -44,6 +44,7 @@ func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작
 	for i in range(0,말수):
 		var m = 말_scene.instantiate().init(self, r,r/3, i+1)
 		말들.append(m)
+	return self
 
 func 놓을말로만들기(ms :Array[말]):
 	for m in ms:

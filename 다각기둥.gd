@@ -2,7 +2,7 @@ extends MeshInstance3D
 
 class_name 다각기둥
 
-func init(반지름 :float, 높이 :float, 색깔 :Color, 각수 :int = 64) -> void:
+func init(반지름 :float, 높이 :float, 색깔 :Color, 각수 :int = 64) -> 다각기둥:
 	var msh = CylinderMesh.new()
 	msh.bottom_radius = 반지름
 	msh.top_radius = 반지름
@@ -14,6 +14,7 @@ func init(반지름 :float, 높이 :float, 색깔 :Color, 각수 :int = 64) -> v
 	msh.material = mat
 	$".".mesh = msh
 	$".".rotation.x = PI/2
+	return self
 
 func set_color(co :Color) -> void:
 	$".".mesh.material.albedo_color = co
