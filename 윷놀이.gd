@@ -5,7 +5,6 @@ extends Node3D
 @onready var 윷짝1 = $"오른쪽패널/윷짝"
 
 var 편_scene = preload("res://편.tscn")
-var 말_scene = preload("res://말.tscn")
 
 var 편들 :Array[편]
 var vp_size :Vector2
@@ -128,14 +127,8 @@ func 윷던지기() -> void:
 func 말이동하기() -> void:
 	var 윷던진편 = 편들[이번윷던질편번호]
 	var m = 윷던진편.쓸말고르기(윷짝1.결과얻기())
-	if m == null:
-		진행사항.text = "%d %s %s 이동할 말이 없습니다.\n" % [윷짝1.던진횟수얻기(), 윷던진편 , 윷짝1 ] + 진행사항.text
-		이동애니메이션후처리하기()
-		return
-	if m.놓을말인가():
+	if m != null and m.놓을말인가():
 		$"말판/달말통".말빼기(m)
-	#else:
-		#이동말들 = $"말판/말눈들".눈얻기( m.마지막눈번호() ).말빼기()
 
 	var 이동결과 = 윷던진편.말쓰기(윷짝1.결과얻기(), m)
 	이동후다음차례준비하나 = (not 윷짝1.한번더던지나()) and 이동결과.잡힌말들.size() == 0
