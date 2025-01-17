@@ -166,6 +166,10 @@ text = "눈번호보기"
 layout_mode = 2
 text = "놀이재시작"
 
+[node name="시야바꾸기" type="Button" parent="오른쪽패널"]
+layout_mode = 2
+text = "시야바꾸기"
+
 [node name="말판" type="Node3D" parent="."]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
@@ -197,4 +201,5 @@ autoplay = "시작"
 [connection signal="toggled" from="오른쪽패널/길보기" to="." method="_on_길보기_toggled"]
 [connection signal="toggled" from="오른쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]
 [connection signal="pressed" from="오른쪽패널/놀이재시작" to="." method="_on_놀이재시작_pressed"]
+[connection signal="pressed" from="오른쪽패널/시야바꾸기" to="." method="_on_시야바꾸기_pressed"]
 [connection signal="animation_finished" from="말판/말이동AnimationPlayer" to="." method="_on_말이동animation_player_animation_finished"]

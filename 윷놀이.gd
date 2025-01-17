@@ -222,9 +222,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.keycode == KEY_ESCAPE:
 			get_tree().quit()
 		elif event.keycode == KEY_ENTER:
-			_on_카메라변경_pressed()
+			_on_시야바꾸기_pressed()
 
-func _on_카메라변경_pressed() -> void:
+func _on_시야바꾸기_pressed() -> void:
 	camera_move = !camera_move
 	if camera_move == false:
 		reset_camera_pos()
