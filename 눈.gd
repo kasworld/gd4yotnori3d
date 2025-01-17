@@ -8,9 +8,7 @@ func _to_string() -> String:
 
 func init(반지름 :float, 높이 :float, 색깔: Color, n:int) -> void:
 	self.번호 = n
-	$"말통".init(반지름,높이,색깔)
-	$"말통".설명달기("%d" % 번호, Vector3(반지름,-반지름,0))
-	$"말통".넣을크기비율바꾸기(1.1)
+	$"말통".init(반지름,높이,색깔,64,1.1,"%d" % 번호, Vector3(반지름,-반지름,0))
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	if 놓을말들.size() == 0 :

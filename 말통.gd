@@ -6,15 +6,18 @@ var 반지름 :float
 var 높이 :float
 var 넣을크기비율 :float = 1.0
 
-func init(반지름a :float, 높이a :float, 색깔 :Color, 각수 :int = 64) -> void:
+func init(반지름a :float, 높이a :float, 색깔 :Color, 각수 := 64, 배치비율 := 1.0, 설명 :String = "",설명위치 :=Vector3.ZERO ) -> void:
 	반지름 = 반지름a
 	높이 = 높이a
 	$"모양".init(반지름, 높이, 색깔, 각수)
+	넣을크기비율바꾸기(배치비율)
+	if 설명 != "" :
+		설명달기(설명, 설명위치)
 
 func 넣을크기비율바꾸기(새비율 :float) -> void:
 	넣을크기비율 = 새비율
 
-func 설명달기(설명 :String, 위치 :Vector3 = Vector3.ZERO) -> void:
+func 설명달기(설명 :String, 위치 := Vector3.ZERO) -> void:
 	$"설명".text = 설명
 	$"설명".position = 위치
 
