@@ -9,6 +9,8 @@ func _to_string() -> String:
 func init(반지름 :float, 높이 :float, 색깔: Color, n:int) -> void:
 	self.번호 = n
 	$"말통".init(반지름,높이,색깔,64,1.1,"%d" % 번호, Vector3(반지름,-반지름,0))
+	눈번호보기(false)
+
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	if 놓을말들.size() == 0 :
