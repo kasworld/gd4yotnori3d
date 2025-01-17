@@ -4,11 +4,15 @@ class_name 말통
 
 var 반지름 :float
 var 높이 :float
+var 넣을크기비율 :float = 1.0
 
 func init(반지름a :float, 높이a :float, 색깔 :Color, 각수 :int = 64) -> void:
 	반지름 = 반지름a
 	높이 = 높이a
 	$"모양".init(반지름, 높이, 색깔, 각수)
+
+func 넣을크기비율바꾸기(새비율 :float) -> void:
+	넣을크기비율 = 새비율
 
 func 설명달기(설명 :String, 위치 :Vector3 = Vector3.ZERO) -> void:
 	$"설명".text = 설명
@@ -23,7 +27,7 @@ func 말들넣기(넣을말들 :Array[말]) -> void:
 
 func 말넣기(넣을말 :말) -> void:
 	$"말들".add_child(넣을말)
-	넣을말.position = rand_circle(반지름*0.9, 높이)
+	넣을말.position = rand_circle(반지름*넣을크기비율, 높이)
 
 func 말모두빼기() -> Array[말]:
 	var rtn :Array[말]
