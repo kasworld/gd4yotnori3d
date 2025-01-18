@@ -10,7 +10,7 @@ var 편들 :Array[편]
 var vp_size :Vector2
 var 판반지름 :float
 
-func init() -> void:
+func _ready() -> void:
 	Settings.놀이횟수 +=1
 	$"왼쪽패널/Label".text = "진행사항 (놀이횟수 %d)" % Settings.놀이횟수
 	vp_size = get_viewport().get_visible_rect().size
@@ -209,9 +209,6 @@ func _on_놀이재시작_pressed() -> void:
 	Settings.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
 	get_tree().reload_current_scene()
 
-func _ready() -> void:
-	init()
-
 func reset_camera_pos()->void:
 	$Camera3D.position = Vector3(1,1,판반지름*1)
 	$Camera3D.look_at(Vector3.ZERO)
@@ -228,7 +225,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
-			get_tree().quit()
+			_on_끝내기_pressed()
 		elif event.keycode == KEY_ENTER:
 			_on_시야바꾸기_pressed()
 
@@ -236,3 +233,6 @@ func _on_시야바꾸기_pressed() -> void:
 	camera_move = !camera_move
 	if camera_move == false:
 		reset_camera_pos()
+
+func _on_끝내기_pressed() -> void:
+	get_tree().quit()

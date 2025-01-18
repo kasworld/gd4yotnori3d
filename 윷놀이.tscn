@@ -97,6 +97,11 @@ follow_focus = true
 [node name="진행사항" type="Label" parent="왼쪽패널/ScrollContainer"]
 layout_mode = 2
 
+[node name="끝내기" type="Button" parent="왼쪽패널"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "끝내기"
+
 [node name="오른쪽패널" type="VBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -109,6 +114,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 48
 text = "윷던지기"
 
 [node name="Control" type="Control" parent="오른쪽패널"]
@@ -198,6 +204,7 @@ libraries = {
 }
 autoplay = "시작"
 
+[connection signal="pressed" from="왼쪽패널/끝내기" to="." method="_on_끝내기_pressed"]
 [connection signal="pressed" from="오른쪽패널/윷던지기" to="." method="_on_윷던지기_pressed"]
 [connection signal="toggled" from="오른쪽패널/자동진행" to="." method="_on_자동진행_toggled"]
 [connection signal="toggled" from="오른쪽패널/길보기" to="." method="_on_길보기_toggled"]
