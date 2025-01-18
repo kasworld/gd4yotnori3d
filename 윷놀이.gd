@@ -20,18 +20,18 @@ func _ready() -> void:
 	var depth = 판반지름/40
 
 	reset_camera_pos()
-	$DirectionalLight3D.position = Vector3(판반지름/2,판반지름/2,판반지름)
+	$DirectionalLight3D.position = Vector3(판반지름,판반지름,판반지름)
 	$DirectionalLight3D.look_at(Vector3.ZERO)
-	$OmniLight3D.position = Vector3(판반지름/2,-판반지름/2,판반지름)
+	$OmniLight3D.position = Vector3(판반지름,-판반지름,판반지름)
 	$"말판/원판".init(판반지름, depth, Color.DIM_GRAY, 20)
-	$"말판/원판".position.z = -depth
+	$"말판/원판".position.z = -depth/2-1
 	$"말판/말눈들".init(판반지름*0.95, depth, Color.GRAY)
-	$"말판/말눈들".position.z = -depth+1
+	$"말판/말눈들".position.z = -depth/2
 
 	$"말판/달말통".init(판반지름/4, depth, Color.CYAN,64,0.9).설명달기("달말통",Vector3(0,판반지름/3.5,0), Color.CYAN)
-	$"말판/달말통".position = Vector3(-판반지름/3,판반지름/3, -depth+1)
+	$"말판/달말통".position = Vector3(-판반지름/3,판반지름/3, -depth/2)
 	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK,64,0.9).설명달기("난말통",Vector3(0,판반지름/3.5,0), Color.HOT_PINK)
-	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth+1)
+	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 
 	var r = min(vp_size.x,vp_size.y)/2
 	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)
