@@ -10,5 +10,4 @@ script = ExtResource("1_edvhi")
 
 [node name="번호" type="Label3D" parent="."]
 pixel_size = 1.0
-billboard = 1
 no_depth_test = true

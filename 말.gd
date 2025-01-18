@@ -23,6 +23,7 @@ func init(t :편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false
 	$"번호".text = "%d" % 말번호
 	$"번호".visible = not hide_num
 	$"번호".modulate = t.인자.색
+	#$"번호".position.z = 높이
 	return self
 
 func 편얻기()->편:

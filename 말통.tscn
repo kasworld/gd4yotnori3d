@@ -12,5 +12,4 @@ script = ExtResource("1_aswxv")
 
 [node name="설명" type="Label3D" parent="."]
 pixel_size = 1.0
-billboard = 1
 no_depth_test = true
