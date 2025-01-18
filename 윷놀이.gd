@@ -11,6 +11,8 @@ var vp_size :Vector2
 var 판반지름 :float
 
 func init() -> void:
+	Settings.놀이횟수 +=1
+	$"왼쪽패널/Label".text = "진행사항 (놀이횟수 %d)" % Settings.놀이횟수
 	vp_size = get_viewport().get_visible_rect().size
 	RenderingServer.set_default_clear_color( Global3d.colors.default_clear)
 
@@ -107,6 +109,8 @@ func 다음편차례준비하기():
 
 func 놀이가끝났다() -> void:
 	진행사항.text = "놀이가 끝났습니다.\n" + 진행사항.text
+	if Settings.자동진행:
+		_on_놀이재시작_pressed()
 
 func 차례준비하기(편번호 :int):
 	말이동길보이기(편들[편번호])
@@ -196,7 +200,11 @@ func _on_눈번호보기_toggled(toggled_on: bool) -> void:
 	Settings.눈번호보기 = toggled_on
 	$"말판/말눈들".눈번호보기(Settings.눈번호보기)
 
+var 재시작중 :bool
 func _on_놀이재시작_pressed() -> void:
+	if 재시작중:
+		return
+	재시작중 = true
 	$"말판/말이동AnimationPlayer".stop()
 	Settings.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
 	get_tree().reload_current_scene()
