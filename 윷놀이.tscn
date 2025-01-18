@@ -107,6 +107,8 @@ layout_mode = 2
 
 [node name="윷던지기" type="Button" parent="오른쪽패널"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
 text = "윷던지기"
 
 [node name="Control" type="Control" parent="오른쪽패널"]
