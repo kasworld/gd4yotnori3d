@@ -72,14 +72,6 @@ func 업힌말인가(m :말)->bool:
 func 업은말들얻기(m :말)->Array[말]:
 	return 눈들.눈얻기(m.마지막눈번호()).말보기()
 
-class 이동결과틀:
-	var 말이동과정눈번호 :Array[int]
-	var 잡힌말들 :Array[말]
-	var 새로단말 :말
-	var 놓을말로돌아간말들 :Array[말]
-	var 난말들 :Array[말]
-	var 성공 :bool
-
 func 쓸말고르기(이동거리 :int)->말:
 	var 섞은말 = 말들.duplicate()
 	섞은말.shuffle()
@@ -96,19 +88,19 @@ func 쓸말고르기(이동거리 :int)->말:
 	# 모두 났다.
 	return null
 
-func 말쓰기(이동거리 :int, m :말)->이동결과틀:
+func 말쓰기(이동거리 :int, m :말)->이동결과:
 	if m == null :
-		return 이동결과틀.new()
+		return 이동결과.new()
 	if m.난말인가():
-		return 이동결과틀.new()
+		return 이동결과.new()
 	if m.놓을말인가() and 이동거리 > 0:
 		return 새로말달기(m, 이동거리)
 	if 업힌말인가(m):
-		return 이동결과틀.new()
+		return 이동결과.new()
 	return 판위의말이동하기(m, 이동거리)
 
-func 새로말달기(m :말, 이동거리 :int)->이동결과틀:
-	var 결과 = 이동결과틀.new()
+func 새로말달기(m :말, 이동거리 :int)->이동결과:
+	var 결과 = 이동결과.new()
 	#놓을말에서빼기(m)
 	결과.말이동과정눈번호 = 길.말이동과정찾기(-1,이동거리)
 	for i in 결과.말이동과정눈번호:
@@ -120,8 +112,8 @@ func 새로말달기(m :말, 이동거리 :int)->이동결과틀:
 	결과.성공 = true
 	return 결과
 
-func 판위의말이동하기(m :말, 이동거리 :int)->이동결과틀:
-	var 결과 = 이동결과틀.new()
+func 판위의말이동하기(m :말, 이동거리 :int)->이동결과:
+	var 결과 = 이동결과.new()
 	var 이동할말들 = 눈들.눈얻기(m.마지막눈번호()).말빼기() # 눈에서 제거한다.
 	if 이동거리 < 0: # 뒷도개걸 처리
 		if m.지나온눈번호들.size() <= -이동거리: #판에서 빼서 놓을 말로 돌아간다.
