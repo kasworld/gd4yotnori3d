@@ -35,6 +35,12 @@ func 마지막눈번호()->int:
 func 놓을말인가() -> bool:
 	return 지나온눈번호들.size() == 0
 
+func 놓을말로만들기() -> void:
+	지나온눈번호들 = []
+
+func 난말로만들기():
+	났다 = true
+
 func 난말인가() -> bool:
 	return 났다
 
