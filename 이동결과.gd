@@ -8,3 +8,7 @@ var 새로단말 :말
 var 놓을말로돌아간말들 :Array[말]
 var 난말들 :Array[말]
 var 성공 :bool
+var 다음편으로넘어가나:bool
+
+func _init() -> void:
+	다음편으로넘어가나 = true
