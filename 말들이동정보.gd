@@ -1,6 +1,6 @@
 extends RefCounted
 
-class_name 이동결과
+class_name 말들이동정보
 
 var 말이동과정눈번호 :Array[int]
 var 잡힌말들 :Array[말]
