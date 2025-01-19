@@ -15,7 +15,7 @@ func string_debug() -> String:
 	return "말(%s %d 눈[%s])" % [속한편,말번호,s]
 
 func _to_string() -> String:
-	return "%s말%d%s" % [속한편,말번호]
+	return "%s말%d" % [속한편,말번호]
 
 func init(t :편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false) -> 말:
 	속한편 = t
@@ -36,15 +36,28 @@ func 마지막눈번호()->int:
 	return 지나온눈번호들[-1]
 
 func 난말로만들기() -> void:
-	지나온눈번호들 = []
 	말위치 = 위치.난말통
 
+func 난말인가() -> bool:
+	return 말위치 == 위치.난말통
+
 func 달말로만들기() -> void:
-	지나온눈번호들 = []
 	말위치 = 위치.달말통
 
-func 말위치설정(위치a :위치):
-	말위치 = 위치a
+func 달말인가() -> bool:
+	return  말위치 == 위치.달말통
+
+func 판위말로만들기() -> void:
+	말위치 = 위치.판위눈
+
+func 판위말인가() -> bool:
+	return  말위치 == 위치.판위눈
+
+func 이동말로만들기() -> void:
+	말위치 = 위치.이동중
+
+func 이동말인가() -> bool:
+	return 말위치 == 위치.이동중
 
 func 말위치얻기() -> 위치:
 	return 말위치

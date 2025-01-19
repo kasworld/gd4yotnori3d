@@ -152,6 +152,7 @@ func 말이동하기() -> void:
 	$"오른쪽패널/윷던지기".disabled = true
 	for mm in 말들이동정보g.이동할말들:
 		mm.get_parent().remove_child(mm)
+		mm.이동말로만들기()
 		$"말판/이동용말통".말넣기(mm)
 	# 애니메이션 시작
 	$"말판/말이동AnimationPlayer".stop()
