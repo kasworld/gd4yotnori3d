@@ -49,7 +49,7 @@ func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작
 func 난말수얻기() -> int:
 	var rtn :int = 0
 	for n in 말들:
-		if n.난말인가():
+		if n.말위치얻기() == 말.위치.난말통:
 			rtn +=1
 	return rtn
 
@@ -59,7 +59,7 @@ func 모든말이났나() -> bool:
 # 이동 주체로 사용 불가
 func 업힌말인가(m :말)->bool:
 	var ms = 눈들.눈얻기(m.마지막눈번호()).말보기()
-	return m.판위말인가() and ms[0] != m
+	return m.말위치얻기() == 말.위치.판위눈 and ms[0] != m
 
 func 업은말들얻기(m :말)->Array[말]:
 	return 눈들.눈얻기(m.마지막눈번호()).말보기()
@@ -68,9 +68,9 @@ func 쓸말고르기(윷짝a :윷짝)->말:
 	var 섞은말 = 말들.duplicate()
 	섞은말.shuffle()
 	for m in 섞은말:
-		if m.난말인가():
+		if m.말위치얻기() == 말.위치.난말통:
 			continue
-		if m.놓을말인가():
+		if m.말위치얻기() == 말.위치.달말통:
 			if 윷짝a.결과얻기() < 0:
 				continue
 			return m
@@ -83,9 +83,9 @@ func 쓸말고르기(윷짝a :윷짝)->말:
 func 말이동정보만들기(윷짝a :윷짝, m :말)->말들이동정보:
 	if m == null :
 		return 말들이동정보.new()
-	if m.난말인가():
+	if m.말위치얻기() == 말.위치.난말통:
 		return 말들이동정보.new()
-	if m.놓을말인가() and 윷짝a.결과얻기() > 0:
+	if m.말위치얻기() == 말.위치.달말통 and 윷짝a.결과얻기() > 0:
 		return 새로말달정보만들기(윷짝a, m)
 	if 업힌말인가(m):
 		return 말들이동정보.new()
