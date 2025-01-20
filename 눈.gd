@@ -14,7 +14,7 @@ func init(반지름 :float, 높이 :float, 색깔: Color, n:int) ->  눈:
 
 func 말놓기(놓을말들 :Array)->Array[말]:
 	if 놓을말들.size() == 0 :
-		print("문제:놓을말들이 비어있습니다.", 번호)
+		print_debug("문제:놓을말들이 비어있습니다.", 번호)
 		return []
 
 	var 선두말 :말
@@ -38,7 +38,7 @@ func 말놓기(놓을말들 :Array)->Array[말]:
 
 func 말잡기시도(놓을말들 :Array)->Array[말]:
 	if 놓을말들.size() == 0 :
-		print("문제:놓을말들이 비어있습니다.", 번호)
+		print_debug("문제:놓을말들이 비어있습니다.", 번호)
 		return []
 	var 잡을말들 : Array[말]
 	var 있던말들 = 말보기()

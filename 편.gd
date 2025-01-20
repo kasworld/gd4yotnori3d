@@ -74,6 +74,8 @@ func 쓸말고르기(윷짝a :윷짝)->말:
 			if 윷짝a.결과얻기() < 0:
 				continue
 			return m
+		if not 눈들.눈얻기(m.마지막눈번호()).말이있나(m):
+			print_debug("문제발생 %s %s %s %s" % [m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 눈들.눈얻기(m.마지막눈번호()).말보기() ])
 		if 업힌말인가(m):
 			continue
 		return m

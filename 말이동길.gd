@@ -61,7 +61,7 @@ func init(w: float, co :Color, es :Array[눈], 시작눈 :int, mirror :bool = fa
 			첫지름길 = 지름길2
 			둘째지름길 = 지름길1
 		_:
-			print("잘못된 시작점입니다.", 가능한시작눈목록,"만 가능")
+			print_debug("잘못된 시작점입니다.", 가능한시작눈목록,"만 가능")
 			get_tree().quit()
 
 	세째지름길 = 둘째지름길.slice(3)
@@ -103,10 +103,10 @@ func init(w: float, co :Color, es :Array[눈], 시작눈 :int, mirror :bool = fa
 # 에러인 경우 [] 들 돌려준다.
 func 말이동과정찾기(현재말눈번호:int, 이동거리:int)->Array[int]:
 	if 이동거리 < 1 or 이동거리 > 5 :
-		print("잘못된 이동거리 ", 이동거리)
+		print_debug("잘못된 이동거리 ", 이동거리)
 		return []
 	if 현재말눈번호 < -1 or 현재말눈번호 > 28 :
-		print("잘못된 현재말눈번호 ", 현재말눈번호)
+		print_debug("잘못된 현재말눈번호 ", 현재말눈번호)
 		return []
 	if 현재말눈번호 == -1: # 말을 새로 다는 경우
 		return 바깥길.slice(0,이동거리)
@@ -122,7 +122,7 @@ func 말이동과정찾기(현재말눈번호:int, 이동거리:int)->Array[int]
 	# 길에서 위치 찾기
 	var i = 갈길.find(현재말눈번호)
 	if i < 0:
-		print("이상한 문제 ", 갈길,현재말눈번호 )
+		print_debug("이상한 문제 ", 갈길, 현재말눈번호 )
 		return []
 	if i+이동거리 >= 갈길.size(): # 말이 나는 경우
 		return 갈길.slice(i+1)
