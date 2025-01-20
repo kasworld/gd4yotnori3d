@@ -62,7 +62,15 @@ func 업힌말인가(m :말)->bool:
 	return m.판위말인가() and ms[0] != m
 
 func 업은말들얻기(m :말)->Array[말]:
-	return 눈들.눈얻기(m.마지막눈번호()).말보기()
+	var 속한눈 = 눈들.눈얻기(m.마지막눈번호())
+	var rtn = 속한눈.말보기()
+	if not 속한눈.말이있나(m):
+		print_debug("문제:말이 눈에 속하지 않다. %s %s %s %s %s" %	[
+			m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 속한눈, 속한눈.말보기() ])
+	if rtn.size() == 0 :
+		print_debug("문제:말이 속한 눈이 비어 있다. %s %s %s %s %s" % [
+			m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 속한눈, 속한눈.말보기() ])
+	return rtn
 
 func 쓸말고르기(윷짝a :윷짝)->말:
 	var 섞은말 = 말들.duplicate()
@@ -74,8 +82,6 @@ func 쓸말고르기(윷짝a :윷짝)->말:
 			if 윷짝a.결과얻기() < 0:
 				continue
 			return m
-		if not 눈들.눈얻기(m.마지막눈번호()).말이있나(m):
-			print_debug("문제발생 %s %s %s %s" % [m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 눈들.눈얻기(m.마지막눈번호()).말보기() ])
 		if 업힌말인가(m):
 			continue
 		return m
