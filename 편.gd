@@ -35,8 +35,7 @@ func 등수얻기() -> int:
 func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작눈 :int, mirror :bool = false) -> 편:
 	인자 = 편정보
 	눈들 = es
-	길 = 말이동길_scene.instantiate()
-	길.init( max(1,크기/200), 인자.색, es.눈들, 시작눈, mirror)
+	길 = 말이동길_scene.instantiate().init( max(1,크기/200), 인자.색, es.눈들, 시작눈, mirror)
 	var r = 크기/30
 	custom_minimum_size = Vector2(r*2*10,r*2)
 	길단추.text = 인자.이름
@@ -68,7 +67,7 @@ func 업은말들얻기(m :말)->Array[말]:
 	if not 속한눈.말이있나(m):
 		print_debug("문제:말이 눈에 속하지 않다. %d %s %s %s %s %s" %	[
 			Settings.놀이횟수, m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 속한눈, 속한눈.말보기() ])
-	elif rtn.size() == 0 :
+	elif rtn.is_empty() :
 		print_debug("문제:말이 속한 눈이 비어 있다. %d %s %s %s %s %s" % [
 			Settings.놀이횟수, m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 속한눈, 속한눈.말보기() ])
 	return rtn

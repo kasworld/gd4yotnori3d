@@ -29,6 +29,9 @@ func init(t :편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false
 	달말로만들기()
 	return self
 
+func 초기상태인가() -> bool:
+	return 말위치 == 위치.달말통 and 지나온눈번호들.is_empty()
+
 func 편얻기()->편:
 	return 속한편
 
@@ -40,6 +43,7 @@ func 마지막눈번호()->int:
 
 func 난말로만들기() -> void:
 	말위치 = 위치.난말통
+	지나온눈번호들 = []
 
 func 난말인가() -> bool:
 	return 말위치 == 위치.난말통
