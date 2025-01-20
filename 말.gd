@@ -32,6 +32,9 @@ func init(t :편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false
 func 편얻기()->편:
 	return 속한편
 
+func 같은편인가(m :말) -> bool:
+	return 속한편 == m.편얻기()
+
 func 마지막눈번호()->int:
 	return 지나온눈번호들[-1]
 
