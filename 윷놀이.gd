@@ -32,11 +32,10 @@ func _ready() -> void:
 	$"말판/달말통".position = Vector3(-판반지름/3,판반지름/3, -depth/2)
 	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK,64,0.9).설명달기("난말통",Vector3(0,판반지름/3.5,0), Color.HOT_PINK)
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
-
-	var r = min(vp_size.x,vp_size.y)/2
-	$"왼쪽패널".size = Vector2(vp_size.x/2 -r, vp_size.y)
-	$오른쪽패널.size = Vector2(vp_size.x/2 -r, vp_size.y)
-	$오른쪽패널.position = Vector2(vp_size.x/2 + r, 0)
+	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
+	$"왼쪽패널".size = Vector2(vp_size.x/2 -판반지름, vp_size.y)
+	$오른쪽패널.size = Vector2(vp_size.x/2 -판반지름, vp_size.y)
+	$오른쪽패널.position = Vector2(vp_size.x/2 + 판반지름, 0)
 
 	윷짝1.init()
 
@@ -55,6 +54,7 @@ func _ready() -> void:
 				self.말이동길보이기(t)
 				)
 		$"말판/달말통".말들넣기(t.말들)
+
 
 	$"오른쪽패널/자동진행".button_pressed = Settings.자동진행
 	$"오른쪽패널/길보기".button_pressed = Settings.모든길보기
@@ -76,7 +76,7 @@ func 말이동길보이기(t:편) ->void:
 func 말이동길모두보기() ->void:
 	var deg_start = 30.0
 	var deg_inc = 360.0 / 편들.size()
-	var r = min(vp_size.x,vp_size.y)/2 * 0.03
+	var r = 판반지름 * 0.03
 	var i = 0
 	for t in 편들:
 		t.길.visible = true
@@ -165,8 +165,6 @@ func 말이동하기() -> void:
 		말이동.track_remove_key(0,0)
 	for i in 이동좌표들.size():
 		말이동.track_insert_key(0, $"오른쪽패널/HBoxContainer/HSlider".value * i, 이동좌표들[i])
-	var r = min(vp_size.x,vp_size.y)/2 *0.9 / 30
-	$"말판/이동용말통".init(r, r/4, Color.BLACK )
 	$"말판/이동용말통".visible = true
 	$"말판/말이동AnimationPlayer".play("말이동")
 

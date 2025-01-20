@@ -195,6 +195,7 @@ playback_auto_capture = false
 [node name="난말통" parent="말판" instance=ExtResource("6_w3qwi")]
 
 [node name="이동용말통" parent="말판" instance=ExtResource("6_w3qwi")]
+visible = false
 
 [node name="시작AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
