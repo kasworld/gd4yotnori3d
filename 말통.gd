@@ -53,6 +53,12 @@ func 말보기() -> Array[말]:
 		rtn.append(m)
 	return rtn
 
+func 말이있나(ma :말) -> bool:
+	for m in $"말들".get_children():
+		if m == ma:
+			return true
+	return false
+
 func rand_circle(r :float, hrange :Vector2) -> Vector3:
 	var l = randf_range(0,r)
 	var rad = randf_range(0,2*PI)
