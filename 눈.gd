@@ -53,5 +53,8 @@ func 말빼기()->Array[말]:
 func 말보기()->Array[말]:
 	return $"말통".말보기()
 
+func 말이있나(ma :말) -> bool:
+	return $"말통".말이있나(ma)
+
 func 눈번호보기(b :bool):
 	$"말통".설명보기(b)
