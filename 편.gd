@@ -81,14 +81,17 @@ func 업은말들얻기(m :말)->Array[말]:
 
 func 말상태검사(m :말) -> String:
 	if m.달말인가() or m.난말인가():
-		return m.debug_str()
+		if not m.지나온눈번호들.is_empty():
+			return "말의 지나온눈번호들이 비어있지않다. %s" % [m.debug_str() ]
+		else:
+			return ""
 	var 속한눈 = 눈들.눈얻기(m.마지막눈번호())
 	var rtn = 속한눈.말보기()
 	if not 속한눈.말이있나(m):
 		return "말이 눈에 속하지 않다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
 	elif rtn.is_empty() :
 		return "말이 속한 눈이 비어 있다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
-	return m.debug_str()
+	return "뭔가이상함 %s %s" % [m.debug_str(), 속한눈.debug_str() ]
 
 func 쓸말고르기(윷짝a :윷짝)->말:
 	var 섞은말 = 말들.duplicate()

@@ -35,6 +35,12 @@ func init(t :편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false
 func 초기상태인가() -> bool:
 	return 말위치 == 위치.달말통 and 지나온눈번호들.is_empty()
 
+func 상태검사() -> String:
+	if 달말인가() or 난말인가():
+		if not 지나온눈번호들.is_empty():
+			return "말의 지나온눈번호들이 비어있지않다. %s" % [debug_str() ]
+	return ""
+
 func 편얻기()->편:
 	return 속한편
 
