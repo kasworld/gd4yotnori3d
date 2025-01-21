@@ -17,6 +17,9 @@ func string_debug() -> String:
 func _to_string() -> String:
 	return "%s말%d" % [속한편,말번호]
 
+func debug_str() -> String:
+	return "%s말%d %s %s" % [속한편, 말번호, 위치.keys()[말위치], 지나온눈번호들]
+
 func init(t :편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false) -> 말:
 	속한편 = t
 	말번호 = n

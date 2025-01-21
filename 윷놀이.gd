@@ -6,9 +6,14 @@ extends Node3D
 
 var 편_scene = preload("res://편.tscn")
 
-var 편들 :Array[편]
+var 편들 :Array[편] = []
 var vp_size :Vector2
 var 판반지름 :float
+var 이번윷던질편번호 = 0
+var 난편들 :Array[편] = []
+var 재시작중 :bool = false
+var 말들이동정보g := 말들이동정보.new()
+var camera_move = false
 
 func _ready() -> void:
 	Settings.놀이횟수 +=1
@@ -55,7 +60,6 @@ func _ready() -> void:
 				)
 		$"말판/달말통".말들넣기(t.말들)
 
-
 	$"오른쪽패널/자동진행".button_pressed = Settings.자동진행
 	$"오른쪽패널/길보기".button_pressed = Settings.모든길보기
 	$"오른쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
@@ -90,8 +94,6 @@ func 눈번호들을좌표로(눈번호들 :Array[int])->Array[Vector3]:
 		좌표들.append($"말판/말눈들".눈들[i].position )
 	return 좌표들
 
-var 이번윷던질편번호 =0
-var 난편들 :Array[편]
 func 다음편차례준비하기():
 	while true:
 		if 난편들.size() == Settings.편인자들.size(): # 모든 편이 다 났다.
@@ -131,7 +133,6 @@ func 윷던지기() -> void:
 		진행사항기록하기( "    %s 던저서 한번더 던진다. \n" % [ 윷짝1 ] )
 	말이동하기()
 
-var 말들이동정보g :말들이동정보
 func 말이동하기() -> void:
 	var 윷던진편 = 편들[이번윷던질편번호]
 	var m = 윷던진편.쓸말고르기(윷짝1)
@@ -214,7 +215,6 @@ func _on_눈번호보기_toggled(toggled_on: bool) -> void:
 	Settings.눈번호보기 = toggled_on
 	$"말판/말눈들".눈번호보기(Settings.눈번호보기)
 
-var 재시작중 :bool
 func _on_놀이재시작_pressed() -> void:
 	if 재시작중:
 		return
@@ -227,7 +227,6 @@ func reset_camera_pos()->void:
 	$Camera3D.position = Vector3(1,1,판반지름*1)
 	$Camera3D.look_at(Vector3.ZERO)
 
-var camera_move = false
 func _process(_delta: float) -> void:
 	var t = Time.get_unix_time_from_system() /-3.0
 	if camera_move:

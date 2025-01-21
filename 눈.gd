@@ -6,6 +6,9 @@ var 번호 :int
 func _to_string() -> String:
 	return "눈%d" % 번호
 
+func debug_str() -> String:
+	return "눈%d %s" % [번호, 말보기()]
+
 func init(반지름 :float, 높이 :float, 색깔: Color, n:int) ->  눈:
 	self.번호 = n
 	$"말통".init(반지름,높이,색깔,64,1.1).설명달기("%d" % 번호, Vector3(반지름,-반지름,0),색깔)

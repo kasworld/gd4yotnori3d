@@ -65,11 +65,11 @@ func 업은말들얻기(m :말)->Array[말]:
 	var 속한눈 = 눈들.눈얻기(m.마지막눈번호())
 	var rtn = 속한눈.말보기()
 	if not 속한눈.말이있나(m):
-		print_debug("문제:말이 눈에 속하지 않다. %d %s %s %s %s %s" %	[
-			Settings.놀이횟수, m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 속한눈, 속한눈.말보기() ])
+		print_debug("문제:말이 눈에 속하지 않다. %d %s %s" %	[
+			Settings.놀이횟수, m.debug_str(), 속한눈.debug_str() ])
 	elif rtn.is_empty() :
-		print_debug("문제:말이 속한 눈이 비어 있다. %d %s %s %s %s %s" % [
-			Settings.놀이횟수, m, 말.위치.keys()[m.말위치], m.지나온눈번호들, 속한눈, 속한눈.말보기() ])
+		print_debug("문제:말이 속한 눈이 비어 있다. %d %s %s" % [
+			Settings.놀이횟수, m.debug_str(), 속한눈.debug_str() ])
 	return rtn
 
 func 쓸말고르기(윷짝a :윷짝)->말:
