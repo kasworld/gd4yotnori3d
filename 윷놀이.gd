@@ -15,6 +15,14 @@ var 재시작중 :bool = false
 var 말들이동정보g := 말들이동정보.new()
 var camera_move = false
 
+func 말상태검사_debug():
+	var 윷던진편 = 편들[이번윷던질편번호]
+	print("놀이:%d %s차례 던지기:%d" %[Settings.놀이횟수, 윷던진편, 윷짝1.던진횟수얻기() ])
+	for p in 편들:
+		print(p.debug_str())
+		for m in p.말들:
+			print( p.말상태검사(m) )
+
 func _ready() -> void:
 	Settings.놀이횟수 +=1
 	$"왼쪽패널/Label".text = "진행사항 (놀이횟수 %d)" % Settings.놀이횟수
@@ -65,6 +73,7 @@ func _ready() -> void:
 	$"오른쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
 	$"오른쪽패널/HBoxContainer/HSlider".value = Settings.말빠르기
 	차례준비하기(0)
+	말상태검사_debug()
 	if Settings.자동진행:
 		윷던지기()
 

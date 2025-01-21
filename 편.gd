@@ -22,8 +22,15 @@ var 눈들 :말눈들
 var 길 :말이동길
 var 말들 :Array[말]
 var 등수 :int
+
 func _to_string() -> String:
 	return "%s편" % [인자.이름]
+
+func debug_str() -> String:
+	var rtn = "%s" % self
+	for m in 말들:
+		rtn += " " + m.debug_str()
+	return rtn
 
 func 등수쓰기(n :int):
 	등수 = n
@@ -71,6 +78,17 @@ func 업은말들얻기(m :말)->Array[말]:
 		print_debug("문제:말이 속한 눈이 비어 있다. %d %s %s" % [
 			Settings.놀이횟수, m.debug_str(), 속한눈.debug_str() ])
 	return rtn
+
+func 말상태검사(m :말) -> String:
+	if m.달말인가() or m.난말인가():
+		return m.debug_str()
+	var 속한눈 = 눈들.눈얻기(m.마지막눈번호())
+	var rtn = 속한눈.말보기()
+	if not 속한눈.말이있나(m):
+		return "말이 눈에 속하지 않다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
+	elif rtn.is_empty() :
+		return "말이 속한 눈이 비어 있다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
+	return m.debug_str()
 
 func 쓸말고르기(윷짝a :윷짝)->말:
 	var 섞은말 = 말들.duplicate()
