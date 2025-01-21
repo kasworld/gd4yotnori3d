@@ -17,13 +17,9 @@ var camera_move = false
 
 func 말상태검사_debug():
 	var 윷던진편 = 편들[이번윷던질편번호]
-	print("놀이:%d %s차례 던지기:%d" %[Settings.놀이횟수, 윷던진편, 윷짝1.던진횟수얻기() ])
+	print("놀이:%d 던지기:%d %s차례" %[Settings.놀이횟수, 윷짝1.던진횟수얻기(), 윷던진편 ])
 	for p in 편들:
-		print(p.debug_str())
-		for m in p.말들:
-			var s = p.말상태검사(m)
-			if s != "":
-				print( s )
+		prints(p.debug_str(), p.상태검사())
 
 func _ready() -> void:
 	Settings.놀이횟수 +=1
@@ -231,7 +227,7 @@ func _on_놀이재시작_pressed() -> void:
 	if 재시작중:
 		return
 	재시작중 = true
-	$"말판/말이동AnimationPlayer".stop()
+	$"말판/말이동AnimationPlayer".pause()
 	Settings.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
 	get_tree().reload_current_scene()
 

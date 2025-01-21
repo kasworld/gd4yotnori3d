@@ -20,7 +20,7 @@ var 말이동길_scene = preload("res://말이동길.tscn")
 var 인자 :인자틀
 var 눈들 :말눈들
 var 길 :말이동길
-var 말들 :Array[말]
+var 말들 :Array[말] = []
 var 등수 :int
 
 func _to_string() -> String:
@@ -31,6 +31,29 @@ func debug_str() -> String:
 	for m in 말들:
 		rtn += " " + m.debug_str()
 	return rtn
+
+func 상태검사() -> String:
+	var rtn = ""
+	for m in 말들:
+		var s = 말상태검사(m)
+		if s != "":
+			rtn += s + " "
+	return rtn
+
+func 말상태검사(m :말) -> String:
+	if m.달말인가() or m.난말인가():
+		if not m.지나온눈번호들.is_empty():
+			return "말의 지나온눈번호들이 비어있지않다. %s" % [m.debug_str() ]
+		else:
+			return ""
+	var 속한눈 = 눈들.눈얻기(m.마지막눈번호())
+	var rtn = 속한눈.말보기()
+	if not 속한눈.말이있나(m):
+		return "말이 눈에 속하지 않다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
+	elif rtn.is_empty() :
+		return "말이 속한 눈이 비어 있다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
+	return "뭔가이상함 %s %s" % [m.debug_str(), 속한눈.debug_str() ]
+
 
 func 등수쓰기(n :int):
 	등수 = n
@@ -47,7 +70,6 @@ func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작
 	custom_minimum_size = Vector2(r*2*10,r*2)
 	길단추.text = 인자.이름
 	길단추.modulate = 인자.색
-	말들 = []
 	for i in range(0,말수):
 		var m = 말_scene.instantiate().init(self, r,r/3, i+1)
 		말들.append(m)
@@ -79,19 +101,6 @@ func 업은말들얻기(m :말)->Array[말]:
 			Settings.놀이횟수, m.debug_str(), 속한눈.debug_str() ])
 	return rtn
 
-func 말상태검사(m :말) -> String:
-	if m.달말인가() or m.난말인가():
-		if not m.지나온눈번호들.is_empty():
-			return "말의 지나온눈번호들이 비어있지않다. %s" % [m.debug_str() ]
-		else:
-			return ""
-	var 속한눈 = 눈들.눈얻기(m.마지막눈번호())
-	var rtn = 속한눈.말보기()
-	if not 속한눈.말이있나(m):
-		return "말이 눈에 속하지 않다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
-	elif rtn.is_empty() :
-		return "말이 속한 눈이 비어 있다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
-	return "뭔가이상함 %s %s" % [m.debug_str(), 속한눈.debug_str() ]
 
 func 쓸말고르기(윷짝a :윷짝)->말:
 	var 섞은말 = 말들.duplicate()
