@@ -1,5 +1,9 @@
 extends Node3D
 
+class_name 윷놀이
+
+signal 놀이종료()
+
 @onready var 편통 = $"오른쪽패널/편들상태/내용"
 @onready var 진행사항 = $"왼쪽패널/ScrollContainer/진행사항"
 @onready var 윷짝1 = $"오른쪽패널/윷짝"
@@ -229,7 +233,8 @@ func _on_놀이재시작_pressed() -> void:
 	재시작중 = true
 	$"말판/말이동AnimationPlayer".pause()
 	Settings.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
+	놀이종료.emit()
 
 func reset_camera_pos()->void:
 	$Camera3D.position = Vector3(1,1,판반지름*1)
