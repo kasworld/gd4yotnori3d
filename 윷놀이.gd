@@ -67,14 +67,13 @@ func _ready() -> void:
 				)
 		$"말판/달말통".말들넣기(t.말들)
 
-	$"오른쪽패널/자동진행".button_pressed = Settings.자동진행
 	$"오른쪽패널/길보기".button_pressed = Settings.모든길보기
 	$"오른쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
 	$"오른쪽패널/HBoxContainer/HSlider".value = Settings.말빠르기
 	차례준비하기(0)
 	말상태검사_debug("_ready")
-	if Settings.자동진행:
-		윷던지기()
+	# _on_자동진행_toggled 가 불린다.
+	$"오른쪽패널/자동진행".button_pressed = Settings.자동진행
 
 func 다음편차례준비하기():
 	while true:
