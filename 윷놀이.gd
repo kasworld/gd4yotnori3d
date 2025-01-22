@@ -76,26 +76,6 @@ func _ready() -> void:
 	if Settings.자동진행:
 		윷던지기()
 
-func 말이동길보이기(t:편) ->void:
-	if Settings.모든길보기:
-		말이동길모두보기()
-	else:
-		for i in 편들:
-			i.길.visible = false
-		t.길.visible = true
-		t.길.position = Vector3.ZERO
-
-func 말이동길모두보기() ->void:
-	var deg_start = 30.0
-	var deg_inc = 360.0 / 편들.size()
-	var r = 판반지름 * 0.03
-	var i = 0
-	for t in 편들:
-		t.길.visible = true
-		var rd = deg_to_rad( deg_start + i*deg_inc)
-		t.길.position = Vector3(sin(rd)*r, cos(rd)*r, 0)
-		i+=1
-
 func 다음편차례준비하기():
 	while true:
 		if 난편들.size() == Settings.편인자들.size(): # 모든 편이 다 났다.
@@ -111,19 +91,16 @@ func 다음편차례준비하기():
 		차례준비하기(이번윷던질편번호)
 		break
 
-func 진행사항기록하기(s :String) -> void:
-	진행사항.text = s + 진행사항.text
-
 func 놀이가끝났다() -> void:
 	진행사항기록하기( "놀이가 끝났습니다.\n" )
 	말상태검사_debug("놀이가끝났다")
 	if Settings.자동진행:
-		_on_놀이재시작_pressed()
+		놀이재시작하기()
 
 func 차례준비하기(편번호 :int):
 	말이동길보이기(편들[편번호])
-	$"오른쪽패널/윷던지기".modulate = 편들[편번호].인자.색
-	$"오른쪽패널/윷던지기".text = "%s\n윷던지기" % 편들[편번호]
+	$"오른쪽패널/윷던지기단추".modulate = 편들[편번호].인자.색
+	$"오른쪽패널/윷던지기단추".text = "%s\n윷던지기" % 편들[편번호]
 
 func 윷던지기() -> void:
 	if 난편들.size() == Settings.편인자들.size(): # 모든 편이 다 났다.
@@ -156,7 +133,7 @@ func 말이동하기() -> void:
 		이동좌표들.push_back(윷던진편.길.나는길끝 )
 	if not 말들이동정보g.잡힐말들.is_empty() :
 		진행사항기록하기( "    %s 을 잡아 한번더 던집니다.\n" % [ 말들이동정보g.잡힐말들 ] )
-	$"오른쪽패널/윷던지기".disabled = true
+	$"오른쪽패널/윷던지기단추".disabled = true
 	for mm in 말들이동정보g.이동할말들:
 		mm.get_parent().remove_child(mm)
 		mm.이동말로만들기()
@@ -197,29 +174,32 @@ func 이동애니메이션후처리하기() -> void:
 	if Settings.자동진행:
 		윷던지기.call_deferred()
 	else:
-		$"오른쪽패널/윷던지기".disabled = false
+		$"오른쪽패널/윷던지기단추".disabled = false
 
-func _on_말이동animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "말이동":
-		이동애니메이션후처리하기()
+func 말이동길보이기(t:편) ->void:
+	if Settings.모든길보기:
+		말이동길모두보기()
+	else:
+		for i in 편들:
+			i.길.visible = false
+		t.길.visible = true
+		t.길.position = Vector3.ZERO
 
-func _on_윷던지기_pressed() -> void:
-	윷던지기()
+func 말이동길모두보기() ->void:
+	var deg_start = 30.0
+	var deg_inc = 360.0 / 편들.size()
+	var r = 판반지름 * 0.03
+	var i = 0
+	for t in 편들:
+		t.길.visible = true
+		var rd = deg_to_rad( deg_start + i*deg_inc)
+		t.길.position = Vector3(sin(rd)*r, cos(rd)*r, 0)
+		i+=1
 
-func _on_자동진행_toggled(toggled_on: bool) -> void:
-	Settings.자동진행 = toggled_on
-	if Settings.자동진행:
-		윷던지기()
+func 진행사항기록하기(s :String) -> void:
+	진행사항.text = s + 진행사항.text
 
-func _on_길보기_toggled(toggled_on: bool) -> void:
-	Settings.모든길보기 = toggled_on
-	말이동길보이기(편들[이번윷던질편번호])
-
-func _on_눈번호보기_toggled(toggled_on: bool) -> void:
-	Settings.눈번호보기 = toggled_on
-	$"말판/말눈들".눈번호보기(Settings.눈번호보기)
-
-func _on_놀이재시작_pressed() -> void:
+func 놀이재시작하기() -> void:
 	if 재시작중:
 		return
 	재시작중 = true
@@ -246,6 +226,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.keycode == KEY_ENTER:
 			_on_시야바꾸기_pressed()
 
+func _on_말이동animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "말이동":
+		이동애니메이션후처리하기()
+
+func _on_윷던지기_pressed() -> void:
+	윷던지기()
+
+func _on_자동진행_toggled(toggled_on: bool) -> void:
+	Settings.자동진행 = toggled_on
+	if Settings.자동진행:
+		윷던지기()
+
+func _on_놀이재시작_pressed() -> void:
+	놀이재시작하기()
+
 func _on_시야바꾸기_pressed() -> void:
 	camera_move = !camera_move
 	if camera_move == false:
@@ -253,3 +248,11 @@ func _on_시야바꾸기_pressed() -> void:
 
 func _on_끝내기_pressed() -> void:
 	get_tree().quit()
+
+func _on_길보기_toggled(toggled_on: bool) -> void:
+	Settings.모든길보기 = toggled_on
+	말이동길보이기(편들[이번윷던질편번호])
+
+func _on_눈번호보기_toggled(toggled_on: bool) -> void:
+	Settings.눈번호보기 = toggled_on
+	$"말판/말눈들".눈번호보기(Settings.눈번호보기)
