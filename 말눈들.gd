@@ -35,3 +35,9 @@ func 눈얻기(눈번호 :int)->눈:
 func 눈번호보기(b :bool):
 	for n in 눈들:
 		n.눈번호보기(b)
+
+func 눈번호들을좌표로(눈번호들 :Array[int])->Array[Vector3]:
+	var 좌표들 :Array[Vector3] = []
+	for i in 눈번호들:
+		좌표들.append(눈들[i].position )
+	return 좌표들

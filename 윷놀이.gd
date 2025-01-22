@@ -1,8 +1,5 @@
 extends Node3D
-
 class_name 윷놀이
-
-#signal 놀이종료()
 
 @onready var 편통 = $"오른쪽패널/편들상태/내용"
 @onready var 진행사항 = $"왼쪽패널/ScrollContainer/진행사항"
@@ -19,9 +16,9 @@ var 재시작중 :bool = false
 var 말들이동정보g := 말들이동정보.new()
 var camera_move = false
 
-func 말상태검사_debug():
+func 말상태검사_debug(s :String=""):
 	var 윷던진편 = 편들[이번윷던질편번호]
-	print("놀이:%d 던지기:%d %s차례" %[Settings.놀이횟수, 윷짝1.던진횟수얻기(), 윷던진편 ])
+	print("%s 놀이:%d 던지기:%d %s차례" %[s, Settings.놀이횟수, 윷짝1.던진횟수얻기(), 윷던진편 ])
 	for p in 편들:
 		prints(p.debug_str(), p.상태검사())
 
@@ -75,7 +72,7 @@ func _ready() -> void:
 	$"오른쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
 	$"오른쪽패널/HBoxContainer/HSlider".value = Settings.말빠르기
 	차례준비하기(0)
-	말상태검사_debug()
+	말상태검사_debug("_ready")
 	if Settings.자동진행:
 		윷던지기()
 
@@ -99,12 +96,6 @@ func 말이동길모두보기() ->void:
 		t.길.position = Vector3(sin(rd)*r, cos(rd)*r, 0)
 		i+=1
 
-func 눈번호들을좌표로(눈번호들 :Array[int])->Array[Vector3]:
-	var 좌표들 :Array[Vector3] = []
-	for i in 눈번호들:
-		좌표들.append($"말판/말눈들".눈들[i].position )
-	return 좌표들
-
 func 다음편차례준비하기():
 	while true:
 		if 난편들.size() == Settings.편인자들.size(): # 모든 편이 다 났다.
@@ -125,8 +116,9 @@ func 진행사항기록하기(s :String) -> void:
 
 func 놀이가끝났다() -> void:
 	진행사항기록하기( "놀이가 끝났습니다.\n" )
-	#if Settings.자동진행:
-		#_on_놀이재시작_pressed()
+	말상태검사_debug("놀이가끝났다")
+	if Settings.자동진행:
+		_on_놀이재시작_pressed()
 
 func 차례준비하기(편번호 :int):
 	말이동길보이기(편들[편번호])
@@ -153,7 +145,7 @@ func 말이동하기() -> void:
 		진행사항기록하기( "%d %s %s 이동할 말이 없습니다.\n" % [윷짝1.던진횟수얻기(), 윷던진편 , 윷짝1 ] )
 		이동애니메이션후처리하기()
 		return
-	var 이동좌표들 = 눈번호들을좌표로(말들이동정보g.이동과정눈번호들)
+	var 이동좌표들 = $"말판/말눈들".눈번호들을좌표로(말들이동정보g.이동과정눈번호들)
 	if 말들이동정보g.새로달말 != null:
 		이동좌표들.push_front(윷던진편.길.놓을길시작 )
 	if not 말들이동정보g.놓을말로돌아갈말들.is_empty():
@@ -234,7 +226,6 @@ func _on_놀이재시작_pressed() -> void:
 	$"말판/말이동AnimationPlayer".pause()
 	Settings.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
 	get_tree().reload_current_scene()
-	#놀이종료.emit()
 
 func reset_camera_pos()->void:
 	$Camera3D.position = Vector3(1,1,판반지름*1)
