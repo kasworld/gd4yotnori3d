@@ -71,7 +71,7 @@ func _ready() -> void:
 	$"오른쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
 	$"오른쪽패널/HBoxContainer/HSlider".value = Settings.말빠르기
 	차례준비하기(0)
-	말상태검사_debug("_ready")
+	#말상태검사_debug("_ready")
 	# _on_자동진행_toggled 가 불린다.
 	$"오른쪽패널/자동진행".button_pressed = Settings.자동진행
 
@@ -92,7 +92,7 @@ func 다음편차례준비하기():
 
 func 놀이가끝났다() -> void:
 	진행사항기록하기( "놀이가 끝났습니다.\n" )
-	말상태검사_debug("놀이가끝났다")
+	#말상태검사_debug("놀이가끝났다")
 	if Settings.자동진행:
 		놀이재시작하기()
 
@@ -150,8 +150,8 @@ func 말이동하기() -> void:
 
 func 이동애니메이션후처리하기() -> void:
 	$"말판/이동용말통".visible = false
-	if not 말들이동정보g.이동성공:
-		print(말들이동정보g)
+	#if not 말들이동정보g.이동성공:
+		#print(말들이동정보g)
 	var 이동한말들 = $"말판/이동용말통".말모두빼기()
 	if 말들이동정보g.도착눈 != null :
 		말들이동정보g.도착눈.말놓기(이동한말들)
