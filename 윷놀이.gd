@@ -94,7 +94,7 @@ func 놀이가끝났다() -> void:
 	진행사항기록하기( "놀이가 끝났습니다.\n" )
 	#말상태검사_debug("놀이가끝났다")
 	if Settings.자동진행:
-		놀이재시작하기()
+		놀이다시시작하기()
 
 func 차례준비하기(편번호 :int):
 	말이동길보이기(편들[편번호])
@@ -198,7 +198,7 @@ func 말이동길모두보기() ->void:
 func 진행사항기록하기(s :String) -> void:
 	진행사항.text = s + 진행사항.text
 
-func 놀이재시작하기() -> void:
+func 놀이다시시작하기() -> void:
 	if 재시작중:
 		return
 	재시작중 = true
@@ -237,8 +237,8 @@ func _on_자동진행_toggled(toggled_on: bool) -> void:
 	if Settings.자동진행:
 		윷던지기()
 
-func _on_놀이재시작_pressed() -> void:
-	놀이재시작하기()
+func _on_놀이다시시작_pressed() -> void:
+	놀이다시시작하기()
 
 func _on_시야바꾸기_pressed() -> void:
 	camera_move = !camera_move

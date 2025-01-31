@@ -149,7 +149,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="오른쪽패널/HBoxContainer"]
 layout_mode = 2
-text = "말속도 "
+text = "걸음빠르기"
 
 [node name="HSlider" type="HSlider" parent="오른쪽패널/HBoxContainer"]
 layout_mode = 2
@@ -169,9 +169,9 @@ text = "모든길보기"
 layout_mode = 2
 text = "눈번호보기"
 
-[node name="놀이재시작" type="Button" parent="오른쪽패널"]
+[node name="놀이다시시작" type="Button" parent="오른쪽패널"]
 layout_mode = 2
-text = "놀이재시작"
+text = "놀이다시시작"
 
 [node name="시야바꾸기" type="Button" parent="오른쪽패널"]
 layout_mode = 2
@@ -208,6 +208,6 @@ autoplay = "시작"
 [connection signal="toggled" from="오른쪽패널/자동진행" to="." method="_on_자동진행_toggled"]
 [connection signal="toggled" from="오른쪽패널/길보기" to="." method="_on_길보기_toggled"]
 [connection signal="toggled" from="오른쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]
-[connection signal="pressed" from="오른쪽패널/놀이재시작" to="." method="_on_놀이재시작_pressed"]
+[connection signal="pressed" from="오른쪽패널/놀이다시시작" to="." method="_on_놀이다시시작_pressed"]
 [connection signal="pressed" from="오른쪽패널/시야바꾸기" to="." method="_on_시야바꾸기_pressed"]
 [connection signal="animation_finished" from="말판/말이동AnimationPlayer" to="." method="_on_말이동animation_player_animation_finished"]
