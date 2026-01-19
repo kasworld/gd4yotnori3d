@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://dssphq21kra0l"]
 
-[ext_resource type="Script" path="res://윷놀이.gd" id="1_4ga8h"]
+[ext_resource type="Script" uid="uid://3gb1lxi6imws" path="res://윷놀이.gd" id="1_4ga8h"]
 [ext_resource type="Theme" uid="uid://dlbbbw7g3rlr4" path="res://왼쪽패널.tres" id="2_c0hqa"]
 [ext_resource type="PackedScene" uid="uid://bpsrl3ehaiokq" path="res://윷짝.tscn" id="2_lq234"]
 [ext_resource type="Theme" uid="uid://by255psfytiui" path="res://오른쪽패널.tres" id="3_is060"]
@@ -23,7 +23,7 @@ tracks/0/keys = PackedFloat32Array()
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p5hde"]
 _data = {
-"말이동": SubResource("Animation_a0a0t")
+&"말이동": SubResource("Animation_a0a0t")
 }
 
 [sub_resource type="Animation" id="Animation_mkuig"]
@@ -55,8 +55,8 @@ tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ha7vo"]
 _data = {
-"RESET": SubResource("Animation_mkuig"),
-"시작": SubResource("Animation_vtkmd")
+&"RESET": SubResource("Animation_mkuig"),
+&"시작": SubResource("Animation_vtkmd")
 }
 
 [node name="윷놀이" type="Node3D"]
@@ -184,7 +184,7 @@ transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="말이동AnimationPlayer" type="AnimationPlayer" parent="말판"]
 libraries = {
-"": SubResource("AnimationLibrary_p5hde")
+&"": SubResource("AnimationLibrary_p5hde")
 }
 playback_auto_capture = false
 
@@ -199,7 +199,7 @@ visible = false
 
 [node name="시작AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ha7vo")
+&"": SubResource("AnimationLibrary_ha7vo")
 }
 autoplay = "시작"
 

@@ -1,7 +1,7 @@
 extends Node3D
 class_name 말이동길
 
-var 화살표_scene = preload("res://arrow3d/arrow3d.tscn")
+var 화살표_scene = preload("res://arrow_3d/arrow_3d.tscn")
 
 const 가능한시작눈목록 = [0,1,2,3,5,6,7,8,10,11,12,13,15,16,17,18]
 var 화살표두께 :float
@@ -135,7 +135,7 @@ func 화살표추가(p1 :Vector3, p2 :Vector3):
 	var 화살표 = 화살표_scene.instantiate()
 	var t1 = (p1-p2)*0.8+p2
 	var t2 = (p2-p1)*0.8+p1
-	화살표.init((t1-t2).length(), 화살표색, 화살표두께, 화살표두께*4)
+	화살표.set_size((t1-t2).length(),화살표두께, 화살표두께*4).set_color(화살표색)
 	var temp = p2-p1
 	var v2 = Vector2(temp.x, temp.y)
 	var a2 = v2.angle()

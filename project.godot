@@ -12,13 +12,12 @@ config_version=5
 
 config/name="gd4윷놀이3d"
 run/main_scene="res://윷놀이.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global3d="*res://global/global3d.gd"
-NamedColorList="*res://global/named_color_list.gd"
 Settings="*res://global/settings.gd"
 PolygonNode="*res://global/polygon_node.gd"
 
