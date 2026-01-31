@@ -20,7 +20,7 @@ func _ready() -> void:
 	Settings.놀이횟수 +=1
 	$"왼쪽패널/Label".text = "진행사항 (놀이횟수 %d)" % Settings.놀이횟수
 	vp_size = get_viewport().get_visible_rect().size
-	RenderingServer.set_default_clear_color( Global3d.colors.default_clear)
+	#RenderingServer.set_default_clear_color( Global3d.colors.default_clear)
 
 	판반지름 = min(vp_size.x,vp_size.y)/2
 	var depth = 판반지름/40

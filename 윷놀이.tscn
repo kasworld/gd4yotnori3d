@@ -187,6 +187,7 @@ libraries/ = SubResource("AnimationLibrary_p5hde")
 playback_auto_capture = false
 
 [node name="원판" parent="말판" unique_id=1960672903 instance=ExtResource("5_mxqr6")]
+visible = false
 
 [node name="달말통" parent="말판" unique_id=1772135456 instance=ExtResource("6_w3qwi")]
 

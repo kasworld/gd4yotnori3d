@@ -18,9 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global3d="*res://global/global3d.gd"
 Settings="*res://global/settings.gd"
-PolygonNode="*res://global/polygon_node.gd"
 
 [display]
 
