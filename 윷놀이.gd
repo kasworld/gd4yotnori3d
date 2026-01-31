@@ -1,11 +1,6 @@
 extends Node3D
 class_name 윷놀이
 
-@onready var 편통 = $"오른쪽패널/편들상태/내용"
-@onready var 진행사항 = $"왼쪽패널/ScrollContainer/진행사항"
-@onready var 윷짝1 = $"오른쪽패널/윷짝"
-
-
 var 편들 :Array[편] = []
 var vp_size :Vector2
 var 판반지름 :float
@@ -17,7 +12,7 @@ var camera_move = false
 
 func 말상태검사_debug(s :String=""):
 	var 윷던진편 = 편들[이번윷던질편번호]
-	print("%s 놀이:%d 던지기:%d %s차례" %[s, Settings.놀이횟수, 윷짝1.던진횟수얻기(), 윷던진편 ])
+	print("%s 놀이:%d 던지기:%d %s차례" %[s, Settings.놀이횟수, $"오른쪽패널/윷짝".던진횟수얻기(), 윷던진편 ])
 	for p in 편들:
 		prints(p.debug_str(), p.상태검사())
 
@@ -48,13 +43,13 @@ func _ready() -> void:
 	$오른쪽패널.size = Vector2(vp_size.x/2 -판반지름, vp_size.y)
 	$오른쪽패널.position = Vector2(vp_size.x/2 + 판반지름, 0)
 
-	윷짝1.init()
+	$"오른쪽패널/윷짝".init()
 
 	Settings.편인자들.shuffle()
 	# 편 가르기
 	for ti in Settings.편인자들:
 		var t = preload("res://윷놀이/편.tscn").instantiate()
-		편통.add_child(t)
+		$"오른쪽패널/편들상태/내용".add_child(t)
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
 		t.init(ti,Settings.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
@@ -104,20 +99,20 @@ func 윷던지기() -> void:
 	if 난편들.size() == Settings.편인자들.size(): # 모든 편이 다 났다.
 		놀이가끝났다()
 		return
-	윷짝1.윷던지기()
+	$"오른쪽패널/윷짝".윷던지기()
 	var 윷던진편 = 편들[이번윷던질편번호]
-	진행사항기록하기( "%d %s %s\n" % [윷짝1.던진횟수얻기(), 윷던진편 , 윷짝1 ] )
-	if 윷짝1.한번더던지나():
-		진행사항기록하기( "    %s 던저서 한번더 던진다. \n" % [ 윷짝1 ] )
+	진행사항기록하기( "%d %s %s\n" % [$"오른쪽패널/윷짝".던진횟수얻기(), 윷던진편 , $"오른쪽패널/윷짝" ] )
+	if $"오른쪽패널/윷짝".한번더던지나():
+		진행사항기록하기( "    %s 던저서 한번더 던진다. \n" % [ $"오른쪽패널/윷짝" ] )
 	말이동하기()
 
 func 말이동하기() -> void:
 	var 윷던진편 = 편들[이번윷던질편번호]
-	var m = 윷던진편.쓸말고르기(윷짝1)
-	말들이동정보g = 윷던진편.말이동정보만들기(윷짝1, m)
-	말들이동정보g.다음편으로넘어가나 = (not 윷짝1.한번더던지나()) and 말들이동정보g.잡힐말들.is_empty()
+	var m = 윷던진편.쓸말고르기($"오른쪽패널/윷짝")
+	말들이동정보g = 윷던진편.말이동정보만들기($"오른쪽패널/윷짝", m)
+	말들이동정보g.다음편으로넘어가나 = (not $"오른쪽패널/윷짝".한번더던지나()) and 말들이동정보g.잡힐말들.is_empty()
 	if not 말들이동정보g.이동성공:
-		진행사항기록하기( "%d %s %s 이동할 말이 없습니다.\n" % [윷짝1.던진횟수얻기(), 윷던진편 , 윷짝1 ] )
+		진행사항기록하기( "%d %s %s 이동할 말이 없습니다.\n" % [$"오른쪽패널/윷짝".던진횟수얻기(), 윷던진편 , $"오른쪽패널/윷짝" ] )
 		이동애니메이션후처리하기()
 		return
 	var 이동좌표들 = $"말판/말눈들".눈번호들을좌표로(말들이동정보g.이동과정눈번호들)
@@ -195,7 +190,7 @@ func 말이동길모두보기() ->void:
 		i+=1
 
 func 진행사항기록하기(s :String) -> void:
-	진행사항.text = s + 진행사항.text
+	$"왼쪽패널/ScrollContainer/진행사항".text = s + $"왼쪽패널/ScrollContainer/진행사항".text
 
 func 놀이다시시작하기() -> void:
 	if 재시작중:
