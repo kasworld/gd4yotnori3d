@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://caufs5hrb6jlt"]
-
-[ext_resource type="Script" path="res://다각기둥.gd" id="1_jqemy"]
-
-[node name="다각기둥" type="MeshInstance3D"]
-script = ExtResource("1_jqemy")

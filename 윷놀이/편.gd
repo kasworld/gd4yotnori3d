@@ -14,9 +14,6 @@ class 인자틀:
 
 @onready var 길단추 = $HBoxContainer/Button
 
-var 말_scene = preload("res://말.tscn")
-var 말이동길_scene = preload("res://말이동길.tscn")
-
 var 인자 :인자틀
 var 눈들 :말눈들
 var 길 :말이동길
@@ -65,13 +62,13 @@ func 등수얻기() -> int:
 func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작눈 :int, mirror :bool = false) -> 편:
 	인자 = 편정보
 	눈들 = es
-	길 = 말이동길_scene.instantiate().init( max(1,크기/200), 인자.색, es.눈들, 시작눈, mirror)
+	길 = preload("res://윷놀이/말이동길.tscn").instantiate().init( max(1,크기/200), 인자.색, es.눈들, 시작눈, mirror)
 	var r = 크기/30
 	custom_minimum_size = Vector2(r*2*10,r*2)
 	길단추.text = 인자.이름
 	길단추.modulate = 인자.색
 	for i in range(0,말수):
-		var m = 말_scene.instantiate().init(self, r,r/3, i+1)
+		var m = preload("res://윷놀이/말.tscn").instantiate().init(self, r,r/3, i+1)
 		말들.append(m)
 	return self
 

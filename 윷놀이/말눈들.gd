@@ -2,7 +2,6 @@ extends Node3D
 class_name 말눈들
 
 const 눈사이각도 = 360.0/20.0
-var 눈_scene = preload("res://눈.tscn")
 var 눈들 :Array[눈]
 
 func init(반지름: float, 높이 :float, 색깔 :Color) -> 말눈들:
@@ -23,7 +22,7 @@ func init(반지름: float, 높이 :float, 색깔 :Color) -> 말눈들:
 	return self
 
 func 눈추가(눈반지름: float, 높이:float, pos:Vector3, 색깔:Color):
-	var 눈1 = 눈_scene.instantiate()
+	var 눈1 = preload("res://윷놀이/눈.tscn").instantiate()
 	눈1.init(눈반지름, 높이, 색깔, 눈들.size())
 	눈1.position = pos
 	add_child(눈1)

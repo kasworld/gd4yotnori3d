@@ -1,8 +1,6 @@
 extends PanelContainer
 class_name 윷짝
 
-var 윷_scene = preload("res://윷가락.tscn")
-
 const 결과문자변환 = {
 	-3:"뒷걸",
 	-2:"뒷개",
@@ -34,7 +32,7 @@ func init()->윷짝:
 	$"윷통".add_child(결과label)
 
 	for i in range(0,4):
-		var n = 윷_scene.instantiate().init()
+		var n = preload("res://윷놀이/윷가락.tscn").instantiate().init()
 		$"윷통".add_child(n)
 		윷들.append(n)
 	return self

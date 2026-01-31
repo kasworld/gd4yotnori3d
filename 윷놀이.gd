@@ -5,7 +5,6 @@ class_name 윷놀이
 @onready var 진행사항 = $"왼쪽패널/ScrollContainer/진행사항"
 @onready var 윷짝1 = $"오른쪽패널/윷짝"
 
-var 편_scene = preload("res://편.tscn")
 
 var 편들 :Array[편] = []
 var vp_size :Vector2
@@ -54,7 +53,7 @@ func _ready() -> void:
 	Settings.편인자들.shuffle()
 	# 편 가르기
 	for ti in Settings.편인자들:
-		var t = 편_scene.instantiate()
+		var t = preload("res://윷놀이/편.tscn").instantiate()
 		편통.add_child(t)
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
