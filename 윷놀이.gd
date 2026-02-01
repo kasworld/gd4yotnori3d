@@ -4,10 +4,10 @@ class_name 윷놀이
 const 편당말수 = 4
 
 static var 편인자들 = [
-	편.인자틀.new("빨강색", Color.RED, 4, 1.45),
-	편.인자틀.new("초록색", Color.GREEN, 5, 1.4),
-	편.인자틀.new("파랑색", Color.BLUE, 6, 1.3),
-	편.인자틀.new("노랑색", Color.YELLOW, 8, 1.25),
+	윷놀이편.인자틀.new("빨강색", Color.RED, 4, 1.45),
+	윷놀이편.인자틀.new("초록색", Color.GREEN, 5, 1.4),
+	윷놀이편.인자틀.new("파랑색", Color.BLUE, 6, 1.3),
+	윷놀이편.인자틀.new("노랑색", Color.YELLOW, 8, 1.25),
 ]
 
 static var 자동진행 :bool = true
@@ -18,11 +18,11 @@ static var 놀이횟수 :int = 0
 
 
 var 윷짝_var := 윷짝.new()
-var 편들 :Array[편] = []
+var 편들 :Array[윷놀이편] = []
 var vp_size :Vector2
 var 판반지름 :float
 var 이번윷던질편번호 = 0
-var 난편들 :Array[편] = []
+var 난편들 :Array[윷놀이편] = []
 var 재시작중 :bool = false
 var 말들이동정보g := 말들이동정보.new()
 var camera_move = false
@@ -65,7 +65,7 @@ func _ready() -> void:
 	윷놀이.편인자들.shuffle()
 	# 편 가르기
 	for ti in 윷놀이.편인자들:
-		var t = 편.new()
+		var t = 윷놀이편.new()
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
 		t.init(ti,윷놀이.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
@@ -181,7 +181,7 @@ func 이동애니메이션후처리하기() -> void:
 	else:
 		$"오른쪽패널/윷던지기단추".disabled = false
 
-func 말이동길보이기(t:편) ->void:
+func 말이동길보이기(t :윷놀이편) -> void:
 	if 윷놀이.모든길보기:
 		말이동길모두보기()
 	else:

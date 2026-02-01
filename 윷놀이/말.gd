@@ -3,7 +3,7 @@ class_name 말
 
 enum 위치 {달말통, 판위눈, 이동중, 난말통}
 
-var 속한편 :편
+var 속한편 :윷놀이편
 var 말번호 :int
 var 지나온눈번호들 :Array[int]
 var 말위치 :위치
@@ -20,7 +20,7 @@ func _to_string() -> String:
 func debug_str() -> String:
 	return "%s말%d %s %s" % [속한편, 말번호, 위치.keys()[말위치], 지나온눈번호들]
 
-func init(t :편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false) -> 말:
+func init(t :윷놀이편, 반지름 :float, 높이 :float, n:int, hide_num :bool = false) -> 말:
 	속한편 = t
 	말번호 = n
 	반지름 = 반지름*1.0 * t.인자.크기보정
@@ -41,7 +41,7 @@ func 상태검사() -> String:
 			return "말의 지나온눈번호들이 비어있지않다. %s" % [debug_str() ]
 	return ""
 
-func 편얻기()->편:
+func 편얻기() -> 윷놀이편:
 	return 속한편
 
 func 같은편인가(m :말) -> bool:

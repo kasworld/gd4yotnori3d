@@ -1,4 +1,4 @@
-class_name 편
+class_name 윷놀이편
 
 class 인자틀:
 	var 이름 :String
@@ -56,7 +56,7 @@ func 등수쓰기(n :int):
 func 등수얻기() -> int:
 	return 등수
 
-func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작눈 :int, mirror :bool = false) -> 편:
+func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작눈 :int, mirror :bool = false) -> 윷놀이편:
 	인자 = 편정보
 	눈들 = es
 	길 = preload("res://윷놀이/말이동길.tscn").instantiate().init( max(1,크기/200), 인자.색, es.눈들, 시작눈, mirror)
