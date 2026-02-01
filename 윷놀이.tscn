@@ -1,14 +1,9 @@
 [gd_scene format=3 uid="uid://dssphq21kra0l"]
 
 [ext_resource type="Script" uid="uid://3gb1lxi6imws" path="res://윷놀이.gd" id="1_4ga8h"]
-[ext_resource type="Theme" uid="uid://dlbbbw7g3rlr4" path="res://왼쪽패널.tres" id="2_c0hqa"]
-[ext_resource type="Theme" uid="uid://by255psfytiui" path="res://오른쪽패널.tres" id="3_is060"]
 [ext_resource type="PackedScene" uid="uid://chvddubar1fad" path="res://윷놀이/말눈들.tscn" id="3_of73k"]
 [ext_resource type="PackedScene" uid="uid://caufs5hrb6jlt" path="res://윷놀이/다각기둥.tscn" id="5_mxqr6"]
 [ext_resource type="PackedScene" uid="uid://h31tcp58dngw" path="res://윷놀이/말통.tscn" id="6_w3qwi"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8horw"]
-bg_color = Color(0.272655, 0.272655, 0.272655, 1)
 
 [sub_resource type="Animation" id="Animation_a0a0t"]
 resource_name = "말이동"
@@ -61,100 +56,7 @@ _data = {
 [node name="윷놀이" type="Node3D" unique_id=153465458]
 script = ExtResource("1_4ga8h")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=437021811]
-fov = 90.0
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=90215923]
-shadow_enabled = true
-sky_mode = 1
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1723583412]
-light_energy = 5.0
-shadow_enabled = true
-omni_range = 5000.0
-omni_attenuation = 0.1
-
-[node name="왼쪽패널" type="VBoxContainer" parent="." unique_id=1998917592]
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("2_c0hqa")
-
-[node name="Label" type="Label" parent="왼쪽패널" unique_id=1284760846]
-layout_mode = 2
-text = "진행사항"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="왼쪽패널" unique_id=43014640]
-modulate = Color(1, 1, 1, 0.709804)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_8horw")
-follow_focus = true
-
-[node name="진행사항" type="Label" parent="왼쪽패널/ScrollContainer" unique_id=332081050]
-layout_mode = 2
-
-[node name="끝내기" type="Button" parent="왼쪽패널" unique_id=1969724890]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "끝내기"
-
-[node name="오른쪽패널" type="VBoxContainer" parent="." unique_id=897185591]
-offset_right = 40.0
-offset_bottom = 40.0
-theme = ExtResource("3_is060")
-
-[node name="윷던지기단추" type="Button" parent="오른쪽패널" unique_id=1030316365]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 48
-text = "윷던지기"
-
-[node name="Control" type="Control" parent="오른쪽패널" unique_id=1185689114]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="자동진행" type="CheckButton" parent="오른쪽패널" unique_id=768114908]
-layout_mode = 2
-text = "자동진행하기"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="오른쪽패널" unique_id=596017282]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="오른쪽패널/HBoxContainer" unique_id=1361095125]
-layout_mode = 2
-text = "걸음빠르기"
-
-[node name="HSlider" type="HSlider" parent="오른쪽패널/HBoxContainer" unique_id=630593492]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-min_value = 0.1
-max_value = 1.0
-step = 0.1
-value = 0.6
-ticks_on_borders = true
-
-[node name="길보기" type="CheckButton" parent="오른쪽패널" unique_id=855542322]
-layout_mode = 2
-text = "모든길보기"
-
-[node name="눈번호보기" type="CheckButton" parent="오른쪽패널" unique_id=1644472756]
-layout_mode = 2
-text = "눈번호보기"
-
-[node name="놀이다시시작" type="Button" parent="오른쪽패널" unique_id=1202151019]
-layout_mode = 2
-text = "놀이다시시작"
-
-[node name="시야바꾸기" type="Button" parent="오른쪽패널" unique_id=2147393984]
-layout_mode = 2
-text = "시야바꾸기"
-
 [node name="말판" type="Node3D" parent="." unique_id=391897830]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="말눈들" parent="말판" unique_id=232993502 instance=ExtResource("3_of73k")]
 
@@ -176,11 +78,4 @@ visible = false
 libraries/ = SubResource("AnimationLibrary_ha7vo")
 autoplay = &"시작"
 
-[connection signal="pressed" from="왼쪽패널/끝내기" to="." method="_on_끝내기_pressed"]
-[connection signal="pressed" from="오른쪽패널/윷던지기단추" to="." method="_on_윷던지기_pressed"]
-[connection signal="toggled" from="오른쪽패널/자동진행" to="." method="_on_자동진행_toggled"]
-[connection signal="toggled" from="오른쪽패널/길보기" to="." method="_on_길보기_toggled"]
-[connection signal="toggled" from="오른쪽패널/눈번호보기" to="." method="_on_눈번호보기_toggled"]
-[connection signal="pressed" from="오른쪽패널/놀이다시시작" to="." method="_on_놀이다시시작_pressed"]
-[connection signal="pressed" from="오른쪽패널/시야바꾸기" to="." method="_on_시야바꾸기_pressed"]
 [connection signal="animation_finished" from="말판/말이동AnimationPlayer" to="." method="_on_말이동animation_player_animation_finished"]

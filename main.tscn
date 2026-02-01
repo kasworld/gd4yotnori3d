@@ -14,6 +14,7 @@ bg_color = Color(0.272655, 0.272655, 0.272655, 1)
 script = ExtResource("1_ig7tw")
 
 [node name="왼쪽패널" type="VBoxContainer" parent="." unique_id=238492421]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
@@ -40,6 +41,7 @@ theme_override_font_sizes/font_size = 48
 text = "끝내기"
 
 [node name="오른쪽패널" type="VBoxContainer" parent="." unique_id=899863916]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("3_5vw27")

@@ -23,6 +23,13 @@ func _ready() -> void:
 	$MovingCameraLightAround.set_center_pos_far(Vector3.ZERO, Vector3(0, 0, WorldSize.z),  WorldSize.length()*3)
 	$AxisArrow3D.set_colors().set_size(WorldSize.length()/20)
 	$GlassCabinet.init(WorldSize)
+	yutgame_demo($GlassCabinet)
+
+var yutgame :윷놀이
+func yutgame_demo(gc :GlassCabinet) -> void:
+	gc.show_wall_box(false)
+	yutgame = preload("res://윷놀이.tscn").instantiate().init(gc.cabinet_size)
+	gc.add_child(yutgame)
 
 func _process(_delta: float) -> void:
 	var now := Time.get_unix_time_from_system()

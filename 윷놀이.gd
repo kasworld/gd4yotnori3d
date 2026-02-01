@@ -1,6 +1,10 @@
 extends Node3D
 class_name 윷놀이
 
+signal game_ended(game :윷놀이)
+signal turn_ended(game :윷놀이, text :String)
+signal noti_progress(game :윷놀이, text :String)
+
 const 편당말수 = 4
 
 static var 편인자들 = [
@@ -16,16 +20,13 @@ static var 눈번호보기 :bool
 static var 말빠르기 :float = 0.5
 static var 놀이횟수 :int = 0
 
-
+var cabinet_size :Vector3
 var 윷짝_var := 윷짝.new()
 var 편들 :Array[윷놀이편] = []
-var vp_size :Vector2
-var 판반지름 :float
 var 이번윷던질편번호 = 0
 var 난편들 :Array[윷놀이편] = []
 var 재시작중 :bool = false
 var 말들이동정보g := 말들이동정보.new()
-var camera_move = false
 
 func 말상태검사_debug(s :String=""):
 	var 윷던진편 = 편들[이번윷던질편번호]
@@ -33,19 +34,14 @@ func 말상태검사_debug(s :String=""):
 	for p in 편들:
 		prints(p.debug_str(), p.상태검사())
 
-func _ready() -> void:
+func init(sz :Vector3) -> 윷놀이:
+	cabinet_size = sz
 	윷놀이.놀이횟수 +=1
-	$"왼쪽패널/Label".text = "진행사항 (놀이횟수 %d)" % 윷놀이.놀이횟수
-	vp_size = get_viewport().get_visible_rect().size
-	#RenderingServer.set_default_clear_color( Global3d.colors.default_clear)
+	noti_progress.emit(self, "진행사항 (놀이횟수 %d)" % 윷놀이.놀이횟수)
 
-	판반지름 = min(vp_size.x,vp_size.y)/2
+	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	var depth = 판반지름/40
 
-	reset_camera_pos()
-	$DirectionalLight3D.position = Vector3(판반지름,판반지름,판반지름)
-	$DirectionalLight3D.look_at(Vector3.ZERO)
-	$OmniLight3D.position = Vector3(판반지름,-판반지름,판반지름)
 	$"말판/원판".init(판반지름, depth, Color.DIM_GRAY, 20)
 	$"말판/원판".position.z = -depth/2-1
 	$"말판/말눈들".init(판반지름*0.95, depth, Color.GRAY)
@@ -56,9 +52,6 @@ func _ready() -> void:
 	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK,64,0.9).설명달기("난말통",Vector3(0,판반지름/3.5,0), Color.HOT_PINK)
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
-	$"왼쪽패널".size = Vector2(vp_size.x/2 -판반지름, vp_size.y)
-	$오른쪽패널.size = Vector2(vp_size.x/2 -판반지름, vp_size.y)
-	$오른쪽패널.position = Vector2(vp_size.x/2 + 판반지름, 0)
 
 	윷짝_var.init()
 
@@ -72,14 +65,8 @@ func _ready() -> void:
 		편들.append(t)
 		$"말판".add_child(t.길)
 		$"말판/달말통".말들넣기(t.말들)
-
-	$"오른쪽패널/길보기".button_pressed = 윷놀이.모든길보기
-	$"오른쪽패널/눈번호보기".button_pressed = 윷놀이.눈번호보기
-	$"오른쪽패널/HBoxContainer/HSlider".value = 윷놀이.말빠르기
 	차례준비하기(0)
-	#말상태검사_debug("_ready")
-	# _on_자동진행_toggled 가 불린다.
-	$"오른쪽패널/자동진행".button_pressed = 윷놀이.자동진행
+	return self
 
 func 다음편차례준비하기():
 	while true:
@@ -97,15 +84,13 @@ func 다음편차례준비하기():
 		break
 
 func 놀이가끝났다() -> void:
-	진행사항기록하기( "놀이가 끝났습니다.\n" )
-	#말상태검사_debug("놀이가끝났다")
+	game_ended.emit(self)
 	if 윷놀이.자동진행:
 		놀이다시시작하기()
 
 func 차례준비하기(편번호 :int):
 	말이동길보이기(편들[편번호])
-	$"오른쪽패널/윷던지기단추".modulate = 편들[편번호].인자.색
-	$"오른쪽패널/윷던지기단추".text = "%s\n윷던지기" % 편들[편번호]
+	turn_ended.emit(self,"%s\n윷던지기" % 편들[편번호])
 
 func 윷던지기() -> void:
 	if 난편들.size() == 윷놀이.편인자들.size(): # 모든 편이 다 났다.
@@ -138,7 +123,6 @@ func 말이동하기() -> void:
 		이동좌표들.push_back(윷던진편.길.나는길끝 )
 	if not 말들이동정보g.잡힐말들.is_empty() :
 		진행사항기록하기( "    %s 을 잡아 한번더 던집니다.\n" % [ 말들이동정보g.잡힐말들 ] )
-	$"오른쪽패널/윷던지기단추".disabled = true
 	for mm in 말들이동정보g.이동할말들:
 		mm.get_parent().remove_child(mm)
 		mm.이동말로만들기()
@@ -193,6 +177,7 @@ func 말이동길보이기(t :윷놀이편) -> void:
 func 말이동길모두보기() ->void:
 	var deg_start = 30.0
 	var deg_inc = 360.0 / 편들.size()
+	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	var r = 판반지름 * 0.03
 	var i = 0
 	for t in 편들:
@@ -202,34 +187,14 @@ func 말이동길모두보기() ->void:
 		i+=1
 
 func 진행사항기록하기(s :String) -> void:
-	$"왼쪽패널/ScrollContainer/진행사항".text = s + $"왼쪽패널/ScrollContainer/진행사항".text
+	noti_progress.emit(self, s)
 
 func 놀이다시시작하기() -> void:
 	if 재시작중:
 		return
 	재시작중 = true
 	$"말판/말이동AnimationPlayer".pause()
-	윷놀이.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
 	get_tree().reload_current_scene()
-
-func reset_camera_pos()->void:
-	$Camera3D.position = Vector3(1,1,판반지름*1)
-	$Camera3D.look_at(Vector3.ZERO)
-
-func _process(_delta: float) -> void:
-	var t = Time.get_unix_time_from_system() /-3.0
-	if camera_move:
-		$Camera3D.position = Vector3(sin(t)*판반지름, cos(t)*판반지름, 판반지름*0.6  )
-		$Camera3D.look_at(Vector3(sin(t)*판반지름/2, cos(t)*판반지름/2, 0) )
-		#$Camera3D.look_at(Vector3.ZERO)
-
-# esc to exit
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_ESCAPE:
-			_on_끝내기_pressed()
-		elif event.keycode == KEY_ENTER:
-			_on_시야바꾸기_pressed()
 
 func _on_말이동animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "말이동":
@@ -245,14 +210,6 @@ func _on_자동진행_toggled(toggled_on: bool) -> void:
 
 func _on_놀이다시시작_pressed() -> void:
 	놀이다시시작하기()
-
-func _on_시야바꾸기_pressed() -> void:
-	camera_move = !camera_move
-	if camera_move == false:
-		reset_camera_pos()
-
-func _on_끝내기_pressed() -> void:
-	get_tree().quit()
 
 func _on_길보기_toggled(toggled_on: bool) -> void:
 	윷놀이.모든길보기 = toggled_on
