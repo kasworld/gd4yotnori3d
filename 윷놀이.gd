@@ -10,7 +10,7 @@ static var 편인자들 = [
 	편.인자틀.new("노랑색", Color.YELLOW, 8, 1.25),
 ]
 
-static var 자동진행 :bool
+static var 자동진행 :bool = true
 static var 모든길보기 :bool
 static var 눈번호보기 :bool
 static var 말빠르기 :float = 0.5
@@ -72,10 +72,10 @@ func _ready() -> void:
 		t.init(ti,윷놀이.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
 		편들.append(t)
 		$"말판".add_child(t.길)
-		t.길단추.pressed.connect(
-			func():
-				self.말이동길보이기(t)
-				)
+		#t.길단추.pressed.connect(
+			#func():
+				#self.말이동길보이기(t)
+				#)
 		$"말판/달말통".말들넣기(t.말들)
 
 	$"오른쪽패널/길보기".button_pressed = 윷놀이.모든길보기
