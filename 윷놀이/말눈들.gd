@@ -5,7 +5,7 @@ const 눈사이각도 = 360.0/20.0
 var 눈들 :Array[눈]
 
 func init(반지름: float, 높이 :float, 색깔 :Color) -> 말눈들:
-	var 눈반지름 = max(10,반지름/30)
+	var 눈반지름 = 반지름/30
 
 	# 눈 추가하기
 	for i in range(눈사이각도, 360+눈사이각도, 눈사이각도):

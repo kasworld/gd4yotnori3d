@@ -15,8 +15,8 @@ static var 편인자들 = [
 ]
 
 static var 자동진행 :bool = true
-static var 모든길보기 :bool
-static var 눈번호보기 :bool
+static var 모든길보기 :bool = true
+static var 눈번호보기 :bool = true
 static var 말빠르기 :float = 0.5
 static var 놀이횟수 :int = 0
 
@@ -46,10 +46,11 @@ func init(sz :Vector3) -> 윷놀이:
 	$"말판/원판".position.z = -depth/2-1
 	$"말판/말눈들".init(판반지름*0.95, depth, Color.GRAY)
 	$"말판/말눈들".position.z = -depth/2
+	$"말판/말눈들".눈번호보기(윷놀이.눈번호보기)
 
-	$"말판/달말통".init(판반지름/4, depth, Color.CYAN,64,0.9).설명달기("달말통",Vector3(0,판반지름/3.5,0), Color.CYAN)
+	$"말판/달말통".init(판반지름/4, depth, Color.CYAN,64,0.9).설명달기("달말통", 판반지름/500, Vector3(0,판반지름/3.5,0), Color.CYAN)
 	$"말판/달말통".position = Vector3(-판반지름/3,판반지름/3, -depth/2)
-	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK,64,0.9).설명달기("난말통",Vector3(0,판반지름/3.5,0), Color.HOT_PINK)
+	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK,64,0.9).설명달기("난말통", 판반지름/500, Vector3(0,판반지름/3.5,0), Color.HOT_PINK)
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
 
@@ -61,7 +62,7 @@ func init(sz :Vector3) -> 윷놀이:
 		var t = 윷놀이편.new()
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
-		t.init(ti,윷놀이.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
+		t.init(ti, 윷놀이.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
 		편들.append(t)
 		$"말판".add_child(t.길)
 		$"말판/달말통".말들넣기(t.말들)

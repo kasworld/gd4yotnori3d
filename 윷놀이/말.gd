@@ -28,6 +28,7 @@ func init(t :윷놀이편, 반지름 :float, 높이 :float, n:int, hide_num :boo
 	$"번호".text = "%d" % 말번호
 	$"번호".visible = not hide_num
 	$"번호".modulate = t.인자.색
+	$"번호".pixel_size = 반지름 /30
 	#$"번호".position.z = 높이
 	달말로만들기()
 	return self

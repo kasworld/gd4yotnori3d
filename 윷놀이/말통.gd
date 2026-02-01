@@ -20,10 +20,11 @@ func 넣을공간설정(넣을반경크기a :float, 넣을높이범위a :Vector2
 	넣을높이범위 = 넣을높이범위a
 	return self
 
-func 설명달기(설명 :String, 위치 := Vector3.ZERO, 설명색깔 := Color.WHITE) -> 말통:
+func 설명달기(설명 :String, 크기 :float,  위치 := Vector3.ZERO, 설명색깔 := Color.WHITE) -> 말통:
 	$"설명".text = 설명
 	$"설명".position = 위치
 	$"설명".modulate = 설명색깔
+	$"설명".pixel_size = 크기
 	return self
 
 func 설명보기(b :bool) -> void:
