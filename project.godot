@@ -16,10 +16,6 @@ run/main_scene="res://윷놀이.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Settings="*res://global/settings.gd"
-
 [display]
 
 window/size/viewport_width=3840

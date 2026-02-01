@@ -1,6 +1,22 @@
 extends Node3D
 class_name 윷놀이
 
+const 편당말수 = 4
+
+static var 편인자들 = [
+	편.인자틀.new("빨강색", Color.RED, 4, 1.45),
+	편.인자틀.new("초록색", Color.GREEN, 5, 1.4),
+	편.인자틀.new("파랑색", Color.BLUE, 6, 1.3),
+	편.인자틀.new("노랑색", Color.YELLOW, 8, 1.25),
+]
+
+static var 자동진행 :bool
+static var 모든길보기 :bool
+static var 눈번호보기 :bool
+static var 말빠르기 :float = 0.5
+static var 놀이횟수 :int = 0
+
+
 var 편들 :Array[편] = []
 var vp_size :Vector2
 var 판반지름 :float
@@ -12,13 +28,13 @@ var camera_move = false
 
 func 말상태검사_debug(s :String=""):
 	var 윷던진편 = 편들[이번윷던질편번호]
-	print("%s 놀이:%d 던지기:%d %s차례" %[s, Settings.놀이횟수, $"오른쪽패널/윷짝".던진횟수얻기(), 윷던진편 ])
+	print("%s 놀이:%d 던지기:%d %s차례" %[s, 윷놀이.놀이횟수, $"오른쪽패널/윷짝".던진횟수얻기(), 윷던진편 ])
 	for p in 편들:
 		prints(p.debug_str(), p.상태검사())
 
 func _ready() -> void:
-	Settings.놀이횟수 +=1
-	$"왼쪽패널/Label".text = "진행사항 (놀이횟수 %d)" % Settings.놀이횟수
+	윷놀이.놀이횟수 +=1
+	$"왼쪽패널/Label".text = "진행사항 (놀이횟수 %d)" % 윷놀이.놀이횟수
 	vp_size = get_viewport().get_visible_rect().size
 	#RenderingServer.set_default_clear_color( Global3d.colors.default_clear)
 
@@ -45,14 +61,14 @@ func _ready() -> void:
 
 	$"오른쪽패널/윷짝".init()
 
-	Settings.편인자들.shuffle()
+	윷놀이.편인자들.shuffle()
 	# 편 가르기
-	for ti in Settings.편인자들:
+	for ti in 윷놀이.편인자들:
 		var t = preload("res://윷놀이/편.tscn").instantiate()
 		$"오른쪽패널/편들상태/내용".add_child(t)
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
-		t.init(ti,Settings.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
+		t.init(ti,윷놀이.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
 		편들.append(t)
 		$"말판".add_child(t.길)
 		t.길단추.pressed.connect(
@@ -61,17 +77,17 @@ func _ready() -> void:
 				)
 		$"말판/달말통".말들넣기(t.말들)
 
-	$"오른쪽패널/길보기".button_pressed = Settings.모든길보기
-	$"오른쪽패널/눈번호보기".button_pressed = Settings.눈번호보기
-	$"오른쪽패널/HBoxContainer/HSlider".value = Settings.말빠르기
+	$"오른쪽패널/길보기".button_pressed = 윷놀이.모든길보기
+	$"오른쪽패널/눈번호보기".button_pressed = 윷놀이.눈번호보기
+	$"오른쪽패널/HBoxContainer/HSlider".value = 윷놀이.말빠르기
 	차례준비하기(0)
 	#말상태검사_debug("_ready")
 	# _on_자동진행_toggled 가 불린다.
-	$"오른쪽패널/자동진행".button_pressed = Settings.자동진행
+	$"오른쪽패널/자동진행".button_pressed = 윷놀이.자동진행
 
 func 다음편차례준비하기():
 	while true:
-		if 난편들.size() == Settings.편인자들.size(): # 모든 편이 다 났다.
+		if 난편들.size() == 윷놀이.편인자들.size(): # 모든 편이 다 났다.
 			놀이가끝났다()
 			return
 		이번윷던질편번호 +=1
@@ -87,7 +103,7 @@ func 다음편차례준비하기():
 func 놀이가끝났다() -> void:
 	진행사항기록하기( "놀이가 끝났습니다.\n" )
 	#말상태검사_debug("놀이가끝났다")
-	if Settings.자동진행:
+	if 윷놀이.자동진행:
 		놀이다시시작하기()
 
 func 차례준비하기(편번호 :int):
@@ -96,7 +112,7 @@ func 차례준비하기(편번호 :int):
 	$"오른쪽패널/윷던지기단추".text = "%s\n윷던지기" % 편들[편번호]
 
 func 윷던지기() -> void:
-	if 난편들.size() == Settings.편인자들.size(): # 모든 편이 다 났다.
+	if 난편들.size() == 윷놀이.편인자들.size(): # 모든 편이 다 났다.
 		놀이가끝났다()
 		return
 	$"오른쪽패널/윷짝".윷던지기()
@@ -164,13 +180,13 @@ func 이동애니메이션후처리하기() -> void:
 
 	if 말들이동정보g.다음편으로넘어가나:
 		다음편차례준비하기()
-	if Settings.자동진행:
+	if 윷놀이.자동진행:
 		윷던지기.call_deferred()
 	else:
 		$"오른쪽패널/윷던지기단추".disabled = false
 
 func 말이동길보이기(t:편) ->void:
-	if Settings.모든길보기:
+	if 윷놀이.모든길보기:
 		말이동길모두보기()
 	else:
 		for i in 편들:
@@ -197,7 +213,7 @@ func 놀이다시시작하기() -> void:
 		return
 	재시작중 = true
 	$"말판/말이동AnimationPlayer".pause()
-	Settings.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
+	윷놀이.말빠르기 = $"오른쪽패널/HBoxContainer/HSlider".value
 	get_tree().reload_current_scene()
 
 func reset_camera_pos()->void:
@@ -227,8 +243,8 @@ func _on_윷던지기_pressed() -> void:
 	윷던지기()
 
 func _on_자동진행_toggled(toggled_on: bool) -> void:
-	Settings.자동진행 = toggled_on
-	if Settings.자동진행:
+	윷놀이.자동진행 = toggled_on
+	if 윷놀이.자동진행:
 		윷던지기()
 
 func _on_놀이다시시작_pressed() -> void:
@@ -243,9 +259,9 @@ func _on_끝내기_pressed() -> void:
 	get_tree().quit()
 
 func _on_길보기_toggled(toggled_on: bool) -> void:
-	Settings.모든길보기 = toggled_on
+	윷놀이.모든길보기 = toggled_on
 	말이동길보이기(편들[이번윷던질편번호])
 
 func _on_눈번호보기_toggled(toggled_on: bool) -> void:
-	Settings.눈번호보기 = toggled_on
-	$"말판/말눈들".눈번호보기(Settings.눈번호보기)
+	윷놀이.눈번호보기 = toggled_on
+	$"말판/말눈들".눈번호보기(윷놀이.눈번호보기)

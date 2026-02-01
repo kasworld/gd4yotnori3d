@@ -1,5 +1,3 @@
-extends RefCounted
-
 class_name 말들이동정보
 
 var 이동과정눈번호들 :Array[int]
