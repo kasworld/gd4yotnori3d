@@ -1,4 +1,3 @@
-extends PanelContainer
 class_name 편
 
 class 인자틀:
@@ -53,7 +52,6 @@ func 말상태검사(m :말) -> String:
 
 func 등수쓰기(n :int):
 	등수 = n
-	$HBoxContainer/Label.text = "%d등" % n
 
 func 등수얻기() -> int:
 	return 등수
@@ -63,9 +61,9 @@ func init(편정보 :인자틀, 말수 :int, 크기:float, es :말눈들, 시작
 	눈들 = es
 	길 = preload("res://윷놀이/말이동길.tscn").instantiate().init( max(1,크기/200), 인자.색, es.눈들, 시작눈, mirror)
 	var r = 크기/30
-	custom_minimum_size = Vector2(r*2*10,r*2)
-	$HBoxContainer/Button.text = 인자.이름
-	$HBoxContainer/Button.modulate = 인자.색
+	#custom_minimum_size = Vector2(r*2*10,r*2)
+	#$HBoxContainer/Button.text = 인자.이름
+	#$HBoxContainer/Button.modulate = 인자.색
 	for i in range(0,말수):
 		var m = preload("res://윷놀이/말.tscn").instantiate().init(self, r,r/3, i+1)
 		말들.append(m)

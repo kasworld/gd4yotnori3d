@@ -65,17 +65,12 @@ func _ready() -> void:
 	윷놀이.편인자들.shuffle()
 	# 편 가르기
 	for ti in 윷놀이.편인자들:
-		var t = preload("res://윷놀이/편.tscn").instantiate()
-		$"오른쪽패널/편들상태/내용".add_child(t)
+		var t = 편.new()
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
 		t.init(ti,윷놀이.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
 		편들.append(t)
 		$"말판".add_child(t.길)
-		#t.길단추.pressed.connect(
-			#func():
-				#self.말이동길보이기(t)
-				#)
 		$"말판/달말통".말들넣기(t.말들)
 
 	$"오른쪽패널/길보기".button_pressed = 윷놀이.모든길보기
