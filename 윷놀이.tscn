@@ -78,3 +78,4 @@ libraries/ = SubResource("AnimationLibrary_ha7vo")
 autoplay = &"시작"
 
 [connection signal="animation_finished" from="말판/말이동AnimationPlayer" to="." method="_on_말이동animation_player_animation_finished"]
+[connection signal="animation_finished" from="시작AnimationPlayer" to="." method="_on_시작animation_player_animation_finished"]

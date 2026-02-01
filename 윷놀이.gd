@@ -131,11 +131,11 @@ func 말이동하기() -> void:
 	# 애니메이션 시작
 	$"말판/말이동AnimationPlayer".stop()
 	var 말이동 = $"말판/말이동AnimationPlayer".get_animation("말이동")
-	말이동.length = $"오른쪽패널/HBoxContainer/HSlider".value * 이동좌표들.size()
+	말이동.length = 말빠르기 * 이동좌표들.size()
 	for i in 말이동.track_get_key_count(0) :
 		말이동.track_remove_key(0,0)
 	for i in 이동좌표들.size():
-		말이동.track_insert_key(0, $"오른쪽패널/HBoxContainer/HSlider".value * i, 이동좌표들[i])
+		말이동.track_insert_key(0, 말빠르기 * i, 이동좌표들[i])
 	$"말판/이동용말통".visible = true
 	$"말판/말이동AnimationPlayer".play("말이동")
 
@@ -201,21 +201,25 @@ func _on_말이동animation_player_animation_finished(anim_name: StringName) -> 
 	if anim_name == "말이동":
 		이동애니메이션후처리하기()
 
-func _on_윷던지기_pressed() -> void:
-	윷던지기()
+#func _on_윷던지기_pressed() -> void:
+	#윷던지기()
+#
+#func _on_자동진행_toggled(toggled_on: bool) -> void:
+	#윷놀이.자동진행 = toggled_on
+	#if 윷놀이.자동진행:
+		#윷던지기()
+#
+#func _on_놀이다시시작_pressed() -> void:
+	#놀이다시시작하기()
+#
+#func _on_길보기_toggled(toggled_on: bool) -> void:
+	#윷놀이.모든길보기 = toggled_on
+	#말이동길보이기(편들[이번윷던질편번호])
+#
+#func _on_눈번호보기_toggled(toggled_on: bool) -> void:
+	#윷놀이.눈번호보기 = toggled_on
+	#$"말판/말눈들".눈번호보기(윷놀이.눈번호보기)
 
-func _on_자동진행_toggled(toggled_on: bool) -> void:
-	윷놀이.자동진행 = toggled_on
+func _on_시작animation_player_animation_finished(anim_name: StringName) -> void:
 	if 윷놀이.자동진행:
 		윷던지기()
-
-func _on_놀이다시시작_pressed() -> void:
-	놀이다시시작하기()
-
-func _on_길보기_toggled(toggled_on: bool) -> void:
-	윷놀이.모든길보기 = toggled_on
-	말이동길보이기(편들[이번윷던질편번호])
-
-func _on_눈번호보기_toggled(toggled_on: bool) -> void:
-	윷놀이.눈번호보기 = toggled_on
-	$"말판/말눈들".눈번호보기(윷놀이.눈번호보기)
