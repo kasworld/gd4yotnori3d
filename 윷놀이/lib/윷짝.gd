@@ -1,4 +1,3 @@
-extends PanelContainer
 class_name 윷짝
 
 const 결과문자변환 = {
@@ -12,29 +11,20 @@ const 결과문자변환 = {
 	5:"모",
 }
 
+class 윷가락:
+	func 던지기() -> int:
+		return randi_range(0,1)
+
 var 윷들 :Array[윷가락]
-var 결과label :Label
 var 결과수치 :int
 var 던진횟수 :int = 0
 
 func _to_string() -> String:
 	return 결과문자변환[결과수치]
 
-func init()->윷짝:
-	var lb :Label
-	for i in ["결과","뒷도","뒷개","뒷걸","도"]:
-		lb = Label.new()
-		lb.text = i
-		$"윷통".add_child(lb)
-
-	결과label = Label.new()
-	결과label.text = "모"
-	$"윷통".add_child(결과label)
-
+func init() -> 윷짝:
 	for i in range(0,4):
-		var n = preload("res://윷놀이/윷가락.tscn").instantiate().init()
-		$"윷통".add_child(n)
-		윷들.append(n)
+		윷들.append(윷가락.new())
 	return self
 
 func 윷던지기():
@@ -42,7 +32,6 @@ func 윷던지기():
 	for n in 윷들:
 		결과.append( n.던지기() )
 	결과수치 = 결과해석(결과)
-	결과label.text = 결과문자변환[결과수치]
 	던진횟수 += 1
 
 func 결과얻기()->int:
@@ -68,5 +57,5 @@ func 결과해석(결과 :Array[int])->int:
 		sum += i
 	return sum
 
-func 한번더던지나()->bool:
+func 한번더던지나() -> bool:
 	return 결과수치==5 or 결과수치 == 4

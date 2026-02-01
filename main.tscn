@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://co2xpjoa03lf0" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Theme" uid="uid://dlbbbw7g3rlr4" path="res://왼쪽패널.tres" id="2_272bh"]
 [ext_resource type="Theme" uid="uid://by255psfytiui" path="res://오른쪽패널.tres" id="3_5vw27"]
-[ext_resource type="PackedScene" uid="uid://bpsrl3ehaiokq" path="res://윷놀이/윷짝.tscn" id="4_kek77"]
 [ext_resource type="PackedScene" uid="uid://clnf86bglf40d" path="res://glass_cabinet/glass_cabinet.tscn" id="5_4c57u"]
 [ext_resource type="PackedScene" uid="uid://dl14flc0fkeyt" path="res://axis_arrow_3d/axis_arrow_3d.tscn" id="6_efxa6"]
 [ext_resource type="PackedScene" uid="uid://ces3a6yv0c5fi" path="res://moving_carmera_light/moving_camera_light.tscn" id="7_dg77c"]
@@ -44,9 +43,6 @@ text = "끝내기"
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("3_5vw27")
-
-[node name="윷짝" parent="오른쪽패널" unique_id=1950076368 instance=ExtResource("4_kek77")]
-layout_mode = 2
 
 [node name="윷던지기단추" type="Button" parent="오른쪽패널" unique_id=1178735798]
 layout_mode = 2
