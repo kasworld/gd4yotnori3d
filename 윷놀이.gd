@@ -17,7 +17,7 @@ static var 편인자들 = [
 static var 자동진행 :bool = true
 static var 모든길보기 :bool = true
 static var 눈번호보기 :bool = true
-static var 말빠르기 :float = 0.5
+static var 말빠르기 :float = 0.1
 static var 놀이횟수 :int = 0
 
 var cabinet_size :Vector3
@@ -184,7 +184,7 @@ func 말이동길모두보기() ->void:
 	for t in 편들:
 		t.길.visible = true
 		var rd = deg_to_rad( deg_start + i*deg_inc)
-		t.길.position = Vector3(sin(rd)*r, cos(rd)*r, 0)
+		t.길.position = Vector3(0, sin(rd)*r, cos(rd)*r)
 		i+=1
 
 func 진행사항기록하기(s :String) -> void:
