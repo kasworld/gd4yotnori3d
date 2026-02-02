@@ -30,7 +30,7 @@ var 말들이동정보g := 말들이동정보.new()
 
 func 말상태검사_debug(s :String=""):
 	var 윷던진편 = 편들[이번윷던질편번호]
-	print("%s 놀이:%d 던지기:%d %s차례" %[s, 윷놀이.놀이횟수, 윷짝_var.던진횟수얻기(), 윷던진편 ])
+	print("%s 놀이:%d %s차례" %[s, 윷놀이.놀이횟수, 윷던진편 ])
 	for p in 편들:
 		prints(p.debug_str(), p.상태검사())
 
@@ -53,8 +53,6 @@ func init(sz :Vector3) -> 윷놀이:
 	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK,64,0.9).설명달기("난말통", 판반지름/500, Vector3(0,판반지름/3.5,0), Color.HOT_PINK)
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
-
-	윷짝_var.init()
 
 	윷놀이.편인자들.shuffle()
 	# 편 가르기
@@ -99,7 +97,7 @@ func 윷던지기() -> void:
 		return
 	윷짝_var.윷던지기()
 	var 윷던진편 = 편들[이번윷던질편번호]
-	진행사항기록하기( "%d %s %s\n" % [윷짝_var.던진횟수얻기(), 윷던진편 , 윷짝_var ] )
+	진행사항기록하기( "%s %s\n" % [윷던진편 , 윷짝_var ] )
 	if 윷짝_var.한번더던지나():
 		진행사항기록하기( "    %s 던저서 한번더 던진다. \n" % [ 윷짝_var ] )
 	말이동하기()
@@ -110,7 +108,7 @@ func 말이동하기() -> void:
 	말들이동정보g = 윷던진편.말이동정보만들기(윷짝_var, m)
 	말들이동정보g.다음편으로넘어가나 = (not 윷짝_var.한번더던지나()) and 말들이동정보g.잡힐말들.is_empty()
 	if not 말들이동정보g.이동성공:
-		진행사항기록하기( "%d %s %s 이동할 말이 없습니다.\n" % [윷짝_var.던진횟수얻기(), 윷던진편 , 윷짝_var ] )
+		진행사항기록하기( "%s %s 이동할 말이 없습니다.\n" % [윷던진편 , 윷짝_var ] )
 		이동애니메이션후처리하기()
 		return
 	var 이동좌표들 = $"말판/말눈들".눈번호들을좌표로(말들이동정보g.이동과정눈번호들)
@@ -141,8 +139,6 @@ func 말이동하기() -> void:
 
 func 이동애니메이션후처리하기() -> void:
 	$"말판/이동용말통".visible = false
-	#if not 말들이동정보g.이동성공:
-		#print(말들이동정보g)
 	var 이동한말들 = $"말판/이동용말통".말모두빼기()
 	if 말들이동정보g.도착눈 != null :
 		말들이동정보g.도착눈.말놓기(이동한말들)
@@ -163,8 +159,6 @@ func 이동애니메이션후처리하기() -> void:
 		다음편차례준비하기()
 	if 윷놀이.자동진행:
 		윷던지기.call_deferred()
-	else:
-		$"오른쪽패널/윷던지기단추".disabled = false
 
 func 말이동길보이기(t :윷놀이편) -> void:
 	if 윷놀이.모든길보기:
@@ -200,25 +194,6 @@ func 놀이다시시작하기() -> void:
 func _on_말이동animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "말이동":
 		이동애니메이션후처리하기()
-
-#func _on_윷던지기_pressed() -> void:
-	#윷던지기()
-#
-#func _on_자동진행_toggled(toggled_on: bool) -> void:
-	#윷놀이.자동진행 = toggled_on
-	#if 윷놀이.자동진행:
-		#윷던지기()
-#
-#func _on_놀이다시시작_pressed() -> void:
-	#놀이다시시작하기()
-#
-#func _on_길보기_toggled(toggled_on: bool) -> void:
-	#윷놀이.모든길보기 = toggled_on
-	#말이동길보이기(편들[이번윷던질편번호])
-#
-#func _on_눈번호보기_toggled(toggled_on: bool) -> void:
-	#윷놀이.눈번호보기 = toggled_on
-	#$"말판/말눈들".눈번호보기(윷놀이.눈번호보기)
 
 func _on_시작animation_player_animation_finished(anim_name: StringName) -> void:
 	if 윷놀이.자동진행:

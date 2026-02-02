@@ -7,112 +7,44 @@
 [ext_resource type="PackedScene" uid="uid://dl14flc0fkeyt" path="res://axis_arrow_3d/axis_arrow_3d.tscn" id="6_efxa6"]
 [ext_resource type="PackedScene" uid="uid://ces3a6yv0c5fi" path="res://moving_carmera_light/moving_camera_light.tscn" id="7_dg77c"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
-bg_color = Color(0.272655, 0.272655, 0.272655, 1)
-
 [node name="Main" type="Node3D" unique_id=1867407901]
 script = ExtResource("1_ig7tw")
 
 [node name="왼쪽패널" type="VBoxContainer" parent="." unique_id=238492421]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_272bh")
 
-[node name="Label" type="Label" parent="왼쪽패널" unique_id=1513564864]
-layout_mode = 2
-text = "진행사항"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="왼쪽패널" unique_id=561059494]
-modulate = Color(1, 1, 1, 0.709804)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
-follow_focus = true
-
-[node name="진행사항" type="Label" parent="왼쪽패널/ScrollContainer" unique_id=1015367174]
-layout_mode = 2
-
-[node name="끝내기" type="Button" parent="왼쪽패널" unique_id=313577310]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "끝내기"
-
 [node name="오른쪽패널" type="VBoxContainer" parent="." unique_id=899863916]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("3_5vw27")
 
-[node name="윷던지기단추" type="Button" parent="오른쪽패널" unique_id=1178735798]
+[node name="끝내기" type="Button" parent="오른쪽패널" unique_id=1048553347]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 48
-text = "윷던지기"
+text = "끝내기"
 
-[node name="Control" type="Control" parent="오른쪽패널" unique_id=847777935]
+[node name="카메라변경" type="Button" parent="오른쪽패널" unique_id=1262545182]
 layout_mode = 2
-size_flags_vertical = 3
+text = "카메라변경"
 
-[node name="편들상태" type="VBoxContainer" parent="오른쪽패널" unique_id=1117441965]
+[node name="FOV inc" type="Button" parent="오른쪽패널" unique_id=707752656]
 layout_mode = 2
+text = "FOV inc"
 
-[node name="제목" type="HBoxContainer" parent="오른쪽패널/편들상태" unique_id=1832055609]
+[node name="FOV dec" type="Button" parent="오른쪽패널" unique_id=96130199]
 layout_mode = 2
+text = "FOV dec"
 
-[node name="길보기단추" type="Label" parent="오른쪽패널/편들상태/제목" unique_id=831055047]
+[node name="LabelPerformance" type="Label" parent="오른쪽패널" unique_id=1366601294]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "길보기"
-horizontal_alignment = 1
-vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="등수" type="Label" parent="오른쪽패널/편들상태/제목" unique_id=1640225706]
+[node name="LabelInfo" type="Label" parent="오른쪽패널" unique_id=1220518434]
 layout_mode = 2
-text = "등수"
-
-[node name="내용" type="VBoxContainer" parent="오른쪽패널/편들상태" unique_id=206345597]
-layout_mode = 2
-
-[node name="자동진행" type="CheckButton" parent="오른쪽패널" unique_id=948673088]
-layout_mode = 2
-text = "자동진행하기"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="오른쪽패널" unique_id=201848316]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="오른쪽패널/HBoxContainer" unique_id=2104306040]
-layout_mode = 2
-text = "걸음빠르기"
-
-[node name="HSlider" type="HSlider" parent="오른쪽패널/HBoxContainer" unique_id=1169286696]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-min_value = 0.1
-max_value = 1.0
-step = 0.1
-value = 0.6
-ticks_on_borders = true
-
-[node name="길보기" type="CheckButton" parent="오른쪽패널" unique_id=1928238602]
-layout_mode = 2
-text = "모든길보기"
-
-[node name="눈번호보기" type="CheckButton" parent="오른쪽패널" unique_id=1929378827]
-layout_mode = 2
-text = "눈번호보기"
-
-[node name="놀이다시시작" type="Button" parent="오른쪽패널" unique_id=1639366595]
-layout_mode = 2
-text = "놀이다시시작"
-
-[node name="시야바꾸기" type="Button" parent="오른쪽패널" unique_id=1647799675]
-layout_mode = 2
-text = "시야바꾸기"
+autowrap_mode = 3
 
 [node name="GlassCabinet" parent="." unique_id=382686767 instance=ExtResource("5_4c57u")]
 
@@ -131,3 +63,8 @@ light_energy = 5.0
 shadow_enabled = true
 omni_range = 5000.0
 omni_attenuation = 0.1
+
+[connection signal="pressed" from="오른쪽패널/끝내기" to="." method="_on_끝내기_pressed"]
+[connection signal="pressed" from="오른쪽패널/카메라변경" to="." method="_on_카메라변경_pressed"]
+[connection signal="pressed" from="오른쪽패널/FOV inc" to="." method="_on_fov_inc_pressed"]
+[connection signal="pressed" from="오른쪽패널/FOV dec" to="." method="_on_fov_dec_pressed"]

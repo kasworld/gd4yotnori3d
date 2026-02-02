@@ -4,6 +4,7 @@ const 결과문자변환 = {
 	-3:"뒷걸",
 	-2:"뒷개",
 	-1:"뒷도",
+	0: "낙",
 	1:"도",
 	2:"개",
 	3:"걸",
@@ -11,36 +12,21 @@ const 결과문자변환 = {
 	5:"모",
 }
 
-class 윷가락:
-	func 던지기() -> int:
-		return randi_range(0,1)
-
-var 윷들 :Array[윷가락]
 var 결과수치 :int
-var 던진횟수 :int = 0
 
 func _to_string() -> String:
 	return 결과문자변환[결과수치]
 
-func init() -> 윷짝:
-	for i in range(0,4):
-		윷들.append(윷가락.new())
-	return self
-
-func 윷던지기():
+func 윷던지기() -> void:
 	var 결과 :Array[int]
-	for n in 윷들:
-		결과.append( n.던지기() )
+	for i in 4:
+		결과.append( randi_range(0,1) )
 	결과수치 = 결과해석(결과)
-	던진횟수 += 1
 
-func 결과얻기()->int:
+func 결과얻기() -> int:
 	return 결과수치
 
-func 던진횟수얻기()->int:
-	return 던진횟수
-
-func 결과해석(결과 :Array[int])->int:
+func 결과해석(결과 :Array[int]) -> int:
 	if 결과 == [1,0,0,0]:
 		return -1
 	if 결과 == [1,1,0,0]:

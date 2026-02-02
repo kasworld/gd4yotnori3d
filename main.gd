@@ -12,7 +12,6 @@ func on_viewport_size_changed() -> void:
 	$"오른쪽패널".custom_minimum_size = panel_size
 	$오른쪽패널.position = Vector2(vp_size.x/2 + 짧은길이/2, 0)
 
-
 func _ready() -> void:
 	on_viewport_size_changed()
 	get_viewport().size_changed.connect(on_viewport_size_changed)
