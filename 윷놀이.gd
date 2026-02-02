@@ -22,10 +22,10 @@ static var 놀이횟수 :int = 0
 
 var cabinet_size :Vector3
 var yutset := YutSet.new()
-var 편들 :Array[YutTeam] = []
+var 편들 :Array[YutTeam]
 var 이번윷던질편번호 = 0
-var 난편들 :Array[YutTeam] = []
-var 재시작중 :bool = false
+var 난편들 :Array[YutTeam]
+#var 재시작중 :bool = false
 var 말들이동정보g := 말들이동정보.new()
 
 func 말상태검사_debug(s :String=""):
@@ -54,18 +54,32 @@ func init(sz :Vector3) -> 윷놀이:
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
 
+	return self
+
+func new_game() -> void:
+	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	윷놀이.편인자들.shuffle()
 	# 편 가르기
+	편들 = []
+	난편들 = []
+	for n in $"말판/말길들".get_children():
+		$"말판/말길들".remove_child(n)
+	$"말판/달말통".말모두빼기()
+	$"말판/난말통".말모두빼기()
+	#for n in $"말판/달말통".get_children():
+		#$"말판/달말통".remove_child(n)
+	#for n in $"말판/난말통".get_children():
+		#$"말판/난말통".remove_child(n)
 	for ti in 윷놀이.편인자들:
 		var t = YutTeam.new()
 		var 시작눈 = 말이동길.가능한시작눈목록.pick_random()
 		var mirror = randi_range(0,1)==0
 		t.init(ti, 윷놀이.편당말수, 판반지름, $"말판/말눈들", 시작눈, mirror)
 		편들.append(t)
-		$"말판".add_child(t.길)
+		$"말판/말길들".add_child(t.길)
 		$"말판/달말통".말들넣기(t.말들)
 	차례준비하기(0)
-	return self
+
 
 func 다음편차례준비하기():
 	while true:
@@ -84,8 +98,8 @@ func 다음편차례준비하기():
 
 func 놀이가끝났다() -> void:
 	game_ended.emit(self)
-	if 윷놀이.자동진행:
-		놀이다시시작하기()
+	#if 윷놀이.자동진행:
+		#놀이다시시작하기()
 
 func 차례준비하기(편번호 :int):
 	말이동길보이기(편들[편번호])
@@ -184,12 +198,12 @@ func 말이동길모두보기() ->void:
 func 진행사항기록하기(s :String) -> void:
 	noti_progress.emit(self, s)
 
-func 놀이다시시작하기() -> void:
-	if 재시작중:
-		return
-	재시작중 = true
-	$"말판/말이동AnimationPlayer".pause()
-	get_tree().reload_current_scene()
+#func 놀이다시시작하기() -> void:
+	#if 재시작중:
+		#return
+	#재시작중 = true
+	#$"말판/말이동AnimationPlayer".pause()
+	#get_tree().reload_current_scene()
 
 func _on_말이동animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "말이동":

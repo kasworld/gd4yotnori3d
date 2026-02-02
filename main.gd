@@ -29,6 +29,10 @@ func yutgame_demo(gc :GlassCabinet) -> void:
 	gc.show_wall_box(false)
 	yutgame = preload("res://윷놀이.tscn").instantiate().init(gc.cabinet_size)
 	gc.add_child(yutgame)
+	yutgame.game_ended.connect(yutgame_ended)
+	yutgame.new_game()
+func yutgame_ended(game :윷놀이) -> void:
+	yutgame.new_game()
 
 func _process(_delta: float) -> void:
 	var now := Time.get_unix_time_from_system()

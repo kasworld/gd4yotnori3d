@@ -20,6 +20,9 @@ _data = {
 &"말이동": SubResource("Animation_a0a0t")
 }
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_lkqmh"]
+resource_local_to_scene = true
+
 [sub_resource type="Animation" id="Animation_mkuig"]
 length = 0.001
 tracks/0/type = "rotation_3d"
@@ -66,6 +69,7 @@ playback_auto_capture = false
 
 [node name="원판" parent="말판" unique_id=1960672903 instance=ExtResource("5_mxqr6")]
 visible = false
+mesh = SubResource("CylinderMesh_lkqmh")
 
 [node name="달말통" parent="말판" unique_id=1772135456 instance=ExtResource("6_w3qwi")]
 
@@ -73,6 +77,8 @@ visible = false
 
 [node name="이동용말통" parent="말판" unique_id=572612760 instance=ExtResource("6_w3qwi")]
 visible = false
+
+[node name="말길들" type="Node3D" parent="말판" unique_id=756809126]
 
 [node name="시작AnimationPlayer" type="AnimationPlayer" parent="." unique_id=869523262]
 libraries/ = SubResource("AnimationLibrary_ha7vo")
