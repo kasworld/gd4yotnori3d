@@ -43,6 +43,13 @@ func init(sz :Vector3) -> 윷놀이:
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
 
+	var y := SlotReel.calc_symbol_ysize(sz.z/2, 16)
+	var symbol_sz := Vector2( y*2, y )
+	var symbol_info :Array = []
+	for i in YutSet.ArrayToValue:
+		var s := YutSet.ValueToString[ YutSet.ArrayToValue[i] ]
+		symbol_info.append([Color.BLACK, s ])
+	$SlotReel.init(0,symbol_sz, symbol_info )
 	return self
 
 func new_game() -> void:
