@@ -1,6 +1,6 @@
 class_name 윷짝
 
-const 결과문자변환 = {
+const value_to_string = {
 	-3:"뒷걸",
 	-2:"뒷개",
 	-1:"뒷도",
@@ -12,24 +12,7 @@ const 결과문자변환 = {
 	5:"모",
 }
 
-var 결과수치 :int
-
-func _to_string() -> String:
-	return 결과문자변환[결과수치]
-
-func 윷던지기() -> void:
-	var 결과 :Array[int]
-	for i in 4:
-		결과.append( randi_range(0,1) )
-	결과수치 = 결과해석(결과)
-
-func 결과얻기() -> int:
-	return 결과수치
-
-func 결과해석(결과 :Array[int]) -> int:
-	return result_to_val[결과]
-
-const result_to_val :Dictionary = {
+const array_to_value :Dictionary = {
 	# 0:등 1:배
 	[0,0,0,1] : -1, # 도 백
 	[0,0,1,0] : 1, # 도
@@ -49,5 +32,16 @@ const result_to_val :Dictionary = {
 	[0,0,0,0] : 5, # 모
 }
 
-func 한번더던지나() -> bool:
-	return 결과수치==5 or 결과수치 == 4
+var result_array :Array[int]
+var result_value :int
+var result_string :String
+var can_more_turn :bool
+
+func _to_string() -> String:
+	return result_string
+
+func 윷던지기() -> void:
+	result_array = [randi_range(0,1),randi_range(0,1),randi_range(0,1),randi_range(0,1)]
+	result_value = array_to_value[result_array]
+	result_string = value_to_string[result_value]
+	can_more_turn = result_value==5 or result_value == 4
