@@ -11,7 +11,6 @@ class 인자틀:
 		모양 = c
 		크기보정 = d
 
-
 var 인자 :인자틀
 var 눈들 :말눈들
 var 길 :말이동길
@@ -49,7 +48,6 @@ func 말상태검사(m :말) -> String:
 		return "말이 속한 눈이 비어 있다. %s %s" % [m.debug_str(), 속한눈.debug_str() ]
 	return "뭔가이상함 %s %s" % [m.debug_str(), 속한눈.debug_str() ]
 
-
 func 등수쓰기(n :int):
 	등수 = n
 
@@ -85,13 +83,12 @@ func 업은말들얻기(m :말)->Array[말]:
 	var 속한눈 = 눈들.눈얻기(m.마지막눈번호())
 	var rtn = 속한눈.말보기()
 	if not 속한눈.말이있나(m):
-		print_debug("문제:말이 눈에 속하지 않다. %d %s %s" %	[
-			윷놀이.놀이횟수, m.debug_str(), 속한눈.debug_str() ])
+		print_debug("문제:말이 눈에 속하지 않다. %s %s" %	[
+			m.debug_str(), 속한눈.debug_str() ])
 	elif rtn.is_empty() :
-		print_debug("문제:말이 속한 눈이 비어 있다. %d %s %s" % [
-			윷놀이.놀이횟수, m.debug_str(), 속한눈.debug_str() ])
+		print_debug("문제:말이 속한 눈이 비어 있다. %s %s" % [
+			m.debug_str(), 속한눈.debug_str() ])
 	return rtn
-
 
 func 쓸말고르기(yutset :YutSet)->말:
 	var 섞은말 = 말들.duplicate()
