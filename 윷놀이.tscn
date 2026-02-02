@@ -21,7 +21,7 @@ _data = {
 &"말이동": SubResource("Animation_a0a0t")
 }
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_lkqmh"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_j7yrb"]
 resource_local_to_scene = true
 
 [sub_resource type="Animation" id="Animation_mkuig"]
@@ -70,7 +70,7 @@ playback_auto_capture = false
 
 [node name="원판" parent="말판" unique_id=1960672903 instance=ExtResource("5_mxqr6")]
 visible = false
-mesh = SubResource("CylinderMesh_lkqmh")
+mesh = SubResource("CylinderMesh_j7yrb")
 
 [node name="달말통" parent="말판" unique_id=1772135456 instance=ExtResource("6_w3qwi")]
 
