@@ -21,7 +21,7 @@ static var 말빠르기 :float = 0.1
 static var 놀이횟수 :int = 0
 
 var cabinet_size :Vector3
-var 윷짝_var := 윷짝.new()
+var yutset := YutSet.new()
 var 편들 :Array[윷놀이편] = []
 var 이번윷던질편번호 = 0
 var 난편들 :Array[윷놀이편] = []
@@ -95,20 +95,20 @@ func 윷던지기() -> void:
 	if 난편들.size() == 윷놀이.편인자들.size(): # 모든 편이 다 났다.
 		놀이가끝났다()
 		return
-	윷짝_var.윷던지기()
+	yutset.윷던지기()
 	var 윷던진편 = 편들[이번윷던질편번호]
-	진행사항기록하기( "%s %s\n" % [윷던진편 , 윷짝_var ] )
-	if 윷짝_var.can_more_turn:
-		진행사항기록하기( "    %s 던저서 한번더 던진다. \n" % [ 윷짝_var ] )
+	진행사항기록하기( "%s %s\n" % [윷던진편 , yutset ] )
+	if yutset.can_more_turn:
+		진행사항기록하기( "    %s 던저서 한번더 던진다. \n" % [ yutset ] )
 	말이동하기()
 
 func 말이동하기() -> void:
 	var 윷던진편 = 편들[이번윷던질편번호]
-	var m = 윷던진편.쓸말고르기(윷짝_var)
-	말들이동정보g = 윷던진편.말이동정보만들기(윷짝_var, m)
-	말들이동정보g.다음편으로넘어가나 = (not 윷짝_var.can_more_turn) and 말들이동정보g.잡힐말들.is_empty()
+	var m = 윷던진편.쓸말고르기(yutset)
+	말들이동정보g = 윷던진편.말이동정보만들기(yutset, m)
+	말들이동정보g.다음편으로넘어가나 = (not yutset.can_more_turn) and 말들이동정보g.잡힐말들.is_empty()
 	if not 말들이동정보g.이동성공:
-		진행사항기록하기( "%s %s 이동할 말이 없습니다.\n" % [윷던진편 , 윷짝_var ] )
+		진행사항기록하기( "%s %s 이동할 말이 없습니다.\n" % [윷던진편 , yutset ] )
 		이동애니메이션후처리하기()
 		return
 	var 이동좌표들 = $"말판/말눈들".눈번호들을좌표로(말들이동정보g.이동과정눈번호들)
