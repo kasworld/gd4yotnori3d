@@ -1,6 +1,6 @@
 class_name 윷짝
 
-const value_to_string = {
+const value_to_string :Dictionary[int,String] = {
 	-3:"뒷걸",
 	-2:"뒷개",
 	-1:"뒷도",
@@ -12,7 +12,7 @@ const value_to_string = {
 	5:"모",
 }
 
-const array_to_value :Dictionary = {
+const array_to_value :Dictionary[Array,int] = {
 	# 0:등 1:배
 	[0,0,0,1] : -1, # 도 백
 	[0,0,1,0] : 1, # 도
