@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dssphq21kra0l"]
 
-[ext_resource type="Script" uid="uid://3gb1lxi6imws" path="res://윷놀이.gd" id="1_4ga8h"]
+[ext_resource type="Script" uid="uid://3gb1lxi6imws" path="res://윷놀이/윷놀이.gd" id="1_4ga8h"]
 [ext_resource type="PackedScene" uid="uid://chvddubar1fad" path="res://윷놀이/말눈들.tscn" id="3_of73k"]
 [ext_resource type="PackedScene" uid="uid://caufs5hrb6jlt" path="res://윷놀이/다각기둥.tscn" id="5_mxqr6"]
 [ext_resource type="PackedScene" uid="uid://sjnpttkqk1qs" path="res://roulette/roulette.tscn" id="6_msrcl"]
