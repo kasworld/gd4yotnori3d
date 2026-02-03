@@ -123,16 +123,15 @@ func 윷던지기() -> void:
 	if 난편들.size() == 윷놀이.편인자들.size(): # 모든 편이 다 났다.
 		놀이가끝났다()
 		return
-	yutset.윷던지기()
 	var co := 편들[이번윷던질편번호].인자.색
 	$Roulette.set_all_text_color(co)
 	$Roulette.start_rotation(2*PI)
-	#말이동하기()
 
 func reel_rotation_stopped(_rl :SlotReel) -> void:
 	말이동하기()
 
 func roulette_rotation_stopped(_rl :Roulette) -> void:
+	yutset.set_by_string($Roulette.선택된cell얻기().글내용얻기())
 	말이동하기()
 
 func 말이동하기() -> void:
