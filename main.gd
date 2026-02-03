@@ -27,7 +27,7 @@ func _ready() -> void:
 var yutgame :윷놀이
 func yutgame_demo(gc :GlassCabinet) -> void:
 	gc.show_wall_box(false)
-	yutgame = preload("res://윷놀이.tscn").instantiate().init(gc.cabinet_size)
+	yutgame = preload("res://윷놀이/윷놀이.tscn").instantiate().init(gc.cabinet_size)
 	gc.add_child(yutgame)
 	yutgame.game_ended.connect(yutgame_ended)
 	yutgame.new_game()
