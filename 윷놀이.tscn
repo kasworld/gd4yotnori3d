@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://3gb1lxi6imws" path="res://윷놀이.gd" id="1_4ga8h"]
 [ext_resource type="PackedScene" uid="uid://chvddubar1fad" path="res://윷놀이/말눈들.tscn" id="3_of73k"]
-[ext_resource type="PackedScene" uid="uid://bgvg5u80d01y8" path="res://slot_reel/slot_reel.tscn" id="5_j7yrb"]
 [ext_resource type="PackedScene" uid="uid://caufs5hrb6jlt" path="res://윷놀이/다각기둥.tscn" id="5_mxqr6"]
 [ext_resource type="PackedScene" uid="uid://sjnpttkqk1qs" path="res://roulette/roulette.tscn" id="6_msrcl"]
 [ext_resource type="PackedScene" uid="uid://h31tcp58dngw" path="res://윷놀이/말통.tscn" id="6_w3qwi"]
@@ -85,9 +84,6 @@ visible = false
 [node name="시작AnimationPlayer" type="AnimationPlayer" parent="." unique_id=869523262]
 libraries/ = SubResource("AnimationLibrary_ha7vo")
 autoplay = &"시작"
-
-[node name="SlotReel" parent="." unique_id=1924631216 instance=ExtResource("5_j7yrb")]
-visible = false
 
 [node name="Roulette" parent="." unique_id=783119175 instance=ExtResource("6_msrcl")]
 

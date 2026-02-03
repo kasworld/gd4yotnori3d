@@ -8,9 +8,9 @@ signal noti_progress(game :윷놀이, text :String)
 const 편당말수 = 4
 
 static var 편인자들 = [
-	YutTeam.인자틀.new("빨강색", Color.RED, 4, 1.45),
+	YutTeam.인자틀.new("빨강색", Color.MAGENTA, 4, 1.45),
 	YutTeam.인자틀.new("초록색", Color.GREEN, 5, 1.4),
-	YutTeam.인자틀.new("파랑색", Color.BLUE, 6, 1.3),
+	YutTeam.인자틀.new("파랑색", Color.CYAN, 6, 1.3),
 	YutTeam.인자틀.new("노랑색", Color.YELLOW, 8, 1.25),
 ]
 
@@ -37,29 +37,14 @@ func init(sz :Vector3) -> 윷놀이:
 	$"말판/말눈들".position.z = -depth/2
 	$"말판/말눈들".눈번호보기(윷놀이.눈번호보기)
 
-	$"말판/달말통".init(판반지름/4, depth, Color.CYAN,64,0.9).설명달기("달말통", 판반지름/500, Vector3(0,판반지름/3.5,0), Color.CYAN)
+	$"말판/달말통".init(판반지름/4, depth, Color.DARK_BLUE, 64, 0.9).설명달기("달말통", 판반지름/500, Vector3(0,판반지름/3.5,0), Color.BLUE)
 	$"말판/달말통".position = Vector3(-판반지름/3,판반지름/3, -depth/2)
-	$"말판/난말통".init(판반지름/4, depth, Color.HOT_PINK,64,0.9).설명달기("난말통", 판반지름/500, Vector3(0,판반지름/3.5,0), Color.HOT_PINK)
+	$"말판/난말통".init(판반지름/4, depth, Color.DARK_RED, 64, 0.9).설명달기("난말통", 판반지름/500, Vector3(0,판반지름/3.5,0), Color.RED)
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
 
 	init_wheel()
 	return self
-
-func init_reel() -> void:
-	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
-	var y := SlotReel.calc_symbol_ysize(판반지름/4, 16)
-	var symbol_sz := Vector2( y*2, y )
-	var symbol_info :Array = []
-	for i in YutSet.ArrayToValue:
-		var s := YutSet.ValueToString[ YutSet.ArrayToValue[i] ]
-		symbol_info.append([Color.MAGENTA, s ])
-	#symbol_info.shuffle()
-	$SlotReel.init(0,symbol_sz, symbol_info )
-	$SlotReel.rotation_stopped.connect(reel_rotation_stopped)
-	$SlotReel.show_Spoke(false)
-	#$SlotReel.show_Reel(false)
-	$SlotReel.position = Vector3(-판반지름/3, -판반지름/3, 0)
 
 func init_wheel() -> void:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
@@ -67,6 +52,8 @@ func init_wheel() -> void:
 	for i in YutSet.ArrayToValue:
 		var s := YutSet.ValueToString[ YutSet.ArrayToValue[i] ]
 		symbol_info.append([Color.BLACK, s ])
+	symbol_info.append([Color.BLACK, YutSet.ValueToString[0] ])
+	symbol_info.append([Color.BLACK, YutSet.ValueToString[0] ])
 	symbol_info.shuffle()
 	$Roulette.init(0,판반지름/4,판반지름/40, symbol_info )
 	$Roulette.set_acceleration(0.1)
@@ -126,9 +113,6 @@ func 윷던지기() -> void:
 	var co := 편들[이번윷던질편번호].인자.색
 	$Roulette.set_all_text_color(co)
 	$Roulette.start_rotation(2*PI)
-
-func reel_rotation_stopped(_rl :SlotReel) -> void:
-	말이동하기()
 
 func roulette_rotation_stopped(_rl :Roulette) -> void:
 	yutset.set_by_string($Roulette.선택된cell얻기().글내용얻기())

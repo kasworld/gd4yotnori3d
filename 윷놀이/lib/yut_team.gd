@@ -97,13 +97,13 @@ func 쓸말고르기(yutset :YutSet)->말:
 		if m.난말인가():
 			continue
 		if m.달말인가():
-			if yutset.result_value < 0:
+			if yutset.result_value <= 0:
 				continue
 			return m
 		if 업힌말인가(m):
 			continue
 		return m
-	# 모두 났다.
+	# 쓸말이 없음
 	return null
 
 func 말이동정보만들기(yutset :YutSet, m :말)->말들이동정보:

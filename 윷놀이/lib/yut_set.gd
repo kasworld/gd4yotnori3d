@@ -4,7 +4,7 @@ const ValueToString :Dictionary[int,String] = {
 	-3:"뒷걸",
 	-2:"뒷개",
 	-1:"뒷도",
-	0: "낙",
+	0:"낙",
 	1:"도",
 	2:"개",
 	3:"걸",
