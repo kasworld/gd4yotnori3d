@@ -64,6 +64,9 @@ func init_wheel() -> void:
 	$Roulette.show_back(false)
 	$Roulette.position = Vector3(-판반지름/3, -판반지름/3, 0)
 
+#func _process(_delta: float) -> void:
+	#$Roulette.선택된cell강조상태켜기()
+
 func new_game() -> void:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	윷놀이.편인자들.shuffle()
@@ -113,6 +116,27 @@ func 윷던지기() -> void:
 	var co := 편들[이번윷던질편번호].인자.색
 	$Roulette.set_all_text_color(co)
 	$Roulette.start_rotation(2*PI)
+
+func 말이동길모두보기() -> void:
+	var deg_start = 30.0
+	var deg_inc = 360.0 / 편들.size()
+	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
+	var r = 판반지름 * 0.03
+	var i = 0
+	for t in 편들:
+		t.길.visible = true
+		var rd = deg_to_rad( deg_start + i*deg_inc)
+		t.길.position = Vector3(sin(rd)*r, sin(rd)*r, cos(rd)*r)
+		i+=1
+
+func 말이동길보이기(t :YutTeam) -> void:
+	if 윷놀이.모든길보기:
+		말이동길모두보기()
+	else:
+		for i in 편들:
+			i.길.visible = false
+		t.길.visible = true
+		t.길.position = Vector3.ZERO
 
 func roulette_rotation_stopped(_rl :Roulette) -> void:
 	yutset.set_by_string($Roulette.선택된cell얻기().글내용얻기())
@@ -176,26 +200,6 @@ func 이동애니메이션후처리하기() -> void:
 	if 윷놀이.자동진행:
 		윷던지기.call_deferred()
 
-func 말이동길보이기(t :YutTeam) -> void:
-	if 윷놀이.모든길보기:
-		말이동길모두보기()
-	else:
-		for i in 편들:
-			i.길.visible = false
-		t.길.visible = true
-		t.길.position = Vector3.ZERO
-
-func 말이동길모두보기() ->void:
-	var deg_start = 30.0
-	var deg_inc = 360.0 / 편들.size()
-	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
-	var r = 판반지름 * 0.03
-	var i = 0
-	for t in 편들:
-		t.길.visible = true
-		var rd = deg_to_rad( deg_start + i*deg_inc)
-		t.길.position = Vector3(0, sin(rd)*r, cos(rd)*r)
-		i+=1
 
 func 진행사항기록하기(s :String) -> void:
 	noti_progress.emit(self, s)
