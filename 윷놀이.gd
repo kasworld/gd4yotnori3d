@@ -8,9 +8,9 @@ signal noti_progress(game :윷놀이, text :String)
 const 편당말수 = 4
 
 static var 편인자들 = [
-	YutTeam.인자틀.new("빨강색", Color.MAGENTA, 4, 1.45),
+	YutTeam.인자틀.new("빨강색", Color.RED, 4, 1.45),
 	YutTeam.인자틀.new("초록색", Color.GREEN, 5, 1.4),
-	YutTeam.인자틀.new("파랑색", Color.CYAN, 6, 1.3),
+	YutTeam.인자틀.new("파랑색", Color.BLUE, 6, 1.3),
 	YutTeam.인자틀.new("노랑색", Color.YELLOW, 8, 1.25),
 ]
 
@@ -32,7 +32,8 @@ func init(sz :Vector3) -> 윷놀이:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	var depth = 판반지름/40
 
-	$"말판/원판".init(판반지름, depth, Color.DIM_GRAY, 20)
+	$"말판/원판".init(판반지름, depth, Color(Color.DIM_GRAY, 0.5), 20)
+	#$"말판/원판".flip_face(true)
 	$"말판/원판".position.z = -depth/2-1
 	$"말판/말눈들".init(판반지름*0.95, depth, Color.GRAY)
 	$"말판/말눈들".position.z = -depth/2
@@ -138,12 +139,12 @@ func calc_way_pos(i :int) -> Vector3:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	var r = 판반지름 * 0.03
 	var rd = deg_to_rad( deg_start + i*deg_inc)
-	return Vector3(sin(rd)*r, sin(rd)*r, cos(rd)*r - r*2)
+	return Vector3(cos(rd)*r, sin(rd)*r, -r*4)
 
 func calc_way_show_pos() -> Vector3:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	var r = 판반지름 * 0.03
-	return Vector3(0,0, r )
+	return Vector3(0,0,0)
 
 func roulette_rotation_stopped(_rl :Roulette) -> void:
 	yutset.set_by_string($Roulette.선택된cell얻기().글내용얻기())
