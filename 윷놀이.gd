@@ -15,7 +15,6 @@ static var 편인자들 = [
 ]
 
 static var 자동진행 :bool = true
-static var 모든길보기 :bool = true
 static var 눈번호보기 :bool = true
 static var 말빠르기 :float = 0.1
 
@@ -108,7 +107,6 @@ func 놀이가끝났다() -> void:
 	game_ended.emit(self)
 
 func 차례준비하기(편번호 :int):
-	말이동길보이기(편들[편번호])
 	turn_ended.emit(self,"%s\n윷던지기" % 편들[편번호])
 
 func 윷던지기() -> void:
@@ -118,6 +116,14 @@ func 윷던지기() -> void:
 	var co := 편들[이번윷던질편번호].인자.색
 	$Roulette.set_all_text_color(co)
 	$Roulette.start_rotation(2*PI)
+	말이동길_animation.force_end(false)
+	var ani_sec := 0.5
+	for i in 편들.size():
+		var t = 편들[i]
+		if i == 이번윷던질편번호:
+			말이동길_animation.start_move("move", t.길, t.길.position, calc_way_show_pos(), ani_sec )
+		else:
+			말이동길_animation.start_move("move", t.길, t.길.position, calc_way_pos(i), ani_sec )
 
 func _process(_delta: float) -> void:
 	말이동길_animation.handle_animation()
@@ -126,26 +132,18 @@ func _process(_delta: float) -> void:
 func 말이동길_animation_ended(_st :Node, _ani :Dictionary) -> void:
 	pass
 
-func 말이동길모두보기() -> void:
+func calc_way_pos(i :int) -> Vector3:
 	var deg_start = 30.0
 	var deg_inc = 360.0 / 편들.size()
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
 	var r = 판반지름 * 0.03
-	var i = 0
-	for t in 편들:
-		t.길.visible = true
-		var rd = deg_to_rad( deg_start + i*deg_inc)
-		t.길.position = Vector3(sin(rd)*r, sin(rd)*r, cos(rd)*r)
-		i+=1
+	var rd = deg_to_rad( deg_start + i*deg_inc)
+	return Vector3(sin(rd)*r, sin(rd)*r, cos(rd)*r - r*2)
 
-func 말이동길보이기(t :YutTeam) -> void:
-	if 윷놀이.모든길보기:
-		말이동길모두보기()
-	else:
-		for i in 편들:
-			i.길.visible = false
-		t.길.visible = true
-		t.길.position = Vector3.ZERO
+func calc_way_show_pos() -> Vector3:
+	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
+	var r = 판반지름 * 0.03
+	return Vector3(0,0, r )
 
 func roulette_rotation_stopped(_rl :Roulette) -> void:
 	yutset.set_by_string($Roulette.선택된cell얻기().글내용얻기())
