@@ -19,6 +19,8 @@ static var 모든길보기 :bool = true
 static var 눈번호보기 :bool = true
 static var 말빠르기 :float = 0.1
 
+var 말이동길_animation := SimpleAnimation.new()
+
 var cabinet_size :Vector3
 var yutset := YutSet.new()
 var 편들 :Array[YutTeam]
@@ -43,8 +45,10 @@ func init(sz :Vector3) -> 윷놀이:
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
 
+	말이동길_animation.animation_ended.connect(말이동길_animation_ended)
 	init_wheel()
 	return self
+
 
 func init_wheel() -> void:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
@@ -64,8 +68,6 @@ func init_wheel() -> void:
 	$Roulette.show_back(false)
 	$Roulette.position = Vector3(-판반지름/3, -판반지름/3, 0)
 
-#func _process(_delta: float) -> void:
-	#$Roulette.선택된cell강조상태켜기()
 
 func new_game() -> void:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
@@ -116,6 +118,13 @@ func 윷던지기() -> void:
 	var co := 편들[이번윷던질편번호].인자.색
 	$Roulette.set_all_text_color(co)
 	$Roulette.start_rotation(2*PI)
+
+func _process(_delta: float) -> void:
+	말이동길_animation.handle_animation()
+	#$Roulette.선택된cell강조상태켜기()
+
+func 말이동길_animation_ended(_st :Node, _ani :Dictionary) -> void:
+	pass
 
 func 말이동길모두보기() -> void:
 	var deg_start = 30.0
