@@ -43,19 +43,36 @@ func init(sz :Vector3) -> 윷놀이:
 	$"말판/난말통".position = Vector3(판반지름/3,판반지름/3, -depth/2)
 	$"말판/이동용말통".init(판반지름*0.03, depth, Color.BLACK )
 
-	init_reel()
+	init_wheel()
 	return self
 
 func init_reel() -> void:
-	var y := SlotReel.calc_symbol_ysize(cabinet_size.z/2, 16) /2
+	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
+	var y := SlotReel.calc_symbol_ysize(판반지름/4, 16)
 	var symbol_sz := Vector2( y*2, y )
 	var symbol_info :Array = []
 	for i in YutSet.ArrayToValue:
 		var s := YutSet.ValueToString[ YutSet.ArrayToValue[i] ]
-		symbol_info.append([Color.BLACK, s ])
-	symbol_info.shuffle()
+		symbol_info.append([Color.MAGENTA, s ])
+	#symbol_info.shuffle()
 	$SlotReel.init(0,symbol_sz, symbol_info )
-	$SlotReel.position.x = -cabinet_size.y/2 - y
+	$SlotReel.show_Spoke(false)
+	#$SlotReel.show_Reel(false)
+	$SlotReel.position = Vector3(-판반지름/3, -판반지름/3, 0)
+
+func init_wheel() -> void:
+	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
+	var symbol_info :Array = []
+	for i in YutSet.ArrayToValue:
+		var s := YutSet.ValueToString[ YutSet.ArrayToValue[i] ]
+		symbol_info.append([Color.WHITE, s ])
+	symbol_info.shuffle()
+	$Roulette.init(0,판반지름/4,판반지름/40, symbol_info )
+	$Roulette.show_velvehandle(false)
+	$Roulette.show_bartree(false)
+	$Roulette.show_back(false)
+	$Roulette.position = Vector3(-판반지름/3, -판반지름/3, 0)
+
 
 func new_game() -> void:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
@@ -103,6 +120,7 @@ func 윷던지기() -> void:
 	if 난편들.size() == 윷놀이.편인자들.size(): # 모든 편이 다 났다.
 		놀이가끝났다()
 		return
+	$Roulette.돌리기시작(2)
 	yutset.윷던지기()
 	var 윷던진편 = 편들[이번윷던질편번호]
 	진행사항기록하기( "%s %s\n" % [윷던진편 , yutset ] )
