@@ -56,6 +56,7 @@ func init_reel() -> void:
 		symbol_info.append([Color.MAGENTA, s ])
 	#symbol_info.shuffle()
 	$SlotReel.init(0,symbol_sz, symbol_info )
+	$SlotReel.rotation_stopped.connect(reel_rotation_stopped)
 	$SlotReel.show_Spoke(false)
 	#$SlotReel.show_Reel(false)
 	$SlotReel.position = Vector3(-판반지름/3, -판반지름/3, 0)
@@ -65,14 +66,15 @@ func init_wheel() -> void:
 	var symbol_info :Array = []
 	for i in YutSet.ArrayToValue:
 		var s := YutSet.ValueToString[ YutSet.ArrayToValue[i] ]
-		symbol_info.append([Color.WHITE, s ])
+		symbol_info.append([Color.BLACK, s ])
 	symbol_info.shuffle()
 	$Roulette.init(0,판반지름/4,판반지름/40, symbol_info )
+	$Roulette.set_acceleration(0.1)
+	$Roulette.rotation_stopped.connect(roulette_rotation_stopped)
 	$Roulette.show_velvehandle(false)
 	$Roulette.show_bartree(false)
-	$Roulette.show_back(false)
+	$Roulette.show_back(true)
 	$Roulette.position = Vector3(-판반지름/3, -판반지름/3, 0)
-
 
 func new_game() -> void:
 	var 판반지름 = min(cabinet_size.x,cabinet_size.y)/2
@@ -120,12 +122,16 @@ func 윷던지기() -> void:
 	if 난편들.size() == 윷놀이.편인자들.size(): # 모든 편이 다 났다.
 		놀이가끝났다()
 		return
-	$Roulette.돌리기시작(2)
 	yutset.윷던지기()
-	var 윷던진편 = 편들[이번윷던질편번호]
-	진행사항기록하기( "%s %s\n" % [윷던진편 , yutset ] )
-	if yutset.can_more_turn:
-		진행사항기록하기( "    %s 던저서 한번더 던진다. \n" % [ yutset ] )
+	var co := 편들[이번윷던질편번호].인자.색
+	$Roulette.색설정하기(co,co,co)
+	$Roulette.start_rotation(2*PI)
+	#말이동하기()
+
+func reel_rotation_stopped(_rl :SlotReel) -> void:
+	말이동하기()
+
+func roulette_rotation_stopped(_rl :Roulette) -> void:
 	말이동하기()
 
 func 말이동하기() -> void:
