@@ -73,7 +73,8 @@ func init_wheel() -> void:
 	$Roulette.rotation_stopped.connect(roulette_rotation_stopped)
 	$Roulette.show_velvehandle(false)
 	$Roulette.show_bartree(false)
-	$Roulette.show_back(true)
+	$Roulette.show_spliters(false)
+	$Roulette.show_back(false)
 	$Roulette.position = Vector3(-판반지름/3, -판반지름/3, 0)
 
 func new_game() -> void:
@@ -124,7 +125,7 @@ func 윷던지기() -> void:
 		return
 	yutset.윷던지기()
 	var co := 편들[이번윷던질편번호].인자.색
-	$Roulette.색설정하기(co,co,co)
+	$Roulette.set_all_text_color(co)
 	$Roulette.start_rotation(2*PI)
 	#말이동하기()
 
